@@ -2,7 +2,7 @@
   <div id="register" class="text-center">
     <form @submit.prevent="register">
       <h1>Create Account</h1>
-      <div role="alert" v-if="registrationErrors">
+      <div class="error-msg" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
       <div class="form-input-group">
@@ -45,7 +45,12 @@ export default {
       if (this.user.password != this.user.confirmPassword) {
         this.registrationErrors = true;
         this.registrationErrorMsg = 'Password & Confirm Password do not match.';
+      } else if (this.user.password.length < 8 || this.user.password.length > 15) {
+        this.registrationErrors = true;
+        this.registrationErrorMsg = 'Password must be between 8 and 15 characters long.'
       } else {
+        this.user.username = this.user.username.toLowerCase();
+
         authService
           .register(this.user)
           .then((response) => {
@@ -80,4 +85,8 @@ export default {
 label {
   margin-right: 0.5rem;
 }
+.error-msg{
+  color: red;
+}
+
 </style>
