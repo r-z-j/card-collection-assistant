@@ -14,22 +14,31 @@
 
     </header>
     <main class="container">
-      <img src="../public/img/background.jpg" alt="">
-      <section class="center-card" v-if="$route.path === '/login' || $route.path === '/'">
+      <img src="" alt="">
+      <section class="center-card" :class="{ flipped: isFlipped }" v-if="$route.path === '/login' || $route.path === '/' || $route.path === '/register'">
         <router-view />
       </section>
     </main>
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      isFlipped: false,
+    }
+  }
+}
+</script>
+
 <style scoped>
   .container {
-    position: absolute;
-    background-color: #686573;
+    display: flex;
   }
 
   .center-card {
-    position: absolute;
+    position: relative;
     display: flex;
     top: 15%;
     left: 20%;
@@ -43,8 +52,15 @@
     filter: drop-shadow(30px 10px 4px rgb(46, 46, 46, 0.7));
     border-radius: 10px;
     border: solid #0E2431 10px;
+    transform-style: preserve-3d;
+    transform-origin: center right;
+    transition: transform 1s;
+}
 
-  }
+.flipped {
+  transform: translateX(-100%) rotateY(-180deg);
+  background-color: red;
+}
 
   img {
     height: 100vh;
@@ -68,6 +84,4 @@
   header a:hover {
     font-weight: bold;
   }
-
-
 </style>
