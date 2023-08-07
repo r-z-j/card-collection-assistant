@@ -1,9 +1,73 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <header>
+
+    <div class="left-links">
       <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
+      <a href="#">Magic</a>&nbsp;|&nbsp;
+      <a href="#">Pokemon</a>&nbsp;
     </div>
-    <router-view />
+    <div class="right-links">
+      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
+      <router-link v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</router-link>
+    </div>
+
+    </header>
+    <main class="container">
+      <img src="../public/img/background.jpg" alt="">
+      <section class="center-card" v-if="$route.path === '/login' || $route.path === '/'">
+        <router-view />
+      </section>
+    </main>
   </div>
 </template>
+
+<style scoped>
+  .container {
+    position: absolute;
+    background-color: #686573;
+  }
+
+  .center-card {
+    position: absolute;
+    display: flex;
+    top: 15%;
+    left: 20%;
+    right: 20%;
+    margin: auto;
+    padding-right: 15px;
+    height: 30rem;
+    width: 20rem;
+    padding: 5px;
+    background-color: cornflowerblue;
+    filter: drop-shadow(30px 10px 4px rgb(46, 46, 46, 0.7));
+    border-radius: 10px;
+    border: solid #0E2431 10px;
+
+  }
+
+  img {
+    height: 100vh;
+    opacity: 50%;
+    z-index: -1;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    margin: 0;
+    border-bottom: solid #0E2431 5px;
+    background-color: cornflowerblue;
+  }
+
+  header a {
+    text-decoration: none;
+  }
+
+  header a:hover {
+    font-weight: bold;
+  }
+
+
+</style>
