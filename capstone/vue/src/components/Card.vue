@@ -13,7 +13,6 @@ export default {
         'picture',
         'description',
     ]
-
 }
 </script>
 

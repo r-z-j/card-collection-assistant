@@ -33,7 +33,7 @@ export default {
 <style scoped>
   .container {
     display: flex;
-    padding-top: 12rem;
+    padding-top: 1rem;
   }
 
   header {
