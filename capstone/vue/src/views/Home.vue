@@ -1,22 +1,33 @@
 <template>
-  <div class="home">
-    <h1>Welcome</h1>
-    <div class="filler">
-
-    </div>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, adipisci? Blanditiis enim delectus animi quasi id similique, expedita dolor consequatur, praesentium asperiores vel. Sunt reiciendis necessitatibus dignissimos quis. Asperiores, eveniet.</p>
-    <hr>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, adipisci?</p>
+  <div class="home-card">
+   <Card 
+   name="Magic The Gathering"
+   :picture= 'mtgimage'
+   description="Make and share your own collection of Magic The Gathering cards, or view and favorite collections other users have made!"
+   />
+   <Card 
+   name="Pokemon TCG"
+   :picture= 'karpImage'
+   description="Make and share your own collection of Pokemon TCG cards, or view and favorite collections other users have made!"
+   />
   </div>
 </template>
 
 <script>
+import Card from '../components/Card.vue'
 export default {
-  name: "home"
+  components: { Card },
+  name: "home",
+  data() {
+    return {
+      karpImage: require('../img/karp.png'),
+      mtgimage: require('../img/mtg.png')
+    };
+  }
 };
 </script>
 
-<style scoped>
+<style>
 hr {
   height: 1px;
         background-color: #0E2431;
@@ -25,11 +36,10 @@ hr {
 p {
   padding: 5px;
 }
-.filler {
-  height: 150px;
-  border: solid 2px #0E2431;
-  border-radius: 5px;
-  margin: 7px;
+
+.home-card{
+  display: flex;
+  flex-grow: 1;
 }
 
 

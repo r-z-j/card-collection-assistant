@@ -5,6 +5,8 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
+import MTGView from '../views/MTGView.vue'
+import PokemonTCGView from '../views/PokemonTCGView.vue'
 
 Vue.use(Router)
 
@@ -52,7 +54,23 @@ const router = new Router({
       meta: {
         requiresAuth: false
       }
-    }
+    },
+    {
+      path: "/mtg-view",
+      name: "mtg-view",
+      component: MTGView,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/pokemon-tcg-view",
+      name: "pokemon-tcg-view",
+      component: PokemonTCGView,
+      meta: {
+        requiresAuth: false
+      }
+    },
   ]
 })
 
