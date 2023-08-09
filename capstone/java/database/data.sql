@@ -1,6 +1,7 @@
 BEGIN TRANSACTION;
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
+INSERT INTO users (username,password_hash,role) VALUES ('user2','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
 
 INSERT INTO game_type (game_type_name, game_type_id) VALUES ('Magic', 1);
@@ -24,5 +25,11 @@ INSERT INTO card_collection (card_id, collection_id) VALUES (3,1);
 INSERT INTO card_collection (card_id, collection_id) VALUES (4,2);
 INSERT INTO card_collection (card_id, collection_id) VALUES (5,2);
 INSERT INTO card_collection (card_id, collection_id) VALUES (6,2);
+
+INSERT INTO favorite_collection (user_id, collection_id) VALUES (1, 1);
+INSERT INTO favorite_collection (user_id, collection_id) VALUES (1, 2);
+INSERT INTO favorite_collection (user_id, collection_id) VALUES (2, 1);
+INSERT INTO favorite_collection (user_id, collection_id) VALUES (2, 2);
+
 
 COMMIT TRANSACTION;
