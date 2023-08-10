@@ -1,7 +1,7 @@
 <template>
   <main class="centered-container">
     <div class="cards">
-      <MagicCard cardName="Swiftfoot Boots"></MagicCard>
+      <MagicCard cardName="It That Betrays"></MagicCard>
       <MagicCard cardName="Lightning Greaves"></MagicCard>
       <MagicCard cardName="Winged Boots"></MagicCard>
       <MagicCard cardName="Boots of Speed"></MagicCard>
