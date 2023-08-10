@@ -4,12 +4,15 @@ import com.techelevator.dao.CollectionDao;
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.CollectionDto;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @CrossOrigin
+//@PreAuthorize("isAuthenticated()")
 @RestController
 @RequestMapping("/collection/")
 public class CollectionController {
@@ -21,8 +24,10 @@ public class CollectionController {
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "{id}", method = RequestMethod.GET)
-    public CollectionDto getCollection(@PathVariable int id)  {
+    public CollectionDto getCollection(@PathVariable int id, Principal principal)  {
         try {
+            // Gives us the current user
+            System.out.println(principal.toString());
             return collectionDao.getCollectionById(id);
         } catch (DaoException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
