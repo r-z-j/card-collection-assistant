@@ -9,12 +9,14 @@ public class CollectionDto {
     private String collectionName;
     private int authorId;
     private Gametype gametype;
-    private List<CardDto> cardList;
+    private int gameTypeId;
+    private List<String> cardApiList;
 
     public CollectionDto(int collectionId, String collectionName, int authorId, int gameTypeId) {
         this.collectionId = collectionId;
         this.collectionName = collectionName;
         this.authorId = authorId;
+        this.gameTypeId = gameTypeId;
         switch (gameTypeId) {
             case 1: this.gametype = Gametype.MAGIC;
                 break;
@@ -51,6 +53,20 @@ public class CollectionDto {
         return gametype;
     }
 
+    public int getGameTypeId() {
+        if (gametype == Gametype.MAGIC) return 1;
+        if (gametype == Gametype.POKEMON) return 2;
+        else return gameTypeId;
+    }
+
+    public void setCardApiList(List<String> cardApiList) {
+        this.cardApiList = cardApiList;
+    }
+
+    public List<String> getCardApiList() {
+        return cardApiList;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,6 +87,7 @@ public class CollectionDto {
                 ", collectionName='" + collectionName + '\'' +
                 ", authorId=" + authorId +
                 ", gametype=" + gametype +
+                ", cardApiList=" + cardApiList +
                 '}';
     }
 }
