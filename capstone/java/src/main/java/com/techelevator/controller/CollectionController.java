@@ -27,9 +27,10 @@ public class CollectionController {
     public CollectionDto getCollection(@PathVariable int id, Principal principal)  {
         try {
             // Gives us the current user
-            System.out.println(principal.toString());
+            // System.out.println(principal.toString());
             return collectionDao.getCollectionById(id);
         } catch (DaoException e) {
+            System.out.println(e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

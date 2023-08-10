@@ -8,22 +8,10 @@ public class CollectionDto {
     private int collectionId;
     private String collectionName;
     private int authorId;
-    private Gametype gametype;
-    private int gameTypeId;
-    private List<String> cardApiList;
+    private GameType gameType;
+    private List<CardDto> cardList;
 
-    public CollectionDto(int collectionId, String collectionName, int authorId, int gameTypeId) {
-        this.collectionId = collectionId;
-        this.collectionName = collectionName;
-        this.authorId = authorId;
-        this.gameTypeId = gameTypeId;
-        switch (gameTypeId) {
-            case 1: this.gametype = Gametype.MAGIC;
-                break;
-            case 2: this.gametype = Gametype.POKEMON;
-                break;
-        }
-    }
+    public CollectionDto() {};
 
     public int getCollectionId() {
         return collectionId;
@@ -49,35 +37,30 @@ public class CollectionDto {
         this.authorId = authorId;
     }
 
-    public Gametype getGametype() {
-        return gametype;
-    }
-
     public int getGameTypeId() {
-        if (gametype == Gametype.MAGIC) return 1;
-        if (gametype == Gametype.POKEMON) return 2;
-        else return gameTypeId;
+        return gameType.getId();
     }
 
-    public void setCardApiList(List<String> cardApiList) {
-        this.cardApiList = cardApiList;
+    public GameType getGameType() {
+        return gameType;
     }
 
-    public List<String> getCardApiList() {
-        return cardApiList;
+    public void setGameType(int id) {
+        switch (id) {
+            case 1: this.gameType = GameType.MAGIC;
+                break;
+            case 2: this.gameType = GameType.POKEMON;
+                break;
+            default: this.gameType = GameType.UNKNOWN;
+        }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CollectionDto that = (CollectionDto) o;
-        return collectionId == that.collectionId && authorId == that.authorId && Objects.equals(collectionName, that.collectionName) && gametype == that.gametype;
+    public List<CardDto> getCardList() {
+        return cardList;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(collectionId, collectionName, authorId, gametype);
+    public void setCardList(List<CardDto> cardList) {
+        this.cardList = cardList;
     }
 
     @Override
@@ -86,8 +69,21 @@ public class CollectionDto {
                 "collectionId=" + collectionId +
                 ", collectionName='" + collectionName + '\'' +
                 ", authorId=" + authorId +
-                ", gametype=" + gametype +
-                ", cardApiList=" + cardApiList +
+                ", gameType=" + gameType +
+                ", cardList=" + cardList +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CollectionDto that = (CollectionDto) o;
+        return collectionId == that.collectionId && authorId == that.authorId && Objects.equals(collectionName, that.collectionName) && gameType == that.gameType && Objects.equals(cardList, that.cardList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(collectionId, collectionName, authorId, gameType, cardList);
     }
 }

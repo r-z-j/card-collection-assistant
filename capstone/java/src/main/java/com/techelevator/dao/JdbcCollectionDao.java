@@ -1,7 +1,9 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.CardCondition;
 import com.techelevator.model.CardDto;
 import com.techelevator.model.CollectionDto;
+import com.techelevator.model.GameType;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,12 +43,14 @@ public class JdbcCollectionDao implements CollectionDao{
                 collection = mapRowToCollection(result);
             }
 
-            List<String> cardApiList = new ArrayList<>();
+            List<CardDto> cardList = new ArrayList<>();
             result = jdbcTemplate.queryForRowSet(cardListSql, collectionId);
             while (result.next()) {
-                cardApiList.add(result.getString("card_api_id"));
+                CardDto card = mapRowToCard(result);
+                System.out.println(card);
+                cardList.add(card);
             }
-            collection.setCardApiList(cardApiList);
+            collection.setCardList(cardList);
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         }
@@ -53,23 +58,6 @@ public class JdbcCollectionDao implements CollectionDao{
 
     }
 
-//    @Override
-//    public City createCity(City city) {
-//        City newCity = null;
-//        String sql = "INSERT INTO city (city_name, state_abbreviation, population, area) " +
-//                "VALUES (?, ?, ?, ?) RETURNING city_id;";
-//        try {
-//            int newCityId = jdbcTemplate.queryForObject(sql, int.class,
-//                    city.getCityName(), city.getStateAbbreviation(), city.getPopulation(), city.getArea());
-//
-//            newCity = getCityById(newCityId);
-//        } catch (CannotGetJdbcConnectionException e) {
-//            throw new DaoException("Unable to connect to server or database", e);
-//        } catch (DataIntegrityViolationException e) {
-//            throw new DaoException("Data integrity violation", e);
-//        }
-//        return newCity;
-//    }
     @Override
     public CollectionDto createCollectionDto(CollectionDto collection) {
         CollectionDto newCollectionDto = null;
@@ -116,11 +104,25 @@ return newCollectionDto;
     }
 
     private CollectionDto mapRowToCollection(SqlRowSet rs) {
-        CollectionDto collection = new CollectionDto( rs.getInt("collection_id"),
-                rs.getString("collection_name"),
-                rs.getInt("author_id"),
-                rs.getInt("game_type_id") );
+        CollectionDto collection = new CollectionDto();
+        collection.setCollectionId(rs.getInt("collection_id"));
+        collection.setCollectionName(rs.getString("collection_name"));
+        collection.setAuthorId(rs.getInt("author_id"));
+        collection.setGameType(rs.getInt("game_type_id"));
         return collection;
+    }
+
+    private CardDto mapRowToCard(SqlRowSet rs) {
+        CardDto card = new CardDto();
+        card.setCardId(rs.getInt("card_id"));
+        card.setCardApiId(rs.getString("card_api_id"));
+        card.setCardName(rs.getString("card_name"));
+        card.setGameType(rs.getInt("game_type_id"));
+        card.setUserPrice(BigDecimal.valueOf(10)); // TODO: SET THESE
+        card.setCondition(CardCondition.MINT);// TODO: SET THESE
+        card.setQuantity(1);// TODO: SET THESE
+
+        return card;
     }
 
 }
