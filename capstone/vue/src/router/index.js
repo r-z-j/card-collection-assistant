@@ -8,6 +8,7 @@ import store from '../store/index'
 import MTGView from '../views/MTGView.vue'
 import PokemonTCGView from '../views/PokemonTCGView.vue'
 import DisplayCard from '../views/DisplayCard.vue'
+import PokemonTest from '../views/PokemonTest.vue'
 
 Vue.use(Router)
 
@@ -76,6 +77,14 @@ const router = new Router({
       path: "/card-test",
       name: "card-test",
       component: DisplayCard,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/card-test-pokemon",
+      name: "card-test-pokemon",
+      component: PokemonTest,
       meta: {
         requiresAuth: false
       }
