@@ -2,6 +2,7 @@ BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS game_type;
+DROP TABLE IF EXISTS condition;
 DROP TABLE IF EXISTS card;
 DROP TABLE IF EXISTS collection;
 DROP TABLE IF EXISTS card_collection;
@@ -28,12 +29,21 @@ CREATE TABLE collection (
     CONSTRAINT FK_game_type_id FOREIGN KEY (game_type_id) REFERENCES game_type (game_type_id),
 	CONSTRAINT PK_collection PRIMARY KEY (collection_id));
 
+CREATE TABLE condition (
+    condition_id integer NOT NULL,
+    condition_name varchar(50) NOT NULL,
+    CONSTRAINT PK_condition PRIMARY KEY (condition_id));
+
 CREATE TABLE card (
     card_id SERIAL,
     card_api_id varchar(200) NOT NULL,
     card_name varchar(100) NOT NULL,
 	game_type_id integer NOT NULL,
+	user_price numeric(10,2) NOT NULL,
+	quantity integer,
+	condition_id integer NOT NULL,
     CONSTRAINT FK_game_type_id FOREIGN KEY (game_type_id) REFERENCES game_type (game_type_id),
+	CONSTRAINT FK_condition_id FOREIGN KEY (condition_id) REFERENCES condition (condition_id),
 	CONSTRAINT PK_card PRIMARY KEY (card_id));
 
 CREATE TABLE card_collection (

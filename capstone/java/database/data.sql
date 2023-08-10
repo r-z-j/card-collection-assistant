@@ -10,13 +10,21 @@ INSERT INTO game_type (game_type_name, game_type_id) VALUES ('Pokemon', 2);
 INSERT INTO collection (collection_name, author_id, game_type_id) VALUES ('magic-collection-1', 1, 1);
 INSERT INTO collection (collection_name, author_id, game_type_id) VALUES ('poke-collection-1', 2, 2);
 
-INSERT INTO card (card_api_id, card_name, game_type_id) VALUES ('abcd1234', 'Black Lotus', 1);
-INSERT INTO card (card_api_id, card_name, game_type_id) VALUES ('hifjweio452987', 'Red Lotus', 1);
-INSERT INTO card (card_api_id, card_name, game_type_id) VALUES ('hjkgfd789754390', 'Cornflower Blue Lotus', 1);
+INSERT INTO condition (condition_id, condition_name) VALUES (1, 'Mint');
+INSERT INTO condition (condition_id, condition_name) VALUES (2, 'Near Mint');
+INSERT INTO condition (condition_id, condition_name) VALUES (3, 'Excellent');
+INSERT INTO condition (condition_id, condition_name) VALUES (4, 'Good');
+INSERT INTO condition (condition_id, condition_name) VALUES (5, 'Light Played');
+INSERT INTO condition (condition_id, condition_name) VALUES (6, 'Played');
+INSERT INTO condition (condition_id, condition_name) VALUES (7, 'Poor');
 
-INSERT INTO card (card_api_id, card_name, game_type_id) VALUES ('vcbzxnmvzx', 'Charizard', 2);
-INSERT INTO card (card_api_id, card_name, game_type_id) VALUES ('89u06uifjkg', 'Gengar', 2);
-INSERT INTO card (card_api_id, card_name, game_type_id) VALUES ('63yui54o', 'Scyther', 2);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id) VALUES ('abcd1234', 'Black Lotus', 1, 20.00, 2, 1);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id) VALUES ('hifjweio452987', 'Red Lotus', 1, 10.00, 1, 2);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id) VALUES ('hjkgfd789754390', 'Cornflower Blue Lotus', 1, 5.00, 3, 3);
+
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id) VALUES ('vcbzxnmvzx', 'Charizard', 2, 10.00, 1, 4);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id) VALUES ('89u06uifjkg', 'Gengar', 2, 5.00, 2, 6);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id) VALUES ('63yui54o', 'Scyther', 2, 40.00, 1, 1);
 
 INSERT INTO card_collection (card_id, collection_id) VALUES (1,1);
 INSERT INTO card_collection (card_id, collection_id) VALUES (2,1);

@@ -1,5 +1,6 @@
 package com.techelevator.model;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class CardDto {
@@ -7,15 +8,12 @@ public class CardDto {
     private int cardId;
     private String cardApiId;
     private String cardName;
-    private Gametype gametype;
-    // private BigDecimal price/price range?
+    private BigDecimal userPrice;
+    private CardCondition condition;
+    private int quantity;
+    private GameType gameType;
 
-    public CardDto(int cardId, String cardApiId, String cardName, Gametype gametype) {
-        this.cardId = cardId;
-        this.cardApiId = cardApiId;
-        this.cardName = cardName;
-        this.gametype = gametype;
-    }
+    public CardDto() {};
 
     public int getCardId() {
         return cardId;
@@ -41,21 +39,46 @@ public class CardDto {
         this.cardName = cardName;
     }
 
-    public Gametype getGametype() {
-        return gametype;
+    public BigDecimal getUserPrice() {
+        return userPrice;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CardDto cardDto = (CardDto) o;
-        return cardId == cardDto.cardId && Objects.equals(cardApiId, cardDto.cardApiId) && Objects.equals(cardName, cardDto.cardName) && gametype == cardDto.gametype;
+    public void setUserPrice(BigDecimal userPrice) {
+        this.userPrice = userPrice;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(cardId, cardApiId, cardName, gametype);
+    public CardCondition getCondition() {
+        return condition;
+    }
+
+    public void setCondition(CardCondition condition) {
+        this.condition = condition;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public GameType getGameType() {
+        return gameType;
+    }
+
+    public int getGametypeId() {
+        return gameType.getId();
+    }
+
+    public void setGameType(int id) {
+        switch (id) {
+            case 1: this.gameType = GameType.MAGIC;
+                break;
+            case 2: this.gameType = GameType.POKEMON;
+                break;
+            default: this.gameType = GameType.UNKNOWN;
+        }
     }
 
     @Override
@@ -64,7 +87,23 @@ public class CardDto {
                 "cardId=" + cardId +
                 ", cardApiId='" + cardApiId + '\'' +
                 ", cardName='" + cardName + '\'' +
-                ", gametype=" + gametype +
+                ", userPrice=" + userPrice +
+                ", condition=" + condition +
+                ", quantity=" + quantity +
+                ", gameType=" + gameType +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CardDto cardDto = (CardDto) o;
+        return cardId == cardDto.cardId && quantity == cardDto.quantity && Objects.equals(cardApiId, cardDto.cardApiId) && Objects.equals(cardName, cardDto.cardName) && Objects.equals(userPrice, cardDto.userPrice) && condition == cardDto.condition && gameType == cardDto.gameType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cardId, cardApiId, cardName, userPrice, condition, quantity, gameType);
     }
 }
