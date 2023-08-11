@@ -6,7 +6,10 @@
     </div>
     <div class="card-details">
       <h1>{{ card.name }}</h1>
-     
+      <h1>{{ card.hp }}</h1>
+      <h1>{{ card.types }}</h1>
+      <h1>{{ card.attacks }}</h1>
+      <h1>{{ card.weakenesses }}</h1> 
       <div class="buttons">
         <button>View Collections</button>
         <button>Add To Collection</button>
@@ -33,7 +36,7 @@ export default {
        });
    },
    getMultipleCardsBySearch(){
-       pokemonService.getMultipleCardsBySearchName('Eevee').then(response =>{
+       pokemonService.getMultipleCardsBySearchName('mew').then(response =>{
            this.$store.commit('SET_POKE_CARDS_SEARCH', response.data);
        });
    },

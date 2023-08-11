@@ -26,6 +26,17 @@ export default new Vuex.Store({
       id: null,
       name: '',
       imageUri: [],
+      hp: '',
+      types: [0,1],
+      attacks: {
+       name : '',
+       text:'',
+       damage: '',
+    },
+      weaknesses: {
+        type: '',
+        value: '',
+      },
     },
     //Magic Card Objects
     magicCards: [],
@@ -61,6 +72,11 @@ export default new Vuex.Store({
      state.pokeCard.id = data.data.id;
      state.pokeCard.name = data.data.name;
      state.pokeCard.imageUri = data.data.images;
+     state.pokeCard.hp = data.data.hp;
+     state.pokeCard.types = data.data.types;
+     state.pokeCard.attacks.name = data.data.attacks.name;
+     state.pokeCard.weaknesses.type = data.data.type;
+     state.pokeCard.weaknesses.value = data.data.value;
     },
 
     SET_POKE_CARDS_SEARCH(state, data){
@@ -69,6 +85,10 @@ export default new Vuex.Store({
         id: cardData.id,
         name: cardData.name,
         imageUri: cardData.images.large,
+        hp: cardData.hp,
+        types: cardData.types,
+        attacks: cardData.attacks.name,
+        weaknesses: cardData.weaknesses 
 
       }));
     },
