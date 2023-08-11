@@ -33,7 +33,8 @@ export default new Vuex.Store({
       id: null,
       name: '',
       imageUri: [],
-      oracleText: ''
+      oracleText: '',
+      isDualSided: false
     }
     
   },
@@ -81,13 +82,32 @@ export default new Vuex.Store({
       state.magicCard.oracleText = data.oracle_text;
     },
     SET_MAGIC_CARDS_SEARCH(state, data) {
-      state.magicCards = data.data.map(cardData => ({
-        
-        id: cardData.id,
-        name: cardData.name,
-        imageUri: cardData.image_uris.normal,
-        oracleText: cardData.oracle_text
-      }));
+      state.magicCards = data.data.map(cardData => {
+        let card = {
+          id: cardData.id,
+          name: cardData.name,
+          oracleText: cardData.oracle_text,
+          isDualSided: cardData.layout === "transform" || cardData.layout === "modal_dfc",
+        };
+    
+        // Check if the card has multiple faces
+        if (cardData.card_faces && cardData.card_faces.length > 1) {
+          card.frontFace = {
+            name: cardData.card_faces[0].name,
+            oracleText: cardData.card_faces[0].oracle_text,
+            imageUri: cardData.card_faces[0].image_uris.normal,
+          };
+          card.backFace = {
+            name: cardData.card_faces[1].name,
+            oracleText: cardData.card_faces[1].oracle_text,
+            imageUri: cardData.card_faces[1].image_uris.normal,
+          };
+        } else {
+          card.imageUri = cardData.image_uris.normal;
+        }
+    
+        return card;
+      });
     }
 
   }
