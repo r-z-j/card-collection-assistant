@@ -1,11 +1,8 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.CardCondition;
 import com.techelevator.model.CardDto;
 import com.techelevator.model.CollectionDto;
-import com.techelevator.model.GameType;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import com.techelevator.exception.DaoException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
@@ -47,7 +44,6 @@ public class JdbcCollectionDao implements CollectionDao{
             result = jdbcTemplate.queryForRowSet(cardListSql, collectionId);
             while (result.next()) {
                 CardDto card = mapRowToCard(result);
-                System.out.println(card);
                 cardList.add(card);
             }
             collection.setCardList(cardList);
@@ -108,7 +104,7 @@ return newCollectionDto;
         collection.setCollectionId(rs.getInt("collection_id"));
         collection.setCollectionName(rs.getString("collection_name"));
         collection.setAuthorId(rs.getInt("author_id"));
-        collection.setGameType(rs.getInt("game_type_id"));
+        collection.setGameTypeId(rs.getInt("game_type_id"));
         return collection;
     }
 
@@ -117,10 +113,10 @@ return newCollectionDto;
         card.setCardId(rs.getInt("card_id"));
         card.setCardApiId(rs.getString("card_api_id"));
         card.setCardName(rs.getString("card_name"));
-        card.setGameType(rs.getInt("game_type_id"));
-        card.setUserPrice(BigDecimal.valueOf(10)); // TODO: SET THESE
-        card.setCondition(CardCondition.MINT);// TODO: SET THESE
-        card.setQuantity(1);// TODO: SET THESE
+        card.setGameTypeId(rs.getInt("game_type_id"));
+        card.setUserPrice(BigDecimal.valueOf(rs.getInt("user_price")));
+        card.setConditionId(rs.getInt("condition_id"));
+        card.setQuantity(rs.getInt("quantity"));
 
         return card;
     }
