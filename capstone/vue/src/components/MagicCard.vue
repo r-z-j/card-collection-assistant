@@ -24,15 +24,26 @@ export default {
   name: "magic-card",
   props: ["magicCardName"],
   created() {
-    this.getMultipleCardsBySearch();
+    this.getMultipleCardsBySearch(this.$store.state.searchQuery);
   },
   methods: {
-    getMultipleCardsBySearch(){
-      scryfallService.getMultipleCardsBySearchName("Emraku").then(response => {
+    getMultipleCardsBySearch(searchQuery){
+      scryfallService.getMultipleCardsBySearchName(searchQuery).then(response => {
+        this.$store.commit("CLEAR_MAGIC_CARDS")
         this.$store.commit("SET_MAGIC_CARDS_SEARCH", response.data);
       });
     }
   },
+  computed: {
+    getSearchQuery(){
+      return this.$store.state.searchQuery
+    }
+  },
+  watch: {
+    '$store.state.searchQuery'(newValue) {
+      this.getMultipleCardsBySearch(newValue);
+    }
+  }
 };
 </script>
   
@@ -58,6 +69,7 @@ export default {
 img {
   width: 270px;
   height: 378px;
+  border-radius: 10px;
 }
 
 .card-details {

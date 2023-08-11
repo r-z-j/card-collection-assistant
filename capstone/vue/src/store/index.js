@@ -20,6 +20,10 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
+
+    //Searches are stored here
+    searchQuery: '',
+
     //Pokemon Card Objects
     pokeCards: [],
     pokeCard: {
@@ -108,6 +112,19 @@ export default new Vuex.Store({
     
         return card;
       });
+    },
+
+    SET_SEARCH_QUERY(state, newQuery){
+      state.searchQuery = newQuery;
+    },
+
+    CLEAR_MAGIC_CARDS(state) {
+      state.magicCards = [];
+    },
+  },
+  actions: {
+    updateSearchQuery({ commit }, newQuery){
+      commit("SET_SEARCH_QUERY", newQuery)
     }
 
   }
