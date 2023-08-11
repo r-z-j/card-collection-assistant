@@ -9,8 +9,8 @@ public interface CollectionDao {
     CollectionDto getCollectionById(int collectionId);
     CollectionDto createCollectionDto(CollectionDto collection);
     CollectionDto updateCollectionById(int collectionId);
-    CollectionDto addCardToCollectionById(int collectionId, CardDto card);
-    CollectionDto removeCardFromCollectionById(int collectionId, CardDto card);
+    CollectionDto addCardToCollectionById(int collectionId, int cardId);
+    int removeCardFromCollectionById(int collectionId, int cardId);
     List<CollectionDao> getCollectionsByUserId(int userId);
     List<CardDto> getCardsInCollectionById(int collectionId);
 }

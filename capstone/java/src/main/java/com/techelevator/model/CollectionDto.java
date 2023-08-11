@@ -60,14 +60,4 @@ public class CollectionDto {
         this.cardList = cardList;
     }
 
-    @Override
-    public String toString() {
-        return "CollectionDto{" +
-                "collectionId=" + collectionId +
-                ", collectionName='" + collectionName + '\'' +
-                ", authorId=" + authorId +
-                ", gameTypeId=" + gameTypeId +
-                ", cardList=" + cardList +
-                '}';
-    }
 }

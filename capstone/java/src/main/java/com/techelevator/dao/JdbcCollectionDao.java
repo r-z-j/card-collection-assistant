@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class JdbcCollectionDao implements CollectionDao{
+public class JdbcCollectionDao implements CollectionDao {
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -71,7 +71,7 @@ public class JdbcCollectionDao implements CollectionDao{
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
         }
-return newCollectionDto;
+        return newCollectionDto;
     }
 
     @Override
@@ -80,13 +80,36 @@ return newCollectionDto;
     }
 
     @Override
-    public CollectionDto addCardToCollectionById(int collectionId, CardDto card) {
-        return null;
+    public CollectionDto addCardToCollectionById(int collectionId, int cardId) {
+        CollectionDto collectionDto = null;
+        String sql = "INSERT INTO card_collection(card_id, collection_id) VALUES (?, ?);";
+        try {
+            jdbcTemplate.update(sql,
+                    cardId,
+                    collectionId);
+            collectionDto = getCollectionById(collectionId);
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return collectionDto;
     }
 
     @Override
-    public CollectionDto removeCardFromCollectionById(int collectionId, CardDto card) {
-        return null;
+    public int removeCardFromCollectionById(int collectionId, int cardId) {
+        int numberOfRows;
+        String sqlCardCollection = "DELETE FROM card_collection WHERE card_id = ?";
+        String sqlCard = "DELETE FROM card WHERE card_id = ?";
+        try {
+            jdbcTemplate.update(sqlCardCollection, cardId);
+            numberOfRows = jdbcTemplate.update(sqlCard, cardId);
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return numberOfRows;
     }
 
     @Override
@@ -114,7 +137,7 @@ return newCollectionDto;
         card.setCardApiId(rs.getString("card_api_id"));
         card.setCardName(rs.getString("card_name"));
         card.setGameTypeId(rs.getInt("game_type_id"));
-        card.setUserPrice(BigDecimal.valueOf(rs.getInt("user_price")));
+        card.setUserPrice(BigDecimal.valueOf(rs.getDouble("user_price")));
         card.setConditionId(rs.getInt("condition_id"));
         card.setQuantity(rs.getInt("quantity"));
 
