@@ -29,7 +29,7 @@ export default {
   computed: {
     cardImageUrl() {
         console.log(this.card.images)
-      return `http://images.pokemontcg.io/dp7/7.png`;
+      return `http://images.pokemontcg.io/dp3/3.png`;
     },
   },
   mounted() {
@@ -39,7 +39,7 @@ export default {
     async fetchCardInfo() {
       try {
         const response = await fetch(
-          `https://api.pokemontcg.io/v2/cards`
+          `https://api.pokemontcg.io/v2/cards?q=name:charizard&page=1pageSize=1`
         );
         const data = await response.json();
         this.card = data.data[0];

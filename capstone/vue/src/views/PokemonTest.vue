@@ -1,7 +1,7 @@
 <template>
   <main class="centered-container">
     <div class="cards">
-      <Pokemon cardName="Pikachu"></Pokemon>
+      <Pokemon cardName="Charizard"></Pokemon>
       <Pokemon cardName="Charizard"></Pokemon>
     </div>
   </main>
