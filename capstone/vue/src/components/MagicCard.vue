@@ -2,7 +2,8 @@
   <div>
   <div v-for="card in $store.state.magicCards" v-bind:key="card.id" class="magic-card">
     <div class="card-image">
-      <img :src="card.imageUri" alt="Card Image" />
+      <img v-if="card.frontFace" :src="card.frontFace.imageUri" alt="Card Front Face" />
+      <img v-else :src="card.imageUri" alt="Card Image" />
     </div>
     <div class="card-details">
       <h1>{{ card.name }}</h1>
@@ -27,7 +28,7 @@ export default {
   },
   methods: {
     getMultipleCardsBySearch(){
-      scryfallService.getMultipleCardsBySearchName("sidar").then(response => {
+      scryfallService.getMultipleCardsBySearchName("Emraku").then(response => {
         this.$store.commit("SET_MAGIC_CARDS_SEARCH", response.data);
       });
     }
