@@ -1,14 +1,13 @@
 package com.techelevator.model;
 
 import java.util.List;
-import java.util.Objects;
 
 public class CollectionDto {
 
     private int collectionId;
     private String collectionName;
     private int authorId;
-    private GameType gameType;
+    private int gameTypeId;
     private List<CardDto> cardList;
 
     public CollectionDto() {};
@@ -37,21 +36,19 @@ public class CollectionDto {
         this.authorId = authorId;
     }
 
+    public void setGameTypeId(int gameTypeId) {
+        this.gameTypeId = gameTypeId;
+    }
+
     public int getGameTypeId() {
-        return gameType.getId();
+        return gameTypeId;
     }
 
-    public GameType getGameType() {
-        return gameType;
-    }
-
-    public void setGameType(int id) {
-        switch (id) {
-            case 1: this.gameType = GameType.MAGIC;
-                break;
-            case 2: this.gameType = GameType.POKEMON;
-                break;
-            default: this.gameType = GameType.UNKNOWN;
+    public String getGameType() {
+        switch(gameTypeId) {
+            case 1: return "Magic The Gathering";
+            case 2: return "Pokemon";
+            default: return "Unknown";
         }
     }
 
@@ -69,21 +66,8 @@ public class CollectionDto {
                 "collectionId=" + collectionId +
                 ", collectionName='" + collectionName + '\'' +
                 ", authorId=" + authorId +
-                ", gameType=" + gameType +
+                ", gameTypeId=" + gameTypeId +
                 ", cardList=" + cardList +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CollectionDto that = (CollectionDto) o;
-        return collectionId == that.collectionId && authorId == that.authorId && Objects.equals(collectionName, that.collectionName) && gameType == that.gameType && Objects.equals(cardList, that.cardList);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(collectionId, collectionName, authorId, gameType, cardList);
     }
 }

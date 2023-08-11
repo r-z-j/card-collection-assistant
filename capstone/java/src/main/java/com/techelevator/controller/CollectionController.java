@@ -39,6 +39,7 @@ public class CollectionController {
     @RequestMapping(path = "/create", method = RequestMethod.POST)
     public CollectionDto create(@Valid @RequestBody CollectionDto collection) {
         CollectionDto newCollectionDto = null;
+        System.out.println(collection.toString());
         try {
             if (collection == null) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "CollectionDto was not created.");
@@ -47,7 +48,7 @@ public class CollectionController {
             newCollectionDto = collectionDao.createCollectionDto(collection);
 
         } catch (DaoException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "CollectionDto was not created.");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
         }
         return newCollectionDto;
     }

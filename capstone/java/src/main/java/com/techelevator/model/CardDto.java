@@ -1,7 +1,6 @@
 package com.techelevator.model;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 
 public class CardDto {
 
@@ -9,9 +8,9 @@ public class CardDto {
     private String cardApiId;
     private String cardName;
     private BigDecimal userPrice;
-    private CardCondition condition;
     private int quantity;
-    private GameType gameType;
+    private int gameTypeId;
+    private int conditionId;
 
     public CardDto() {};
 
@@ -47,14 +46,6 @@ public class CardDto {
         this.userPrice = userPrice;
     }
 
-    public CardCondition getCondition() {
-        return condition;
-    }
-
-    public void setCondition(CardCondition condition) {
-        this.condition = condition;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -63,47 +54,41 @@ public class CardDto {
         this.quantity = quantity;
     }
 
-    public GameType getGameType() {
-        return gameType;
+    public int getGameTypeId() {
+        return gameTypeId;
     }
 
-    public int getGametypeId() {
-        return gameType.getId();
+    public void setGameTypeId(int gameTypeId) {
+        this.gameTypeId = gameTypeId;
     }
 
-    public void setGameType(int id) {
-        switch (id) {
-            case 1: this.gameType = GameType.MAGIC;
-                break;
-            case 2: this.gameType = GameType.POKEMON;
-                break;
-            default: this.gameType = GameType.UNKNOWN;
+    public int getConditionId() {
+        return conditionId;
+    }
+
+    public void setConditionId(int conditionId) {
+        this.conditionId = conditionId;
+    }
+
+    public String getGameType() {
+        switch(gameTypeId) {
+            case 1: return "Magic The Gathering";
+            case 2: return "Pokemon";
+            default: return "Unknown";
         }
     }
 
-    @Override
-    public String toString() {
-        return "CardDto{" +
-                "cardId=" + cardId +
-                ", cardApiId='" + cardApiId + '\'' +
-                ", cardName='" + cardName + '\'' +
-                ", userPrice=" + userPrice +
-                ", condition=" + condition +
-                ", quantity=" + quantity +
-                ", gameType=" + gameType +
-                '}';
+    public String getCondition() {
+        switch(conditionId) {
+            case 1: return "Mint";
+            case 2: return "Near Mint";
+            case 3: return "Excellent";
+            case 4: return "Good";
+            case 5: return "Light Played";
+            case 6: return "Played";
+            case 7: return "Poor";
+            default: return "Unknown";
+        }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CardDto cardDto = (CardDto) o;
-        return cardId == cardDto.cardId && quantity == cardDto.quantity && Objects.equals(cardApiId, cardDto.cardApiId) && Objects.equals(cardName, cardDto.cardName) && Objects.equals(userPrice, cardDto.userPrice) && condition == cardDto.condition && gameType == cardDto.gameType;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(cardId, cardApiId, cardName, userPrice, condition, quantity, gameType);
-    }
 }
