@@ -2,7 +2,8 @@
   <div>
   <div v-for="card in $store.state.magicCards" v-bind:key="card.id" class="magic-card">
     <div class="card-image">
-      <img :src="card.imageUri" alt="Card Image" />
+      <img v-if="card.frontFace" :src="card.frontFace.imageUri" alt="Card Front Face" />
+      <img v-else :src="card.imageUri" alt="Card Image" />
     </div>
     <div class="card-details">
       <h1>{{ card.name }}</h1>
@@ -23,15 +24,26 @@ export default {
   name: "magic-card",
   props: ["magicCardName"],
   created() {
-    this.getMultipleCardsBySearch();
+    this.getMultipleCardsBySearch(this.$store.state.searchQuery);
   },
   methods: {
-    getMultipleCardsBySearch(){
-      scryfallService.getMultipleCardsBySearchName("sidar").then(response => {
+    getMultipleCardsBySearch(searchQuery){
+      scryfallService.getMultipleCardsBySearchName(searchQuery).then(response => {
+        this.$store.commit("CLEAR_MAGIC_CARDS")
         this.$store.commit("SET_MAGIC_CARDS_SEARCH", response.data);
       });
     }
   },
+  computed: {
+    getSearchQuery(){
+      return this.$store.state.searchQuery
+    }
+  },
+  watch: {
+    '$store.state.searchQuery'(newValue) {
+      this.getMultipleCardsBySearch(newValue);
+    }
+  }
 };
 </script>
   
@@ -57,6 +69,7 @@ export default {
 img {
   width: 270px;
   height: 378px;
+  border-radius: 10px;
 }
 
 .card-details {

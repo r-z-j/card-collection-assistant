@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.CardDao;
 import com.techelevator.dao.CollectionDao;
+import com.techelevator.dao.UserDao;
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.CardDto;
 import com.techelevator.model.CollectionDto;
@@ -12,29 +13,29 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @CrossOrigin
 //@PreAuthorize("isAuthenticated()")
 @RestController
-@RequestMapping("/collection/")
+@RequestMapping("/collection")
 public class CollectionController {
     private CollectionDao collectionDao;
     private CardDao cardDao;
+    private UserDao userDao;
 
-    CollectionController(CollectionDao collectionDao, CardDao cardDao) {
+    CollectionController(CollectionDao collectionDao, CardDao cardDao, UserDao userDao) {
         this.collectionDao = collectionDao;
         this.cardDao = cardDao;
+        this.userDao = userDao;
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(path = "{collectionId}", method = RequestMethod.GET)
-    public CollectionDto getCollection(@PathVariable int collectionId, Principal principal)  {
+    @RequestMapping(path = "/{collectionId}", method = RequestMethod.GET)
+    public CollectionDto getCollection(@PathVariable int collectionId)  {
         try {
-            // Gives us the current user
-            // System.out.println(principal.toString());
             return collectionDao.getCollectionById(collectionId);
         } catch (DaoException e) {
-            System.out.println(e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -64,29 +65,81 @@ public class CollectionController {
            int numberOfRows = collectionDao.removeCardFromCollectionById(collectionId, cardId);
            updatedCollection = collectionDao.getCollectionById(collectionId);
         } catch (DaoException e) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
         return updatedCollection;
     }
 
-
-
+    @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/create", method = RequestMethod.POST)
-    public CollectionDto create(@Valid @RequestBody CollectionDto collection) {
+    public CollectionDto create(@Valid @RequestBody CollectionDto collection, Principal principal) {
         CollectionDto newCollectionDto = null;
-        System.out.println(collection.toString());
+        int authorId = userDao.getUserByUsername(principal.getName()).getId();
         try {
             if (collection == null) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "CollectionDto was not created.");
             }
-
-            newCollectionDto = collectionDao.createCollectionDto(collection);
+            newCollectionDto = collectionDao.createCollectionDto(collection, authorId);
 
         } catch (DaoException e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
         }
         return newCollectionDto;
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path = "/mine", method = RequestMethod.GET)
+    public List<CollectionDto> getMyCollections(Principal principal){
+        int userId = userDao.getUserByUsername(principal.getName()).getId();
+        List<CollectionDto> myCollections = null;
+        try {
+           myCollections = collectionDao.getMyCollections(userId);
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
+
+        return myCollections;
+    };
+
+    @PreAuthorize("isAuthenticated()")
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path = "/favorite", method = RequestMethod.GET)
+    public List<CollectionDto> getFavCollections(Principal principal){
+        int userId = userDao.getUserByUsername(principal.getName()).getId();
+        List<CollectionDto> favCollections = null;
+        try {
+            favCollections = collectionDao.getFavCollections(userId);
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
+
+        return favCollections;
+    };
+
+    @PreAuthorize("isAuthenticated()")
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path = "/favorite/{collectionId}", method = RequestMethod.POST)
+    public void addCollectionToFavorite(@PathVariable int collectionId, Principal principal) {
+        int userId = userDao.getUserByUsername(principal.getName()).getId();
+        try {
+            collectionDao.addCollectionToFavorite(collectionId, userId);
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path = "/favorite/{collectionId}", method = RequestMethod.DELETE)
+    public void removeCollectionFromFavorite(@PathVariable int collectionId, Principal principal) {
+        int userId = userDao.getUserByUsername(principal.getName()).getId();
+        try {
+            collectionDao.removeCollectionFromFavorite(collectionId, userId);
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
     }
 
 
