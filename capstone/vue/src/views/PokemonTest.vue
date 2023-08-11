@@ -1,18 +1,25 @@
 <template>
-  <main class="centered-container">
-    <div class="cards">
-      <Pokemon></Pokemon>
+  <main>
+    <section>
+      <search-bar></search-bar>
+    </section>
+    <div class="centered-container">
+      <div class="cards">
+        <Pokemon></Pokemon>
+      </div>
     </div>
   </main>
 </template>
 
 <script>
-import Pokemon from '../components/Pokemon.vue';
+import Pokemon from "../components/Pokemon.vue";
+import SearchBar from "../components/SearchBar.vue";
 
 export default {
   components: {
-    Pokemon
-  }
+    Pokemon,
+    SearchBar
+  },
 };
 </script>
 
@@ -21,7 +28,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; 
+  min-height: 100vh;
   flex-grow: 1;
 }
 
@@ -31,4 +38,10 @@ export default {
   justify-content: center;
 }
 
+main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
 </style>

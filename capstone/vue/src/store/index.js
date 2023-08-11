@@ -26,6 +26,14 @@ export default new Vuex.Store({
       id: null,
       name: '',
       imageUri: [],
+    },
+    //Magic Card Objects
+    magicCards: [],
+    magicCard: {
+      id: null,
+      name: '',
+      imageUri: [],
+      oracleText: ''
     }
     
   },
@@ -47,6 +55,8 @@ export default new Vuex.Store({
       state.user = {};
       axios.defaults.headers.common = {};
     },
+
+    //POKEMON MUTATIONS
     SET_POKEMON_CARD(state, data){
      state.pokeCard.id = data.data.id;
      state.pokeCard.name = data.data.name;
@@ -60,6 +70,23 @@ export default new Vuex.Store({
         name: cardData.name,
         imageUri: cardData.images.large,
 
+      }));
+    },
+
+    //MAGIC CARD MUTATIONS
+    SET_MAGIC_CARD(state, data) {
+      state.magicCard.name = data.name;
+      state.magicCard.id = data.id;
+      state.magicCard.imageUri = data.image_uris;
+      state.magicCard.oracleText = data.oracle_text;
+    },
+    SET_MAGIC_CARDS_SEARCH(state, data) {
+      state.magicCards = data.data.map(cardData => ({
+        
+        id: cardData.id,
+        name: cardData.name,
+        imageUri: cardData.image_uris.normal,
+        oracleText: cardData.oracle_text
       }));
     }
 

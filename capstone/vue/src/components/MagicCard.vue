@@ -1,47 +1,36 @@
 <template>
-  <div class="magic-card">
+  <div>
+  <div v-for="card in $store.state.magicCards" v-bind:key="card.id" class="magic-card">
     <div class="card-image">
-      <img :src="cardImageUrl" alt="Card Image" />
+      <img :src="card.imageUri" alt="Card Image" />
     </div>
     <div class="card-details">
       <h1>{{ card.name }}</h1>
-      <h3>{{ card.oracle_text }}</h3>
+      <h3>{{ card.oracleText }}</h3>
       <div class="buttons">
         <button>View Collections</button>
         <button>Add To Collection</button>
       </div>
     </div>
   </div>
+</div>
 </template>
   
-  <script>
+<script>
+import scryfallService from '../services/ScryfallService';
+
 export default {
-  props: ["cardName"],
-  data() {
-    return {
-      card: {},
-    };
-  },
-  computed: {
-    cardImageUrl() {
-      return this.card.image_uris ? this.card.image_uris.normal : "";
-    },
-  },
-  mounted() {
-    this.fetchCardInfo();
+  name: "magic-card",
+  props: ["magicCardName"],
+  created() {
+    this.getMultipleCardsBySearch();
   },
   methods: {
-    async fetchCardInfo() {
-      try {
-        const response = await fetch(
-          `https://api.scryfall.com/cards/named?exact=${this.cardName}`
-        );
-        const data = await response.json();
-        this.card = data;
-      } catch (error) {
-        console.error("Error fetching card:", error);
-      }
-    },
+    getMultipleCardsBySearch(){
+      scryfallService.getMultipleCardsBySearchName("sidar").then(response => {
+        this.$store.commit("SET_MAGIC_CARDS_SEARCH", response.data);
+      });
+    }
   },
 };
 </script>
@@ -70,18 +59,17 @@ img {
   height: 378px;
 }
 
-.card-details{
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+.card-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
-.buttons{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-top: auto;
-
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: auto;
 }
 button {
   padding: 10px 20px;

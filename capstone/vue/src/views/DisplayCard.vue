@@ -1,24 +1,25 @@
 <template>
-  <main class="centered-container">
-    <div class="cards">
-      <MagicCard cardName="It That Betrays"></MagicCard>
-      <MagicCard cardName="Lightning Greaves"></MagicCard>
-      <MagicCard cardName="Winged Boots"></MagicCard>
-      <MagicCard cardName="Boots of Speed"></MagicCard>
-      <MagicCard cardName="Zephyr Boots"></MagicCard>
-      <MagicCard cardName="Trailblazer's Boots"></MagicCard>
-      <MagicCard cardName="Boot Nipper"></MagicCard>
+  <main>
+    <section>
+      <SearchBar></SearchBar>
+    </section>
+    <div class="centered-container">
+      <div class="cards">
+        <MagicCard></MagicCard>
+      </div>
     </div>
   </main>
 </template>
 
 <script>
-import MagicCard from '../components/MagicCard.vue';
+import MagicCard from "../components/MagicCard.vue";
+import SearchBar from "../components/SearchBar.vue";
 
 export default {
   components: {
-    MagicCard
-  }
+    MagicCard,
+    SearchBar,
+  },
 };
 </script>
 
@@ -27,7 +28,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; 
+  min-height: 100vh;
   flex-grow: 1;
 }
 
@@ -37,4 +38,10 @@ export default {
   justify-content: center;
 }
 
+main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
 </style>
