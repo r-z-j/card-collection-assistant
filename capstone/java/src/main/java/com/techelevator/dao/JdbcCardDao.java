@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class JdbcCardDao implements CardDao{
@@ -33,6 +35,22 @@ public class JdbcCardDao implements CardDao{
             throw new DaoException("Unable to connect to server or database", e);
         }
         return card;
+    }
+
+    public List<CardDto> getAllCards() {
+        List<CardDto> allCards = new ArrayList<>();
+        String sql = "SELECT * FROM card";
+        try {
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
+            while (result.next()) {
+                allCards.add(mapRowToCard(result));
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return allCards;
     }
 
     public int addCard(CardDto card){

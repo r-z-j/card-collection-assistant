@@ -55,11 +55,12 @@ public class JdbcCollectionDao implements CollectionDao {
     }
 
     @Override
-    public CollectionDto createCollectionDto(CollectionDto collection) {
+    public CollectionDto createCollectionDto(CollectionDto collection, int authorId) {
         CollectionDto newCollectionDto = null;
         String sql = "INSERT INTO collection(collection_name, author_id, game_type_id) VALUES (?, ?, ?) RETURNING collection_id;";
 
         try {
+            collection.setAuthorId(authorId);
             int newCollectionId = jdbcTemplate.queryForObject(sql,
                     int.class,
                     collection.getCollectionName(),
@@ -74,10 +75,7 @@ public class JdbcCollectionDao implements CollectionDao {
         return newCollectionDto;
     }
 
-    @Override
-    public CollectionDto updateCollectionById(int collectionId) {
-        return null;
-    }
+
 
     @Override
     public CollectionDto addCardToCollectionById(int collectionId, int cardId) {
@@ -113,13 +111,63 @@ public class JdbcCollectionDao implements CollectionDao {
     }
 
     @Override
-    public List<CollectionDao> getCollectionsByUserId(int userId) {
-        return null;
+    public List<CollectionDto> getMyCollections(int userId) {
+        List<CollectionDto> myCollections = new ArrayList<>();
+        String sql = "SELECT collection_id FROM collection WHERE author_id = ?; ";
+        try {
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, userId);
+            while (result.next()) {
+                int collectionId = result.getInt("collection_id");
+                myCollections.add(getCollectionById(collectionId));
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return myCollections;
     }
 
     @Override
-    public List<CardDto> getCardsInCollectionById(int collectionId) {
-        return null;
+    public List<CollectionDto> getFavCollections(int userId) {
+        List<CollectionDto> favCollections = new ArrayList<>();
+        String sql = "SELECT collection_id FROM favorite_collection WHERE user_id = ?; ";
+        try {
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, userId);
+            while (result.next()) {
+                int collectionId = result.getInt("collection_id");
+                favCollections.add(getCollectionById(collectionId));
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return favCollections;
+    }
+
+    @Override
+    public void addCollectionToFavorite(int collectionId, int userId) {
+        String sql = "INSERT INTO favorite_collection(user_id, collection_id) VALUES (?, ?);";
+        try {
+            jdbcTemplate.update(sql, userId, collectionId);
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+    }
+
+    @Override
+    public void removeCollectionFromFavorite(int collectionId, int userId) {
+        String sql = "DELETE FROM favorite_collection WHERE user_id = ? AND collection_id = ?";
+        try {
+            jdbcTemplate.update(sql, userId, collectionId);
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
     }
 
     private CollectionDto mapRowToCollection(SqlRowSet rs) {
