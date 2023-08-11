@@ -19,8 +19,17 @@ if(currentToken != null) {
 export default new Vuex.Store({
   state: {
     token: currentToken || '',
-    user: currentUser || {}
+    user: currentUser || {},
+    //Pokemon Card Objects
+    pokeCards: [],
+    pokeCard: {
+      id: null,
+      name: '',
+      imageUri: [],
+    }
+    
   },
+
   mutations: {
     SET_AUTH_TOKEN(state, token) {
       state.token = token;
@@ -37,6 +46,22 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
+    },
+    SET_POKEMON_CARD(state, data){
+     state.pokeCard.id = data.data.id;
+     state.pokeCard.name = data.data.name;
+     state.pokeCard.imageUri = data.data.images;
+    },
+
+    SET_POKE_CARDS_SEARCH(state, data){
+      state.pokeCards = data.data.map(cardData=>({
+
+        id: cardData.id,
+        name: cardData.name,
+        imageUri: cardData.images.large,
+
+      }));
     }
+
   }
 })

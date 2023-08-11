@@ -1,8 +1,7 @@
 <template>
   <main class="centered-container">
     <div class="cards">
-      <Pokemon cardName="Charizard"></Pokemon>
-      <Pokemon cardName="Charizard"></Pokemon>
+      <Pokemon></Pokemon>
     </div>
   </main>
 </template>

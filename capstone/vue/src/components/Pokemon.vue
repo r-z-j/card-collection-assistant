@@ -1,54 +1,45 @@
 <template>
-  <div class="pokemon-card">
+<div>
+  <div v-for="card in $store.state.pokeCards" v-bind:key="card.id" class="pokemon-card">
     <div class="card-image">
-      <img :src="cardImageUrl" alt="Card Image" />
+      <img :src="card.imageUri" alt="Card Image" />
     </div>
     <div class="card-details">
       <h1>{{ card.name }}</h1>
-      <h3>{{ card.types }}</h3>
-      <h3>{{ card.attacks }}</h3>
+     
       <div class="buttons">
         <button>View Collections</button>
         <button>Add To Collection</button>
       </div>
     </div>
   </div>
+  </div>
 </template>
 <script>
-
+import pokemonService from  '../services/PokemonService';
 export default {
-  props: ["cardName"],
-  data() {
-    return {
-      card: {},
-      
-      
-
-    };
+  name: "pokemon-card",  
+  props: ["pokeCardName"],
+  
+  created(){
+      this.getMultipleCardsBySearch();
   },
-  computed: {
-    cardImageUrl() {
-        console.log(this.card.images)
-      return `http://images.pokemontcg.io/dp3/3.png`;
-    },
-  },
-  mounted() {
-    this.fetchCardInfo();
-  },
+  
+  
   methods: {
-    async fetchCardInfo() {
-      try {
-        const response = await fetch(
-          `https://api.pokemontcg.io/v2/cards?q=name:charizard&page=1pageSize=1`
-        );
-        const data = await response.json();
-        this.card = data.data[0];
-       this.cardImageUrl()
-      } catch (error) {
-        console.error("Error fetching card:", error);
-      }
-    },
-  },
+   getSingleCardById(){
+       pokemonService.getSingleCardById('gym2-2').then(response =>{
+           this.$store.commit("SET_POKEMON_CARD", response.data);
+       });
+   },
+   getMultipleCardsBySearch(){
+       pokemonService.getMultipleCardsBySearchName('Eevee').then(response =>{
+           this.$store.commit('SET_POKE_CARDS_SEARCH', response.data);
+       });
+   },
+
+
+  }
 };
 </script>
   
