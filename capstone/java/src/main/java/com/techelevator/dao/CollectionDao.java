@@ -11,8 +11,9 @@ public interface CollectionDao {
     List<CollectionDto> getMagicCollections();
     List<CollectionDto> getPokemonCollections();
     List<CollectionDto> getMyCollections(int userId);
+    List<CollectionDto> getFavoriteCollections(int userId);
+    // List<Collection> getCollectionsByCardApiId(int cardApiId);
     void deleteCollection(int collectionId);
-    List<CollectionDto> getFavCollections(int userId);
     void addCollectionToFavorite(int collectionId, int userId);
     void removeCollectionFromFavorite(int collectionId, int userId);
 }

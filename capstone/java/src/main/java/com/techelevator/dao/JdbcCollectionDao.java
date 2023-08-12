@@ -163,7 +163,7 @@ public class JdbcCollectionDao implements CollectionDao {
     }
 
     @Override
-    public List<CollectionDto> getFavCollections(int userId) {
+    public List<CollectionDto> getFavoriteCollections(int userId) {
         List<CollectionDto> favCollections = new ArrayList<>();
         String sql = "SELECT collection_id FROM favorite_collection WHERE user_id = ?; ";
         try {

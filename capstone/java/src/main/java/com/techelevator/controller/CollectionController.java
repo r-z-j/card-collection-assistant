@@ -145,11 +145,11 @@ public class CollectionController {
     @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/favorite", method = RequestMethod.GET)
-    public List<CollectionDto> getFavCollections(Principal principal){
+    public List<CollectionDto> getFavoriteCollections(Principal principal){
         int userId = userDao.getUserByUsername(principal.getName()).getId();
         List<CollectionDto> favCollections = null;
         try {
-            favCollections = collectionDao.getFavCollections(userId);
+            favCollections = collectionDao.getFavoriteCollections(userId);
         } catch (DaoException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }

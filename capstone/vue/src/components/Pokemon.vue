@@ -5,11 +5,26 @@
       <img :src="card.imageUri" alt="Card Image" />
     </div>
     <div class="card-details">
-      <h1>{{ card.name }}</h1>
-      <h1>{{ card.hp }}</h1>
-      <h1>{{ card.types }}</h1>
-      <h1>{{ card.attacks }}</h1>
-      <h1>{{ card.weakenesses }}</h1> 
+      <h3>{{ card.name }}</h3>
+      <h3>{{ card.hp }}</h3>
+
+
+      <div v-for="type in card.types" v-bind:key="type.name">
+        <p>{{ type }}</p>
+      </div>
+
+      <div v-for="attack in card.attacks" v-bind:key="attack.name">
+        <p>{{ attack.name }}</p>
+        <p>{{ attack.damage }}</p>
+        <p>{{ attack.text }}</p>
+      </div>
+
+
+      <div v-for="weakness in card.weaknesses[0]" v-bind:key="weakness.type">
+      <p>{{ weakness }} </p>
+      </div>
+
+      
       <div class="buttons">
         <button>View Collections</button>
         <button>Add To Collection</button>
@@ -33,12 +48,14 @@ export default {
   
   methods: {
    getSingleCardById(){
+
        pokemonService.getSingleCardById('gym2-2').then(response =>{
            this.$store.commit("SET_POKEMON_CARD", response.data);
        });
    },
    getMultipleCardsBySearch(searchQuery){
        pokemonService.getMultipleCardsBySearchName(searchQuery).then(response =>{
+           console.log(response.data)
            this.$store.commit("CLEAR_POKEMON_CARDS")
            this.$store.commit('SET_POKE_CARDS_SEARCH', response.data);
        });
