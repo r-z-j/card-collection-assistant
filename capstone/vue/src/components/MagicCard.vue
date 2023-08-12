@@ -57,6 +57,7 @@ export default {
   margin: 10px;
   width: 90vw;
   text-align: center;
+  background-color: rgb(197, 134, 236);
 }
 .card-image {
   min-width: 270px;

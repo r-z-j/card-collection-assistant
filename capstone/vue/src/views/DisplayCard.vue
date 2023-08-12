@@ -43,5 +43,6 @@ main{
   flex-direction: column;
   justify-content: center;
   flex-grow: 1;
+  background-color: rgb(20, 0, 36);
 }
 </style>
