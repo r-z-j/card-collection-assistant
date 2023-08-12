@@ -33,7 +33,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f5f5f5;
+  background-color: #f5f5f5b7;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -52,9 +52,9 @@ export default {
 button {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #6200ff;
+  background-color: #3d1eafe5;
   color: white;
-  border: 2px solid #270cbd;
+  border: 2px solid #260cbdd5;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;

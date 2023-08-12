@@ -81,7 +81,8 @@ export default {
 .pokemon-card {
   display: flex;
   flex-direction: row;
-  border: 2px solid #a3a2a2;
+  border: 2px solid #52525a;
+  background-color: rgb(255, 255, 255);
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
@@ -117,9 +118,9 @@ img {
 button {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #6200ff;
+  background-color: #ff0015e0;
   color: white;
-  border: 2px solid #270cbd;
+  border: 2px solid #0f0f0f;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
