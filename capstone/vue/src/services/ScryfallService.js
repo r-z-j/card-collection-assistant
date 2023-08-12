@@ -11,7 +11,7 @@ export default {
     },
 
     getMultipleCardsBySearchName(searchName){
-        return http.get(`search?q=name:${searchName}`)
+        return http.get(`search?order=released&q=${searchName}&unique=prints`)
     }
 
 }

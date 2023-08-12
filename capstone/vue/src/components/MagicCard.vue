@@ -5,6 +5,9 @@
       <img v-if="card.frontFace" :src="card.frontFace.imageUri" alt="Card Front Face" />
       <img v-else :src="card.imageUri" alt="Card Image" />
     </div>
+    <div>
+      <img v-if="card.backFace" :src="card.backFace.imageUri" alt="Card Back Face" />
+    </div>
     <div class="card-details">
       <h1>{{ card.name }}</h1>
       <h3>{{ card.oracleText }}</h3>
