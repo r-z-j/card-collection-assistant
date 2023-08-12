@@ -5,6 +5,9 @@
       <img v-if="card.frontFace" :src="card.frontFace.imageUri" alt="Card Front Face" />
       <img v-else :src="card.imageUri" alt="Card Image" />
     </div>
+    <div>
+      <img v-if="card.backFace" :src="card.backFace.imageUri" alt="Card Back Face" />
+    </div>
     <div class="card-details">
       <h1>{{ card.name }}</h1>
       <h3>{{ card.oracleText }}</h3>
@@ -57,6 +60,7 @@ export default {
   margin: 10px;
   width: 90vw;
   text-align: center;
+  background-color: rgb(197, 134, 236);
 }
 .card-image {
   min-width: 270px;

@@ -4,6 +4,7 @@
       type="text"
       v-model="searchQuery"
       @input="handleInputChange"
+      @keypress.enter="performSearch"
       placeholder="Search for cards..."
     />
     <button @click="performSearch()">Search</button>
