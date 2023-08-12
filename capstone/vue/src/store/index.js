@@ -80,23 +80,28 @@ export default new Vuex.Store({
      state.pokeCard.hp = data.data.hp;
      state.pokeCard.types = data.data.types;
      state.pokeCard.attacks.name = data.data.attacks.name;
-     state.pokeCard.weaknesses.type = data.data.type;
-     state.pokeCard.weaknesses.value = data.data.value;
+     state.pokeCard.weaknesses = data.data.weaknesses;
+     state.pokeCard.weaknesses.value = data.data.weaknesses.value;
     },
 
     SET_POKE_CARDS_SEARCH(state, data){
       state.pokeCards = data.data.map(cardData=>({
-
+    
         id: cardData.id,
         name: cardData.name,
         imageUri: cardData.images.large,
         hp: cardData.hp,
         types: cardData.types,
-        attacks: cardData.attacks.name,
-        weaknesses: cardData.weaknesses 
+        attacks: cardData.attacks,
+        weaknesses: cardData.weaknesses,
 
-      }));
+      } ));
     },
+
+    CLEAR_POKEMON_CARDS(state) {
+      state.pokeCards = [];
+    },
+
 
     //MAGIC CARD MUTATIONS
     SET_MAGIC_CARD(state, data) {

@@ -18,14 +18,16 @@
   </div>
   </div>
 </template>
+
 <script>
 import pokemonService from  '../services/PokemonService';
+
 export default {
   name: "pokemon-card",  
   props: ["pokeCardName"],
   
   created(){
-      this.getMultipleCardsBySearch();
+      this.getMultipleCardsBySearch(this.$store.state.searchQuery);
   },
   
   
@@ -35,14 +37,26 @@ export default {
            this.$store.commit("SET_POKEMON_CARD", response.data);
        });
    },
-   getMultipleCardsBySearch(){
-       pokemonService.getMultipleCardsBySearchName('mew').then(response =>{
+   getMultipleCardsBySearch(searchQuery){
+       pokemonService.getMultipleCardsBySearchName(searchQuery).then(response =>{
+           this.$store.commit("CLEAR_POKEMON_CARDS")
            this.$store.commit('SET_POKE_CARDS_SEARCH', response.data);
        });
    },
 
 
-  }
+  },
+  
+  computed: {
+      getSearchQuery(){
+          return this.$store.state.searchQueery
+      }
+  },
+    watch: {
+        '$store.state.searchQuery'(newValue){
+            this.getMultipleCardsBySearch(newValue);
+        }
+    }
 };
 </script>
   

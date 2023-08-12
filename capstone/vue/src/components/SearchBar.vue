@@ -7,6 +7,7 @@
       placeholder="Search for cards..."
     />
     <button @click="performSearch()">Search</button>
+    
   </div>
 </template>
 
