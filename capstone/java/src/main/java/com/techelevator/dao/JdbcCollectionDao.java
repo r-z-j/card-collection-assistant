@@ -8,8 +8,6 @@ import com.techelevator.exception.DaoException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -24,15 +22,12 @@ public class JdbcCollectionDao implements CollectionDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @ResponseBody
     @Override
-    @GetMapping
     public CollectionDto getCollectionById(int collectionId) {
         CollectionDto collection = null;
         String sql = "SELECT * FROM collection WHERE collection_id = ?";
         String cardListSql = "SELECT * FROM card " +
-        "JOIN card_collection ON card.card_id  = card_collection.card_id " +
-        "JOIN collection ON card_collection.collection_id = collection.collection_id " +
+        "JOIN collection ON card.collection_id = collection.collection_id " +
         "WHERE collection.collection_id = ?";
         try {
             SqlRowSet result = jdbcTemplate.queryForRowSet(sql, collectionId);
@@ -52,6 +47,26 @@ public class JdbcCollectionDao implements CollectionDao {
         }
         return collection;
 
+    }
+
+    @Override
+    public int getCollectionAuthor(int collectionId) {
+        int authorId = 0;
+        String sql = "SELECT author_id FROM collection WHERE collection_id = ?";
+        try {
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, collectionId);
+            if (result.next()) {
+                authorId = result.getInt("author_id");
+            }
+            if( authorId == 0 ) {
+                throw new DaoException("User not found");
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DaoException e) {
+            throw new DaoException(e.getMessage());
+        }
+        return authorId;
     }
 
     @Override
@@ -75,39 +90,58 @@ public class JdbcCollectionDao implements CollectionDao {
         return newCollectionDto;
     }
 
-
-
     @Override
-    public CollectionDto addCardToCollectionById(int collectionId, int cardId) {
-        CollectionDto collectionDto = null;
-        String sql = "INSERT INTO card_collection(card_id, collection_id) VALUES (?, ?);";
+    public void deleteCollection(int collectionId) {
+        String sql = "DELETE FROM card WHERE collection_id = ?;" +
+        "DELETE FROM favorite_collection WHERE collection_id = ?;" +
+        "DELETE FROM collection WHERE collection_id = ?;";
         try {
-            jdbcTemplate.update(sql,
-                    cardId,
-                    collectionId);
-            collectionDto = getCollectionById(collectionId);
+            jdbcTemplate.update(sql, collectionId, collectionId, collectionId);
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
         }
-        return collectionDto;
     }
 
     @Override
-    public int removeCardFromCollectionById(int collectionId, int cardId) {
-        int numberOfRows;
-        String sqlCardCollection = "DELETE FROM card_collection WHERE card_id = ?";
-        String sqlCard = "DELETE FROM card WHERE card_id = ?";
+    public List<CollectionDto> getMagicCollections() {
+        List<CollectionDto> magicCollections = new ArrayList<>();
+        String sql = "SELECT collection_id FROM collection WHERE game_type_id = 1";
+
         try {
-            jdbcTemplate.update(sqlCardCollection, cardId);
-            numberOfRows = jdbcTemplate.update(sqlCard, cardId);
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
+            while (result.next()) {
+                int collectionId = result.getInt("collection_id");
+                magicCollections.add(getCollectionById(collectionId));
+            }
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
         }
-        return numberOfRows;
+
+        return magicCollections;
+    }
+
+    @Override
+    public List<CollectionDto> getPokemonCollections() {
+        List<CollectionDto> pokemonCollections = new ArrayList<>();
+        String sql = "SELECT collection_id FROM collection WHERE game_type_id = 2";
+
+        try {
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
+            while (result.next()) {
+                int collectionId = result.getInt("collection_id");
+                pokemonCollections.add(getCollectionById(collectionId));
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+
+        return pokemonCollections;
     }
 
     @Override
@@ -182,6 +216,7 @@ public class JdbcCollectionDao implements CollectionDao {
     private CardDto mapRowToCard(SqlRowSet rs) {
         CardDto card = new CardDto();
         card.setCardId(rs.getInt("card_id"));
+        card.setCollectionId(rs.getInt("collection_id"));
         card.setCardApiId(rs.getString("card_api_id"));
         card.setCardName(rs.getString("card_name"));
         card.setGameTypeId(rs.getInt("game_type_id"));

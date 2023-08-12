@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
@@ -40,6 +41,17 @@ public class CardController {
     public CardDto getCard(@PathVariable int cardId, Principal principal)  {
         try {
             return cardDao.getCardById(cardId);
+        } catch (DaoException e) {
+            System.out.println(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path = "/{cardId}", method = RequestMethod.POST)
+    public CardDto getCard(@PathVariable int cardId, @Valid @RequestBody CardDto card, Principal principal)  {
+        try {
+            return cardDao.updateCard(cardId, card);
         } catch (DaoException e) {
             System.out.println(e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);

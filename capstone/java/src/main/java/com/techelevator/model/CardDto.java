@@ -11,6 +11,7 @@ public class CardDto {
     private int quantity;
     private int gameTypeId;
     private int conditionId;
+    private int collectionId;
 
     public CardDto() {};
 
@@ -68,6 +69,14 @@ public class CardDto {
 
     public void setConditionId(int conditionId) {
         this.conditionId = conditionId;
+    }
+
+    public int getCollectionId() {
+        return collectionId;
+    }
+
+    public void setCollectionId(int collectionId) {
+        this.collectionId = collectionId;
     }
 
     public String getGameType() {
