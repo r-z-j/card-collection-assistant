@@ -20,12 +20,27 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
+
+    //Searches are stored here
+    searchQuery: '',
+
     //Pokemon Card Objects
     pokeCards: [],
     pokeCard: {
       id: null,
       name: '',
       imageUri: [],
+      hp: '',
+      types: [0,1],
+      attacks: {
+       name : '',
+       text:'',
+       damage: '',
+    },
+      weaknesses: {
+        type: '',
+        value: '',
+      },
     },
     //Magic Card Objects
     magicCards: [],
@@ -62,6 +77,11 @@ export default new Vuex.Store({
      state.pokeCard.id = data.data.id;
      state.pokeCard.name = data.data.name;
      state.pokeCard.imageUri = data.data.images;
+     state.pokeCard.hp = data.data.hp;
+     state.pokeCard.types = data.data.types;
+     state.pokeCard.attacks.name = data.data.attacks.name;
+     state.pokeCard.weaknesses.type = data.data.type;
+     state.pokeCard.weaknesses.value = data.data.value;
     },
 
     SET_POKE_CARDS_SEARCH(state, data){
@@ -70,6 +90,10 @@ export default new Vuex.Store({
         id: cardData.id,
         name: cardData.name,
         imageUri: cardData.images.large,
+        hp: cardData.hp,
+        types: cardData.types,
+        attacks: cardData.attacks.name,
+        weaknesses: cardData.weaknesses 
 
       }));
     },
@@ -108,6 +132,19 @@ export default new Vuex.Store({
     
         return card;
       });
+    },
+
+    SET_SEARCH_QUERY(state, newQuery){
+      state.searchQuery = newQuery;
+    },
+
+    CLEAR_MAGIC_CARDS(state) {
+      state.magicCards = [];
+    },
+  },
+  actions: {
+    updateSearchQuery({ commit }, newQuery){
+      commit("SET_SEARCH_QUERY", newQuery)
     }
 
   }

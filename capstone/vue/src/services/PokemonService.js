@@ -11,7 +11,7 @@ export default{
     },
 
     getMultipleCardsBySearchName(searchName){
-        return http.get(`cards?q=name:${searchName}&page=1&pageSize=10`);
+        return http.get(`cards?q=name:${searchName}*&page=1&pageSize=10`);
     }
 
     
