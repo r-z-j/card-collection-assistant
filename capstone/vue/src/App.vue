@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header>
-
+      
     <div class="left-links">
       <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'mtg-view' }">Magic</router-link>&nbsp;|&nbsp;
