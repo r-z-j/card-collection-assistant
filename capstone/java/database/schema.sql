@@ -5,7 +5,6 @@ DROP TABLE IF EXISTS game_type;
 DROP TABLE IF EXISTS condition;
 DROP TABLE IF EXISTS card;
 DROP TABLE IF EXISTS collection;
-DROP TABLE IF EXISTS card_collection;
 DROP TABLE IF EXISTS favorite_collection;
 
 CREATE TABLE users (
@@ -42,17 +41,12 @@ CREATE TABLE card (
 	user_price numeric(10,2) NOT NULL,
 	quantity integer,
 	condition_id integer NOT NULL,
+	collection_id integer NOT NULL,
+    CONSTRAINT FK_collection_id FOREIGN KEY (collection_id) REFERENCES collection (collection_id),
     CONSTRAINT FK_game_type_id FOREIGN KEY (game_type_id) REFERENCES game_type (game_type_id),
 	CONSTRAINT FK_condition_id FOREIGN KEY (condition_id) REFERENCES condition (condition_id),
 	CONSTRAINT PK_card PRIMARY KEY (card_id));
 
-CREATE TABLE card_collection (
-    card_id integer NOT NULL,
-    collection_id integer NOT NULL,
-    CONSTRAINT PK_card_collection PRIMARY KEY (card_id, collection_id),
-    CONSTRAINT FK_card_collection_card FOREIGN KEY (card_id) REFERENCES card (card_id),
-    CONSTRAINT FK_card_collection_collection FOREIGN KEY (collection_id) REFERENCES collection (collection_id)
-    );
 
 CREATE TABLE favorite_collection (
     user_id int NOT NULL,

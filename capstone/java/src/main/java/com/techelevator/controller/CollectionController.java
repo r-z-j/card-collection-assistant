@@ -16,7 +16,6 @@ import java.security.Principal;
 import java.util.List;
 
 @CrossOrigin
-//@PreAuthorize("isAuthenticated()")
 @RestController
 @RequestMapping("/collection")
 public class CollectionController {
@@ -40,16 +39,55 @@ public class CollectionController {
         }
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path = "/{collectionId}", method = RequestMethod.DELETE)
+    public void deleteCollection(@PathVariable int collectionId, Principal principal){
+        int userId = userDao.getUserByUsername(principal.getName()).getId();
+
+        try {
+            int authorId = collectionDao.getCollectionAuthor(collectionId);
+            if (userId != authorId) {
+                throw new DaoException("You are not authorized to delete this!");
+            }
+            collectionDao.deleteCollection(collectionId);
+
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
+
+    };
+
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path = "/magic", method = RequestMethod.GET)
+    public List<CollectionDto> getMagicCollections()  {
+        try {
+            return collectionDao.getMagicCollections();
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path = "/pokemon", method = RequestMethod.GET)
+    public List<CollectionDto> getPokemonCollections()  {
+        try {
+            return collectionDao.getPokemonCollections();
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/{collectionId}/add-card", method = RequestMethod.POST)
     public CollectionDto addCard(@PathVariable int collectionId, @Valid @RequestBody CardDto card) {
         CollectionDto updatedCollection = null;
         try {
             if (card == null) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "CollectionDto was not created.");
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Card was null and not added to collection.");
             }
             int newCardId = cardDao.addCard(card);
-            updatedCollection = collectionDao.addCardToCollectionById(collectionId, newCardId);
+            updatedCollection = collectionDao.getCollectionById(collectionId);
 
         } catch (DaoException e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
@@ -62,8 +100,8 @@ public class CollectionController {
     public CollectionDto removeCard(@PathVariable int collectionId, @PathVariable int cardId) {
         CollectionDto updatedCollection = null;
         try {
-           int numberOfRows = collectionDao.removeCardFromCollectionById(collectionId, cardId);
-           updatedCollection = collectionDao.getCollectionById(collectionId);
+            cardDao.removeCard(cardId);
+            updatedCollection = collectionDao.getCollectionById(collectionId);
         } catch (DaoException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
@@ -103,6 +141,7 @@ public class CollectionController {
         return myCollections;
     };
 
+
     @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/favorite", method = RequestMethod.GET)
@@ -119,7 +158,7 @@ public class CollectionController {
     };
 
     @PreAuthorize("isAuthenticated()")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/favorite/{collectionId}", method = RequestMethod.POST)
     public void addCollectionToFavorite(@PathVariable int collectionId, Principal principal) {
         int userId = userDao.getUserByUsername(principal.getName()).getId();
@@ -141,6 +180,5 @@ public class CollectionController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
-
 
 }

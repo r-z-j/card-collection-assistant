@@ -18,21 +18,13 @@ INSERT INTO condition (condition_id, condition_name) VALUES (5, 'Light Played');
 INSERT INTO condition (condition_id, condition_name) VALUES (6, 'Played');
 INSERT INTO condition (condition_id, condition_name) VALUES (7, 'Poor');
 
-INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id) VALUES ('abcd1234', 'Black Lotus', 1, 20.00, 2, 1);
-INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id) VALUES ('hifjweio452987', 'Red Lotus', 1, 10.00, 1, 2);
-INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id) VALUES ('hjkgfd789754390', 'Cornflower Blue Lotus', 1, 5.00, 3, 3);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('abcd1234', 'Black Lotus', 1, 20.00, 2, 1, 1);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('hifjweio452987', 'Red Lotus', 1, 10.00, 1, 2, 1);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('hjkgfd789754390', 'Cornflower Blue Lotus', 1, 5.00, 3, 3, 1);
 
-INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id) VALUES ('vcbzxnmvzx', 'Charizard', 2, 10.00, 1, 4);
-INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id) VALUES ('89u06uifjkg', 'Gengar', 2, 5.00, 2, 6);
-INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id) VALUES ('63yui54o', 'Scyther', 2, 40.00, 1, 1);
-
-INSERT INTO card_collection (card_id, collection_id) VALUES (1,1);
-INSERT INTO card_collection (card_id, collection_id) VALUES (2,1);
-INSERT INTO card_collection (card_id, collection_id) VALUES (3,1);
-
-INSERT INTO card_collection (card_id, collection_id) VALUES (4,2);
-INSERT INTO card_collection (card_id, collection_id) VALUES (5,2);
-INSERT INTO card_collection (card_id, collection_id) VALUES (6,2);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('vcbzxnmvzx', 'Charizard', 2, 10.00, 1, 4, 2);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('89u06uifjkg', 'Gengar', 2, 5.00, 2, 6, 2);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('63yui54o', 'Scyther', 2, 40.00, 1, 1, 2);
 
 INSERT INTO favorite_collection (user_id, collection_id) VALUES (1, 1);
 INSERT INTO favorite_collection (user_id, collection_id) VALUES (1, 2);

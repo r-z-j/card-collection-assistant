@@ -1,15 +1,12 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.CardDto;
-import com.techelevator.model.CollectionDto;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import com.techelevator.exception.DaoException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +20,7 @@ public class JdbcCardDao implements CardDao{
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Override
     public CardDto getCardById(int cardId) {
         CardDto card = null;
         String sql = "SELECT * FROM card WHERE card_id = ?";
@@ -37,6 +35,36 @@ public class JdbcCardDao implements CardDao{
         return card;
     }
 
+    @Override
+    public CardDto updateCard(int cardId, CardDto card) {
+        String sql = "UPDATE card SET card_api_id = ?, " +
+                "card_name = ?, " +
+                "game_type_id = ?, " +
+                "user_price = ?, " +
+                "quantity = ?, " +
+                "condition_id = ?, " +
+                "collection_id = ? " +
+                "WHERE card_id = ? ";
+
+        try {
+
+            jdbcTemplate.update(sql,
+                    card.getCardApiId(),
+                    card.getCardName(),
+                    card.getGameTypeId(),
+                    card.getUserPrice(),
+                    card.getQuantity(),
+                    card.getConditionId(),
+                    card.getCollectionId(),
+                    cardId);
+
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return card;
+    }
+
+    @Override
     public List<CardDto> getAllCards() {
         List<CardDto> allCards = new ArrayList<>();
         String sql = "SELECT * FROM card";
@@ -57,8 +85,8 @@ public class JdbcCardDao implements CardDao{
         int newCardId;
         String sql = "INSERT INTO card(" +
                 "card_api_id, card_name, game_type_id, " +
-                "user_price, quantity, condition_id) " +
-                "VALUES (?, ?, ?, ?, ?, ?) RETURNING card_id;";
+                "user_price, quantity, condition_id, collection_id) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING card_id;";
         try {
             newCardId = jdbcTemplate.queryForObject(sql,
                     int.class,
@@ -67,7 +95,8 @@ public class JdbcCardDao implements CardDao{
                     card.getGameTypeId(),
                     card.getUserPrice(),
                     card.getQuantity(),
-                    card.getConditionId());
+                    card.getConditionId(),
+                    card.getCollectionId());
 
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
@@ -75,11 +104,24 @@ public class JdbcCardDao implements CardDao{
             throw new DaoException("Data integrity violation", e);
         }
         return newCardId;
+    }
+
+    @Override
+    public void removeCard(int cardId) {
+        String sql = "DELETE FROM card WHERE card_id = ?;";
+        try {
+            jdbcTemplate.update(sql, cardId);
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
         }
+    }
 
     private CardDto mapRowToCard(SqlRowSet rs) {
         CardDto card = new CardDto();
         card.setCardId(rs.getInt("card_id"));
+        card.setCollectionId(rs.getInt("collection_id"));
         card.setCardApiId(rs.getString("card_api_id"));
         card.setCardName(rs.getString("card_name"));
         card.setGameTypeId(rs.getInt("game_type_id"));
@@ -89,6 +131,4 @@ public class JdbcCardDao implements CardDao{
 
         return card;
     }
-
-
 }
