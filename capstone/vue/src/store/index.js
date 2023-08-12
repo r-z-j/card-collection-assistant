@@ -49,7 +49,8 @@ export default new Vuex.Store({
       name: '',
       imageUri: [],
       oracleText: '',
-      isDualSided: false
+      setName: '',
+      isDualSided: false,
     }
     
   },
@@ -109,6 +110,7 @@ export default new Vuex.Store({
       state.magicCard.id = data.id;
       state.magicCard.imageUri = data.image_uris;
       state.magicCard.oracleText = data.oracle_text;
+      state.magicCard.setName = data.set_name;
     },
     SET_MAGIC_CARDS_SEARCH(state, data) {
       state.magicCards = data.data.map(cardData => {
@@ -116,6 +118,8 @@ export default new Vuex.Store({
           id: cardData.id,
           name: cardData.name,
           oracleText: cardData.oracle_text,
+          setName: cardData.set_name,
+          isFlipped: false,
           isDualSided: cardData.layout === "transform" || cardData.layout === "modal_dfc",
         };
     
