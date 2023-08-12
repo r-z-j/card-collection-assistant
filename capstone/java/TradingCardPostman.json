@@ -1,0 +1,443 @@
+{
+	"info": {
+		"_postman_id": "3635e2d7-2443-4c30-99e7-6c806a15a0d3",
+		"name": "Final Capstone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "MAGIC",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY5MTcxODAzOH0.tmPeICuM0D5IcJSduyCKMUE7_aiL6WTlCmc2AJj-ZWcu1qfsZuCWwz8fTyp9Sc9qb1lvpE4ii0IkpZa5DQ1v7g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/collection/magic",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"collection",
+						"magic"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POKEMON",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY5MTcxODAzOH0.tmPeICuM0D5IcJSduyCKMUE7_aiL6WTlCmc2AJj-ZWcu1qfsZuCWwz8fTyp9Sc9qb1lvpE4ii0IkpZa5DQ1v7g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/collection/pokemon",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"collection",
+						"pokemon"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Collection By Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY5MTcxODAzOH0.tmPeICuM0D5IcJSduyCKMUE7_aiL6WTlCmc2AJj-ZWcu1qfsZuCWwz8fTyp9Sc9qb1lvpE4ii0IkpZa5DQ1v7g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/collection/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"collection",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Collection By Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY5MTg4MzU1NX0.MeMPVFirnspKoUSPxTJpJrj0yPDIr0kc4Ty0e4y3JshGO23DIl_XVpNEtvBq9x2BNAo4HpMqGnBRsrROzAO68Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/collection/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"collection",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "My Collections",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY5MTg2NTI1NX0.Y9hCvL_yzYbaNfnvJfsZesIBFy0Vb3tfntKiYk2FibtW5sxH1WXC7DHpJdBzOiDmcUfHxw8NSJYBIlDWTcHCMg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/collection/mine",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"collection",
+						"mine"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Collection",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOIiwiZXhwIjoxNjkxODYzMDI3fQ.tbC5v6hv0BDDLSczFj5qsHXG7RJ1ihlf62Debv7Gnv4P7PRda3hJYhYbeLt1Ma8N3KWT2FJwogj3y2sKac7EFg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"collectionName\": \"herewego\",\r\n    \"authorId\": 1,\r\n    \"gameTypeId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/collection/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"collection",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Card to Collection",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cardApiId\": \"g1-1\",\r\n    \"cardName\": \"Blastoise\",\r\n    \"userPrice\": 13.0,\r\n    \"quantity\": 1,\r\n    \"gameTypeId\": 2,\r\n    \"conditionId\": 2,\r\n    \"condition\": \"Near Mint\",\r\n    \"gameType\": \"Pokemon\",\r\n    \"collectionId\": 2\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/collection/2/add-card",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"collection",
+						"2",
+						"add-card"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Card By Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY5MTg4MDYzOX0.wO2sxzv494yAxA2lP-FGsaMsHsIqfzHme878ASNyNN0P9dYu7Fom4QDcbjhxR1AUOktqpHC4eDwURthgT_F29Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/card/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"card",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Card By Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY5MTg4NTUzMH0.xZs--5eNhTJrJXTS6PHUNCrOSg_RpreAgEB8cVNWj12OgP7dqL3yKm5yDdKTTw9Qo9A6H_Es2cV579JR6RxrzA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cardId\": 2,\r\n    \"cardApiId\": \"updated\",\r\n    \"cardName\": \"updated Lotus\",\r\n    \"userPrice\": 11.0,\r\n    \"quantity\": 99,\r\n    \"gameTypeId\": 1,\r\n    \"conditionId\": 7,\r\n    \"collectionId\": 1,\r\n    \"condition\": \"Near Mint\",\r\n    \"gameType\": \"Magic The Gathering\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/card/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"card",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove Card from Collection",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/collection/1/card/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"collection",
+						"1",
+						"card",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "My Favorite Collections",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY5MTg2NTI1NX0.Y9hCvL_yzYbaNfnvJfsZesIBFy0Vb3tfntKiYk2FibtW5sxH1WXC7DHpJdBzOiDmcUfHxw8NSJYBIlDWTcHCMg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/collection/favorite",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"collection",
+						"favorite"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Collection to My Favorites",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY5MTg2NTI1NX0.Y9hCvL_yzYbaNfnvJfsZesIBFy0Vb3tfntKiYk2FibtW5sxH1WXC7DHpJdBzOiDmcUfHxw8NSJYBIlDWTcHCMg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/collection/favorite/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"collection",
+						"favorite",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"user\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sample Pokemon Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.pokemontcg.io/v2/cards?q=name:char*&page=1&pageSize=1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"pokemontcg",
+						"io"
+					],
+					"path": [
+						"v2",
+						"cards"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "name:char*"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
