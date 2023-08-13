@@ -12,7 +12,7 @@ public interface CollectionDao {
     List<CollectionDto> getPokemonCollections();
     List<CollectionDto> getMyCollections(int userId);
     List<CollectionDto> getFavoriteCollections(int userId);
-    // List<Collection> getCollectionsByCardApiId(int cardApiId);
+    List<CollectionDto> getCollectionsByCardApiId(int cardApiId);
     void deleteCollection(int collectionId);
     void addCollectionToFavorite(int collectionId, int userId);
     void removeCollectionFromFavorite(int collectionId, int userId);

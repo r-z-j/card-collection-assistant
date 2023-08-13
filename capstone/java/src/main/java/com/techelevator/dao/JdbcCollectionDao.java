@@ -181,6 +181,12 @@ public class JdbcCollectionDao implements CollectionDao {
     }
 
     @Override
+    public List<CollectionDto> getCollectionsByCardApiId(int cardApiId) {
+        // TODO
+        return null;
+    }
+
+    @Override
     public void addCollectionToFavorite(int collectionId, int userId) {
         String sql = "INSERT INTO favorite_collection(user_id, collection_id) VALUES (?, ?);";
         try {
