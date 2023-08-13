@@ -124,7 +124,7 @@ export default new Vuex.Store({
         };
     
         // Check if the card has multiple faces
-        if (cardData.card_faces && cardData.card_faces.length > 1) {
+        if (cardData.card_faces && cardData.card_faces.length > 1 && cardData.card_faces[0].image_uris) {
           card.frontFace = {
             name: cardData.card_faces[0].name,
             oracleText: cardData.card_faces[0].oracle_text,
