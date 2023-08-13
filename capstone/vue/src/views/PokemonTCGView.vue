@@ -1,20 +1,20 @@
 <template>
     <div class="multiple">
-    <div> 
+    
        <router-link v-bind:to="{ name: 'card-test-pokemon' }">  
       <Card name="Add Cards to Collections" :picture="pokemonCardStackImage" description="Browse all cards"></Card>
        </router-link>&nbsp;
       
-    </div> 
-    <div>  
+    
+     
       <Card name="User Collections" :picture="pokemonUserCollecctionImage" description="View all of your trading card collections"></Card>
-    </div>
-    <div>
+    
+    
       <Card name="Favorited Collections" :picture="favPokeImage" description="View all of your favorited trading card collections"></Card>
-    </div>
-    <div>
+    
+    
       <Card name="All Collections" :picture="allCollectionsImages" description="Browse all collections"></Card>
-    </div> 
+
     </div>
   </template>
   

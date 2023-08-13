@@ -1,12 +1,17 @@
 <template>
   <div id="app">
     <header>
-      <img src="../src/img/Kings and Queens Trading.png">
     <div class="left-links">
-      <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'collections' }">My Collections</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'mtg-view' }">Magic</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'pokemon-tcg-view' }">Pokemon</router-link>&nbsp;
+      <router-link v-bind:to="{ name: 'home' }">
+        <img src="../src/img/Kings and Queens Trading.png">
+      </router-link>&nbsp; &nbsp;
+      <router-link v-bind:to="{ name: 'collections' }">My Collections</router-link>&nbsp; &nbsp;
+      <router-link v-bind:to="{ name: 'mtg-view' }">
+        <img src="../src/img/Magic_The_Gathering_logo_PNG2.png">
+        </router-link>&nbsp; &nbsp;
+      <router-link v-bind:to="{ name: 'pokemon-tcg-view' }">
+        <img src="../src/img/pokemon-logo-png-1432.png">
+        </router-link>&nbsp;
 
     </div>
     <div class="right-links">
