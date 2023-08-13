@@ -1,7 +1,7 @@
 <template>
   <div id="login" :class="['card', { shake: invalidCredentials }]">
     <form @submit.prevent="login">
-      <h1 >Please Sign In</h1>
+      <h1>Please Sign In</h1>
       <div class="error-msg" role="alert" v-if="showErrorMessage">
         Invalid username or password!
       </div>
@@ -10,7 +10,13 @@
       </div>
       <div class="form-input-group">
         <label for="username">Username:</label>
-        <input type="text" id="username" v-model="user.username" required autofocus />
+        <input
+          type="text"
+          id="username"
+          v-model="user.username"
+          required
+          autofocus
+        />
       </div>
       <div class="form-input-group">
         <label for="password">Password:</label>
@@ -18,7 +24,10 @@
       </div>
       <button type="submit">Sign in</button>
       <p>
-      <router-link :to="{ name: 'register' }">Need an account? Sign up.</router-link></p>
+        <router-link :to="{ name: 'register' }"
+          >Need an account? Sign up.</router-link
+        >
+      </p>
     </form>
   </div>
 </template>
@@ -33,24 +42,25 @@ export default {
     return {
       user: {
         username: "",
-        password: ""
+        password: "",
       },
       invalidCredentials: false,
-      showErrorMessage: false
+      showErrorMessage: false,
     };
   },
   methods: {
     login() {
       authService
         .login(this.user)
-        .then(response => {
+        .then((response) => {
           if (response.status == 200) {
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
             this.$store.commit("SET_USER", response.data.user);
+            this.$store.dispatch("fetchCollections");
             this.$router.push("/");
           }
         })
-        .catch(error => {
+        .catch((error) => {
           const response = error.response;
 
           if (response.status === 401) {
@@ -61,8 +71,8 @@ export default {
             }, 1000);
           }
         });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -105,6 +115,6 @@ button:hover {
   background-color: #3e049d;
 }
 .error-msg {
-  color: red
+  color: red;
 }
 </style>

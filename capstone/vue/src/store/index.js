@@ -11,8 +11,9 @@ Vue.use(Vuex)
  */
 const currentToken = localStorage.getItem('token')
 const currentUser = JSON.parse(localStorage.getItem('user'));
+const currentCollections = JSON.parse(localStorage.getItem('collections'));
 
-if(currentToken != null) {
+if (currentToken != null) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${currentToken}`;
 }
 
@@ -20,7 +21,7 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    collections: [],
+    collections: currentCollections || [],
 
     //Searches are stored here
     searchQuery: '',
@@ -32,12 +33,12 @@ export default new Vuex.Store({
       name: '',
       imageUri: [],
       hp: '',
-      types: [0,1],
+      types: [0, 1],
       attacks: {
-       name : '',
-       text:'',
-       damage: '',
-    },
+        name: '',
+        text: '',
+        damage: '',
+      },
       weaknesses: {
         type: '',
         value: '',
@@ -53,7 +54,7 @@ export default new Vuex.Store({
       setName: '',
       isDualSided: false,
     }
-    
+
   },
 
   mutations: {
@@ -64,12 +65,12 @@ export default new Vuex.Store({
     },
     SET_USER(state, user) {
       state.user = user;
-      localStorage.setItem('user',JSON.stringify(user));
+      localStorage.setItem('user', JSON.stringify(user));
     },
     LOGOUT(state) {
-      console.log("LOGOUT")
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      localStorage.removeItem('collections');
       state.token = '';
       state.user = {};
       state.collections = [];
@@ -77,25 +78,25 @@ export default new Vuex.Store({
     },
 
     SET_COLLECTIONS(state, data) {
-      console.log(data);
-      state.collections = data.data;
+      state.collections = data;
+      localStorage.setItem('collections', JSON.stringify(data));
     },
 
     //POKEMON MUTATIONS
-    SET_POKEMON_CARD(state, data){
-     state.pokeCard.id = data.data.id;
-     state.pokeCard.name = data.data.name;
-     state.pokeCard.imageUri = data.data.images;
-     state.pokeCard.hp = data.data.hp;
-     state.pokeCard.types = data.data.types;
-     state.pokeCard.attacks.name = data.data.attacks.name;
-     state.pokeCard.weaknesses = data.data.weaknesses;
-     state.pokeCard.weaknesses.value = data.data.weaknesses.value;
+    SET_POKEMON_CARD(state, data) {
+      state.pokeCard.id = data.data.id;
+      state.pokeCard.name = data.data.name;
+      state.pokeCard.imageUri = data.data.images;
+      state.pokeCard.hp = data.data.hp;
+      state.pokeCard.types = data.data.types;
+      state.pokeCard.attacks.name = data.data.attacks.name;
+      state.pokeCard.weaknesses = data.data.weaknesses;
+      state.pokeCard.weaknesses.value = data.data.weaknesses.value;
     },
 
-    SET_POKE_CARDS_SEARCH(state, data){
-      state.pokeCards = data.data.map(cardData=>({
-    
+    SET_POKE_CARDS_SEARCH(state, data) {
+      state.pokeCards = data.data.map(cardData => ({
+
         id: cardData.id,
         name: cardData.name,
         imageUri: cardData.images.large,
@@ -104,7 +105,7 @@ export default new Vuex.Store({
         attacks: cardData.attacks,
         weaknesses: cardData.weaknesses,
 
-      } ));
+      }));
     },
 
     CLEAR_POKEMON_CARDS(state) {
@@ -130,7 +131,7 @@ export default new Vuex.Store({
           isFlipped: false,
           isDualSided: cardData.layout === "transform" || cardData.layout === "modal_dfc",
         };
-    
+
         // Check if the card has multiple faces
         if (cardData.card_faces && cardData.card_faces.length > 1 && cardData.card_faces[0].image_uris) {
           card.frontFace = {
@@ -146,12 +147,12 @@ export default new Vuex.Store({
         } else {
           card.imageUri = cardData.image_uris.normal;
         }
-    
+
         return card;
       });
     },
 
-    SET_SEARCH_QUERY(state, newQuery){
+    SET_SEARCH_QUERY(state, newQuery) {
       state.searchQuery = newQuery;
     },
 
@@ -160,9 +161,14 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    updateSearchQuery({ commit }, newQuery){
+    updateSearchQuery({ commit }, newQuery) {
       commit("SET_SEARCH_QUERY", newQuery)
-    }
+    },
+
+    async fetchCollections({ commit }) {
+      const res = await axios.get('http://localhost:9000/collection/mine')
+      commit("SET_COLLECTIONS", res.data)
+    },
 
   }
 })
