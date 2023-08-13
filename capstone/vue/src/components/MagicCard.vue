@@ -4,19 +4,27 @@
          v-bind:key="card.id" 
          class="magic-card"
          >
-      <div class="card-image" @click="flipCard(card)">
-        <img v-if="card.isFlipped && card.backFace" 
-             :src="card.backFace.imageUri" 
-             alt="Card Back Face" 
+      <div class="card-image">
+        <img v-if="card.frontFace && card.backFace"
+             class="flip-button" 
+             src="@/img/flip.png" 
+             alt="Flip Icon" 
+             @click="flipCard(card)"
         />
-        <img v-else-if="card.frontFace"
-             :src="card.frontFace.imageUri" 
-             alt="Card Front Face" 
-        />
-        <img v-else
-             :src="card.imageUri" 
-             alt="Card Image" 
-        />
+        <div class="card-image-content">
+          <img v-if="card.isFlipped && card.backFace" 
+               :src="card.backFace.imageUri" 
+               alt="Card Back Face" 
+          />
+          <img v-else-if="card.frontFace"
+               :src="card.frontFace.imageUri" 
+               alt="Card Front Face" 
+          />
+          <img v-else
+               :src="card.imageUri" 
+               alt="Card Image" 
+          />
+        </div>
       </div>
       <div class="card-details">
         <h1>{{ card.name }} ({{ card.setName }})</h1>
@@ -65,9 +73,10 @@ export default {
   
   <style scoped>
 .magic-card {
+  position: relative;
   display: flex;
   flex-direction: row;
-  border: 2px solid #a3a2a2;
+  border: 2px solid #360164;
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
@@ -76,7 +85,20 @@ export default {
   background-color: rgb(197, 134, 236);
 }
 
+
+.flip-button {
+  position: absolute;
+  top: 50px;
+  right: -5px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 1; 
+  background-color: white;
+  border-radius: 100px;
+}
 .card-image {
+  position: relative;
   min-width: 270px;
   max-width: 270px;
   min-height: 378px;
@@ -87,7 +109,7 @@ export default {
 img {
   width: 270px;
   height: 378px;
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
 .card-details {
