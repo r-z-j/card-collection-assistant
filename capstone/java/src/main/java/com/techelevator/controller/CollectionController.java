@@ -132,6 +132,7 @@ public class CollectionController {
     @RequestMapping(path = "/mine", method = RequestMethod.GET)
     public List<CollectionDto> getMyCollections(Principal principal){
         int userId = userDao.getUserByUsername(principal.getName()).getId();
+        System.out.println(principal);
         List<CollectionDto> myCollections = null;
         try {
            myCollections = collectionDao.getMyCollections(userId);

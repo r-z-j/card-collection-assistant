@@ -29,9 +29,10 @@ export default {
   methods: {
     async getCollections() {
       try {
-        const res = await collectionService.getMyCollections()
-          console.log(res.data);
-          this.collections = res.data
+        await collectionService.getMyCollections().then(res =>{
+            console.log(res);
+            this.$store.commit("SET_COLLECTIONS", res);
+        })
       } catch (e) {
         console.error("ERROR fetching collections:", e);
       }
