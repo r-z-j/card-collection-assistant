@@ -1,33 +1,14 @@
 <template>
   <div>
-    <div v-for="card in $store.state.magicCards" 
-         :key="card.id" 
-         class="magic-card"
-         v-bind:class="{ flipped: card.isFlipped }"
-    >
+    <div v-for="card in magicCards" :key="card.id" class="magic-card" :class="{ flipped: card.isFlipped }">
       <div class="card-image">
         <div class="flip-button-container" @click="flipCard(card)">
-          <img v-if="card.frontFace && card.backFace"
-               class="flip-button" 
-               src="@/img/flip.png" 
-               alt="Flip Icon" 
-          />
+          <img v-if="card.frontFace && card.backFace" class="flip-button" src="@/img/flip.png" alt="Flip Icon" />
         </div>
         <div class="card-image-content">
-          <img v-if="card.isFlipped && card.backFace" 
-               :src="card.backFace.imageUri" 
-               alt="Card Back Face" 
-               class="card-face back-face"
-          />
-          <img v-else-if="card.frontFace"
-               :src="card.frontFace.imageUri" 
-               alt="Card Front Face" 
-               class="card-face front-face"
-          />
-          <img v-else
-               :src="card.imageUri" 
-               alt="Card Image" 
-          />
+          <img v-if="card.isFlipped && card.backFace" :src="card.backFace.imageUri" alt="Card Back Face" class="card-face back-face" />
+          <img v-else-if="card.frontFace" :src="card.frontFace.imageUri" alt="Card Front Face" class="card-face front-face" />
+          <img v-else :src="card.imageUri" alt="Card Image" />
         </div>
       </div>
       <div class="card-details">
@@ -41,7 +22,7 @@
     </div>
   </div>
 </template>
-  
+
 <script>
 import scryfallService from '../services/ScryfallService';
 
@@ -52,29 +33,28 @@ export default {
     this.getMultipleCardsBySearch(this.$store.state.searchQuery);
   },
   methods: {
-    getMultipleCardsBySearch(searchQuery){
-      scryfallService.getMultipleCardsBySearchName(searchQuery).then(response => {
-        this.$store.commit("CLEAR_MAGIC_CARDS")
-        this.$store.commit("SET_MAGIC_CARDS_SEARCH", response.data);
-      });
+    async getMultipleCardsBySearch(searchQuery) {
+      const response = await scryfallService.getMultipleCardsBySearchName(searchQuery);
+      this.$store.commit("CLEAR_MAGIC_CARDS");
+      this.$store.commit("SET_MAGIC_CARDS_SEARCH", response.data);
     },
-    flipCard(card){
+    flipCard(card) {
       card.isFlipped = !card.isFlipped;
-    }
+    },
   },
   computed: {
-    getSearchQuery(){
-      return this.$store.state.searchQuery
-    }
+    magicCards() {
+      return this.$store.state.magicCards;
+    },
   },
   watch: {
-    '$store.state.searchQuery'(newValue) {
+    "$store.state.searchQuery"(newValue) {
       this.getMultipleCardsBySearch(newValue);
-    }
-  }
+    },
+  },
 };
 </script>
-  
+
 <style scoped>
 .magic-card {
   position: relative;
@@ -120,8 +100,8 @@ export default {
   height: 100%;
   transform-style: preserve-3d;
   transition: transform 0.3s ease;
-  backface-visibility: hidden; 
-  will-change: transform; 
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
 .card-face {
@@ -129,22 +109,22 @@ export default {
   height: 100%;
   border-radius: 12px;
   object-fit: cover;
-  position: absolute; 
+  position: absolute;
   top: 0;
   left: 0;
-  transition: opacity 0.3s ease; 
+  transition: opacity 0.3s ease;
 }
 
 .card-face.back-face {
   transform: rotateY(180deg);
 }
+
 .magic-card.flipped .flip-button {
   transform: rotateY(180deg);
 }
 
 .magic-card.flipped .card-image-content {
   transform: rotateY(180deg);
-
 }
 
 img {
