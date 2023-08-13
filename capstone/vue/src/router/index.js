@@ -9,6 +9,7 @@ import MTGView from '../views/MTGView.vue'
 import PokemonTCGView from '../views/PokemonTCGView.vue'
 import DisplayCard from '../views/DisplayCard.vue'
 import PokemonTest from '../views/PokemonTest.vue'
+import MyCollections from '../views/MyCollections.vue'
 
 Vue.use(Router)
 
@@ -74,6 +75,13 @@ const router = new Router({
       }
     },
     {
+      path: "/collections",
+      name: "collections",
+      component: MyCollections,
+      meta: {
+        requiresAuth: false
+      }
+    },  {
       path: "/card-test",
       name: "card-test",
       component: DisplayCard,
