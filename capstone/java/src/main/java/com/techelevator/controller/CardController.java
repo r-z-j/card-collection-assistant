@@ -3,7 +3,6 @@ package com.techelevator.controller;
 import com.techelevator.dao.CardDao;
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.CardDto;
-import com.techelevator.model.CollectionDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

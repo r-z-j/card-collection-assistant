@@ -29,6 +29,27 @@ public class CollectionController {
         this.userDao = userDao;
     }
 
+
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path = "/magic", method = RequestMethod.GET)
+    public List<CollectionDto> getMagicCollections()  {
+        try {
+            return collectionDao.getMagicCollections();
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path = "/pokemon", method = RequestMethod.GET)
+    public List<CollectionDto> getPokemonCollections()  {
+        try {
+            return collectionDao.getPokemonCollections();
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/{collectionId}", method = RequestMethod.GET)
     public CollectionDto getCollection(@PathVariable int collectionId)  {
@@ -57,26 +78,6 @@ public class CollectionController {
         }
 
     };
-
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(path = "/magic", method = RequestMethod.GET)
-    public List<CollectionDto> getMagicCollections()  {
-        try {
-            return collectionDao.getMagicCollections();
-        } catch (DaoException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(path = "/pokemon", method = RequestMethod.GET)
-    public List<CollectionDto> getPokemonCollections()  {
-        try {
-            return collectionDao.getPokemonCollections();
-        } catch (DaoException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/{collectionId}/add-card", method = RequestMethod.POST)
@@ -111,7 +112,7 @@ public class CollectionController {
     @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/create", method = RequestMethod.POST)
-    public CollectionDto create(@Valid @RequestBody CollectionDto collection, Principal principal) {
+    public CollectionDto createCollection(@Valid @RequestBody CollectionDto collection, Principal principal) {
         CollectionDto newCollectionDto = null;
         int authorId = userDao.getUserByUsername(principal.getName()).getId();
         try {
@@ -140,7 +141,6 @@ public class CollectionController {
 
         return myCollections;
     };
-
 
     @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.OK)
