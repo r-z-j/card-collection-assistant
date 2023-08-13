@@ -20,6 +20,7 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
+    collections: [],
 
     //Searches are stored here
     searchQuery: '',
@@ -66,11 +67,18 @@ export default new Vuex.Store({
       localStorage.setItem('user',JSON.stringify(user));
     },
     LOGOUT(state) {
+      console.log("LOGOUT")
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       state.token = '';
       state.user = {};
+      state.collections = [];
       axios.defaults.headers.common = {};
+    },
+
+    SET_COLLECTIONS(state, data) {
+      console.log(data);
+      state.collections = data.data;
     },
 
     //POKEMON MUTATIONS

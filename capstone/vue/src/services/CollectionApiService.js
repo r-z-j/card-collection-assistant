@@ -54,9 +54,4 @@ export default {
     removeCardFromCollection(collectionId, cardId) {
         return http.delete(`${collectionId}/card/${cardId}`);
     },
-
-
-
-
-
 }
