@@ -1,15 +1,20 @@
 <template>
   <div class="home-card">
+    <router-link v-bind:to="{ name: 'mtg-view' }">
    <Card 
    name="Magic The Gathering"
    :picture= 'mtgimage'
    description="Make and share your own collection of Magic The Gathering cards, or view and favorite collections other users have made!"
    />
+   </router-link>
+
+   <router-link v-bind:to="{ name: 'pokemon-tcg-view' }">
    <Card 
    name="Pokemon TCG"
    :picture= 'karpImage'
    description="Make and share your own collection of Pokemon TCG cards, or view and favorite collections other users have made!"
    />
+   </router-link>
   </div>
 </template>
 
@@ -40,6 +45,11 @@ p {
 .home-card{
   display: flex;
   flex-grow: 1;
+  text-decoration: none;
+}
+
+router-link{
+  text-decoration: none;
 }
 
 
