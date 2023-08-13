@@ -1,9 +1,9 @@
 <template>
     <div class="multiple">
-      <Card name="Create Collection" picture="" description="Browse all cards"></Card>
-      <Card name="User Collections" picture="" description="View all of your trading card collections"></Card>
-      <Card name="Favorited Collections" picture="" description="View all of your favorited trading card collections"></Card>
-      <Card name="All Collections" picture="" description="Browse all collections"></Card>
+      <Card name="Create Collection" :picture="pokemonCardStackImage" description="Browse all cards"></Card>
+      <Card name="User Collections" :picture="pokemonUserCollecctionImage" description="View all of your trading card collections"></Card>
+      <Card name="Favorited Collections" :picture="favPokeImage" description="View all of your favorited trading card collections"></Card>
+      <Card name="All Collections" :picture="allCollectionsImages" description="Browse all collections"></Card>
       
     </div>
   </template>
@@ -14,6 +14,15 @@
       components: {
           Card
       },
+      name: "pokemon",
+      data(){
+          return {
+              pokemonCardStackImage: require('../img/starterChoicePokemon.png'),
+              pokemonUserCollecctionImage: require('../img/starterPokemon.png'),
+              favPokeImage: require('../img/eeveeImages.png'),
+              allCollectionsImages: require('../img/allPokemonCollections.png')
+          }
+      }
   
   }
   </script>
