@@ -1,24 +1,28 @@
 <template>
   <div>
     <div v-for="card in $store.state.magicCards" 
-         v-bind:key="card.id" 
+         :key="card.id" 
          class="magic-card"
-         >
+         v-bind:class="{ flipped: card.isFlipped }"
+    >
       <div class="card-image">
-        <img v-if="card.frontFace && card.backFace"
-             class="flip-button" 
-             src="@/img/flip.png" 
-             alt="Flip Icon" 
-             @click="flipCard(card)"
-        />
+        <div class="flip-button-container" @click="flipCard(card)">
+          <img v-if="card.frontFace && card.backFace"
+               class="flip-button" 
+               src="@/img/flip.png" 
+               alt="Flip Icon" 
+          />
+        </div>
         <div class="card-image-content">
           <img v-if="card.isFlipped && card.backFace" 
                :src="card.backFace.imageUri" 
                alt="Card Back Face" 
+               class="card-face back-face"
           />
           <img v-else-if="card.frontFace"
                :src="card.frontFace.imageUri" 
                alt="Card Front Face" 
+               class="card-face front-face"
           />
           <img v-else
                :src="card.imageUri" 
@@ -71,7 +75,7 @@ export default {
 };
 </script>
   
-  <style scoped>
+<style scoped>
 .magic-card {
   position: relative;
   display: flex;
@@ -85,18 +89,21 @@ export default {
   background-color: rgb(197, 134, 236);
 }
 
-
 .flip-button {
-  position: absolute;
-  top: 50px;
-  right: -5px;
   width: 30px;
   height: 30px;
   cursor: pointer;
-  z-index: 1; 
   background-color: white;
   border-radius: 100px;
 }
+
+.flip-button-container {
+  position: absolute;
+  top: 40px;
+  right: -5px;
+  z-index: 1;
+}
+
 .card-image {
   position: relative;
   min-width: 270px;
@@ -104,6 +111,40 @@ export default {
   min-height: 378px;
   max-height: 378px;
   padding-right: 10px;
+  perspective: 1000px;
+}
+
+.card-image-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+  backface-visibility: hidden; 
+  will-change: transform; 
+}
+
+.card-face {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  position: absolute; 
+  top: 0;
+  left: 0;
+  transition: opacity 0.3s ease; 
+}
+
+.card-face.back-face {
+  transform: rotateY(180deg);
+}
+.magic-card.flipped .flip-button {
+  transform: rotateY(180deg);
+}
+
+.magic-card.flipped .card-image-content {
+  transform: rotateY(180deg);
+
 }
 
 img {
@@ -124,6 +165,7 @@ img {
   justify-content: space-around;
   margin-top: auto;
 }
+
 button {
   padding: 10px 20px;
   font-size: 16px;
@@ -134,8 +176,8 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
 button:hover {
   background-color: #3e049d;
 }
 </style>
-  
