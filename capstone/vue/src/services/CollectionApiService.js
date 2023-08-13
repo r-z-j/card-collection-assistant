@@ -7,6 +7,7 @@ const http = axios.create({
 
 export default {
 
+    // ***** Main Collections *****
     getMagicCollections() {
         return http.get('magic');
     },
@@ -17,18 +18,6 @@ export default {
 
     getMyCollections() {
         return http.get('mine');
-    },
-
-    getFavoriteCollections() {
-        return http.get('favorite');
-    },
-
-    addCollectionToFavorites(collectionId) {
-        return http.post(`favorite/${collectionId}`);
-    },
-
-    removeCollectionToFavorites(collectionId) {
-        return http.delete(`favorite/${collectionId}`);
     },
 
     createCollection(collection) {
@@ -43,6 +32,21 @@ export default {
         return http.delete(collectionId);
     },
 
+    //  ***** Favorite Collections *****
+    getFavoriteCollections() {
+        return http.get('favorite');
+    },
+
+    addCollectionToFavorites(collectionId) {
+        return http.post(`favorite/${collectionId}`);
+    },
+
+    removeCollectionToFavorites(collectionId) {
+        return http.delete(`favorite/${collectionId}`);
+    },
+
+
+    //  ***** Cards *****
     addCardToCollection(collectionId, card) {
         return http.post(`${collectionId}/add-card`, card);
     },

@@ -4,6 +4,7 @@
       <img src="../src/img/Kings and Queens Trading.png">
     <div class="left-links">
       <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'collections' }">My Collections</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'mtg-view' }">Magic</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'pokemon-tcg-view' }">Pokemon</router-link>&nbsp;
 

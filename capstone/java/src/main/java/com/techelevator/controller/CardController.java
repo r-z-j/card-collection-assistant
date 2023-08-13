@@ -48,7 +48,7 @@ public class CardController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/{cardId}", method = RequestMethod.POST)
-    public CardDto getCard(@PathVariable int cardId, @Valid @RequestBody CardDto card, Principal principal)  {
+    public CardDto updateCard(@PathVariable int cardId, @Valid @RequestBody CardDto card, Principal principal)  {
         try {
             return cardDao.updateCard(cardId, card);
         } catch (DaoException e) {
