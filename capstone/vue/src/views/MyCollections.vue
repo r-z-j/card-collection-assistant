@@ -1,7 +1,7 @@
 <template>
   <div class="collections">
     <h1>Collections</h1>
-    <!-- <button @click="getCollection">get collections</button> -->
+     
     
 
         <div v-for="collection in myCollections" v-bind:key="collection.collectionId">

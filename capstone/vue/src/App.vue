@@ -8,11 +8,11 @@
       <router-link v-bind:to="{ name: 'collections' }">
         <img src="../src/img/my collections.png">
         </router-link>&nbsp; &nbsp;
-      <router-link v-bind:to="{ name: 'mtg-view' }">
-        <img src="../src/img/Magic_The_Gathering_logo_PNG2.png">
-        </router-link>&nbsp; &nbsp;
       <router-link v-bind:to="{ name: 'pokemon-tcg-view' }">
         <img src="../src/img/pokemon-logo-png-1432.png">
+        </router-link>&nbsp; &nbsp;
+      <router-link v-bind:to="{ name: 'mtg-view' }">
+        <img src="../src/img/Magic_The_Gathering_logo_PNG2.png">
         </router-link>&nbsp;
 
     </div>
@@ -50,7 +50,7 @@ export default {
     padding: 20px;
     margin: 0;
     border-bottom: solid #0E2431 5px;
-    background-color: cornflowerblue;
+    background-image: linear-gradient(to right, black, rgb(50, 5, 87));
   }
 
   header a {
