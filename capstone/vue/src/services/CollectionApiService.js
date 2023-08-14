@@ -47,8 +47,8 @@ export default {
 
 
     //  ***** Cards *****
-    addCardToCollection(collectionId, card) {
-        return http.post(`${collectionId}/add-card`, card);
+    addCardToCollection(card) {
+        return http.post(`${card.collectionId}/add-card`, card);
     },
 
     removeCardFromCollection(collectionId, cardId) {
