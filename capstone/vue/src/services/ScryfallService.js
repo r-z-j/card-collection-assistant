@@ -16,6 +16,10 @@ export default {
 
     getMultipleCardsBySearchName(searchName){
         return http.get(`search?order=released&q=${searchName}&unique=prints`)
+    },
+
+    getCardsBySetId(setId){
+        return http.get(`https://api.scryfall.com/cards/search?q=set:${setId}`)
     }
 
 }

@@ -23,8 +23,18 @@
 
     </div>
     <div class="right-links">
-      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
-      <router-link v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</router-link>
+      <div class="logout-button">
+        <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">
+          <button>
+            Login
+          </button>
+        </router-link>
+        <router-link v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">
+          <button>
+            Login
+          </button>
+        </router-link>
+      </div>
     </div>
     </header>
     
@@ -95,8 +105,30 @@ export default {
 
 .left-links {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  flex-grow: 1;
 }
 
+.right-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logout-button button{
+  border: solid;
+  padding: 12px;
+  border-radius: 8px;
+  background: linear-gradient(to top, #3f11ac, #AE8EEF);
+  color: dark purple;
+}
+.logout-button button:hover{
+  border: solid;
+  padding: 12px;
+  border-radius: 8px;
+  background: linear-gradient(to bottom, #3f11ac, #AE8EEF);
+  color: dark purple;
+  cursor: pointer;
+}
 
 </style>

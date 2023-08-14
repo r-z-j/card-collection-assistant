@@ -16,6 +16,10 @@ export default {
 }
 </script>
 
-<style>
-  
+<style scoped>
+  .card-contents{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
 </style>
