@@ -49,8 +49,10 @@ export default {
     justify-content: space-between;
     padding: 20px;
     margin: 0;
-    border-bottom: solid #0E2431 5px;
-    background-image: linear-gradient(to right, black, rgb(50, 5, 87));
+    border-bottom: solid #0e24313b 5px;
+    background-image: url("../src/img/coverbarBackground.png");
+    background-repeat: no repeat;
+    background-size: cover;
   }
 
   header a {
