@@ -1,12 +1,15 @@
 <template>
   <div class="collections">
-    <h1>Collections</h1>
-        <div v-for="collection in collections " v-bind:key="collection.collectionId">
-          <h2>{{ collection.collectionName }}</h2>
-            <div v-for="card in collection.cardList" v-bind:key="card.cardId">
-                <p>{{ card.cardName }} ${{ card.userPrice }}</p>
-            </div>
+    <center><h1 class="page-header">Collections</h1></center>
+      
+        <div class="card" v-for="collection in collections" v-bind:key="collection.collectionId" >
+          {{ collection.collectionName }}
+          <img src="../img/magicCardBack.png"/>
+            <div class="collection-title"></div>
+            
         </div>
+     
+        
   </div>
 </template>
 
@@ -18,6 +21,7 @@ export default {
   data() {
     return {
       collections: null,
+      favorited: null,
     }
   },
 
@@ -40,6 +44,45 @@ export default {
       return collectionService.getMyCollections();
     }
   },
+    getFavoritedCollections: async() => {
+      return collectionService.getFavoriteCollections();
+    }
 
 };
 </script>
+
+<style scoped>
+.collection-title{
+  padding: 40px;
+ color: seashell;
+}
+.collections {
+  display: block;
+  align-content: center;
+  flex-grow: 1;
+  background-image: url("../img/collectionsBackground.png");
+  background-size: cover;
+  width: 100vw;
+  height:100vw;
+  
+}
+
+.card{
+background-color: rgb(17, 17, 16);
+display: flex;
+
+
+
+
+}
+
+.page-header{
+  padding: 50px;
+}
+
+
+
+
+
+
+</style>
