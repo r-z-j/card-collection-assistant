@@ -12,7 +12,7 @@
         <img src="../src/img/pokemon-logo-png-1432.png">
         </router-link>&nbsp; &nbsp;
       <router-link v-bind:to="{ name: 'mtg-view' }">
-        <img src="../src/img/Magic_The_Gathering_logo_PNG2.png">
+        <img class="white-border" src="../src/img/white-mtg-logo.png">
         </router-link>&nbsp;
 
     </div>

@@ -1,79 +1,81 @@
 <template>
-<div>
-  <div v-for="card in $store.state.pokeCards" v-bind:key="card.id" class="pokemon-card">
-    <div class="card-image">
-      <img :src="card.imageUri" alt="Card Image" />
+  <div>
+    <div
+      v-for="card in $store.state.pokeCards"
+      v-bind:key="card.id"
+      class="pokemon-card"
+    >
+      <div class="card-image">
+        <img :src="card.imageUri" alt="Card Image" />
+      </div>
+      <div class="card-details">
+        <h3>{{ card.name }}</h3>
+        <h3>{{ card.hp }}</h3>
+
+        <div v-for="type in card.types" v-bind:key="type.name">
+          <p>{{ type }}</p>
+        </div>
+
+        <div v-for="attack in card.attacks" v-bind:key="attack.name">
+          <p>{{ attack.name }}</p>
+          <p>{{ attack.damage }}</p>
+          <p>{{ attack.text }}</p>
+        </div>
+
+        <div v-for="weakness in card.weaknesses[0]" v-bind:key="weakness.type">
+          <p>{{ weakness }}</p>
+        </div>
+
+        <div class="buttons">
+          <button>View Collections</button>
+          <button>
+            <router-link v-bind:to="{ name: 'add-card', params: { id: card.id } }">
+                Add To Collections</router-link>
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="card-details">
-      <h3>{{ card.name }}</h3>
-      <h3>{{ card.hp }}</h3>
-
-
-      <div v-for="type in card.types" v-bind:key="type.name">
-        <p>{{ type }}</p>
-      </div>
-
-      <div v-for="attack in card.attacks" v-bind:key="attack.name">
-        <p>{{ attack.name }}</p>
-        <p>{{ attack.damage }}</p>
-        <p>{{ attack.text }}</p>
-      </div>
-
-
-      <div v-for="weakness in card.weaknesses[0]" v-bind:key="weakness.type">
-      <p>{{ weakness }} </p>
-      </div>
-
-      
-      <div class="buttons">
-        <button>View Collections</button>
-        <button>Add To Collection</button>
-      </div>
-    </div>
-  </div>
   </div>
 </template>
 
 <script>
-import pokemonService from  '../services/PokemonService';
+import pokemonService from "../services/PokemonService";
 
 export default {
-  name: "pokemon-card",  
+  name: "pokemon-card",
   props: ["pokeCardName"],
-  
-  created(){
-      this.getMultipleCardsBySearch(this.$store.state.searchQuery);
+
+  created() {
+    this.getMultipleCardsBySearch(this.$store.state.searchQuery);
   },
-  
-  
+
   methods: {
-   getSingleCardById(){
-
-       pokemonService.getSingleCardById('gym2-2').then(response =>{
-           this.$store.commit("SET_POKEMON_CARD", response.data);
-       });
-   },
-   getMultipleCardsBySearch(searchQuery){
-       pokemonService.getMultipleCardsBySearchName(searchQuery).then(response =>{
-           console.log(response.data)
-           this.$store.commit("CLEAR_POKEMON_CARDS")
-           this.$store.commit('SET_POKE_CARDS_SEARCH', response.data);
-       });
-   },
-
-
+    getSingleCardById() {
+      pokemonService.getSingleCardById("gym2-2").then((response) => {
+        this.$store.commit("SET_POKEMON_CARD", response.data);
+      });
+    },
+    getMultipleCardsBySearch(searchQuery) {
+      pokemonService
+        .getMultipleCardsBySearchName(searchQuery)
+        .then((response) => {
+          console.log(response.data);
+          this.$store.commit("CLEAR_POKEMON_CARDS");
+          this.$store.commit("SET_POKE_CARDS_SEARCH", response.data);
+        });
+    },
   },
-  
+
   computed: {
-      getSearchQuery(){
-          return this.$store.state.searchQueery
-      }
+    getSearchQuery() {
+      return this.$store.state.searchQueery;
+    },
   },
-    watch: {
-        '$store.state.searchQuery'(newValue){
-            this.getMultipleCardsBySearch(newValue);
-        }
-    }
+  watch: {
+    "$store.state.searchQuery"(newValue) {
+      this.getMultipleCardsBySearch(newValue);
+    },
+  },
 };
 </script>
   
@@ -102,18 +104,17 @@ img {
   height: 378px;
 }
 
-.card-details{
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+.card-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
-.buttons{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-top: auto;
-
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: auto;
 }
 button {
   padding: 10px 20px;
