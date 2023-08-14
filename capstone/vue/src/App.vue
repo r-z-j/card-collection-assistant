@@ -3,14 +3,22 @@
     <header>
     <div class="left-links">
       <router-link v-bind:to="{ name: 'home' }">
+        <div class="translucent-image">
         <img src="../src/img/Kings and Queens Trading.png">
+        <div class="translucent-mask"></div>
+        </div>
       </router-link>&nbsp; &nbsp;
-      <router-link v-bind:to="{ name: 'collections' }">My Collections</router-link>&nbsp; &nbsp;
-      <router-link v-bind:to="{ name: 'mtg-view' }">
-        <img src="../src/img/Magic_The_Gathering_logo_PNG2.png">
+      <router-link v-bind:to="{ name: 'collections' }">
+         <div class="translucent-image">
+        <img src="../src/img/my collections.png">
+        <div class="translucent-mask"></div>
+         </div>
         </router-link>&nbsp; &nbsp;
       <router-link v-bind:to="{ name: 'pokemon-tcg-view' }">
         <img src="../src/img/pokemon-logo-png-1432.png">
+        </router-link>&nbsp; &nbsp;
+      <router-link v-bind:to="{ name: 'mtg-view' }">
+        <img class="white-border" src="../src/img/white-mtg-logo.png">
         </router-link>&nbsp;
 
     </div>
@@ -40,6 +48,7 @@ export default {
   .container {
     display: flex;
     padding-top: 0rem;
+    
   }
 
   header {
@@ -47,8 +56,10 @@ export default {
     justify-content: space-between;
     padding: 20px;
     margin: 0;
-    border-bottom: solid #0E2431 5px;
-    background-color: cornflowerblue;
+    border-bottom: solid #0e24313b 5px;
+    background-image: url("../src/img/coverbarBackground.png");
+    background-repeat: no repeat;
+    background-size: cover;
   }
 
   header a {
@@ -62,4 +73,30 @@ export default {
   img{
     max-block-size: 125px;
   }
+
+  .translucent-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+   
+  }
+
+  .translucent-mask{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at top left, transparent, rgba(59, 31, 92, 0.5), transparent);
+    
+    
+  }
+
+
+.left-links {
+  display: flex;
+  justify-content: space-around;
+}
+
+
 </style>
