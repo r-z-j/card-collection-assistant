@@ -10,6 +10,10 @@ export default {
         return http.get(`named?exact=${cardName}`);
     },
 
+    getSingleCardById(id){
+        return http.get(id);
+    },
+
     getMultipleCardsBySearchName(searchName){
         return http.get(`search?order=released&q=${searchName}&unique=prints`)
     }
