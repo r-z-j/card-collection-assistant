@@ -5,7 +5,9 @@
       <router-link v-bind:to="{ name: 'home' }">
         <img src="../src/img/Kings and Queens Trading.png">
       </router-link>&nbsp; &nbsp;
-      <router-link v-bind:to="{ name: 'collections' }">My Collections</router-link>&nbsp; &nbsp;
+      <router-link v-bind:to="{ name: 'collections' }">
+        <img src="../src/img/my collections.png">
+        </router-link>&nbsp; &nbsp;
       <router-link v-bind:to="{ name: 'mtg-view' }">
         <img src="../src/img/Magic_The_Gathering_logo_PNG2.png">
         </router-link>&nbsp; &nbsp;
