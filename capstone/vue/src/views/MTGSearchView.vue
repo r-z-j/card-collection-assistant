@@ -44,6 +44,9 @@ main{
   justify-content: center;
   flex-grow: 1;
   background-color: rgb(20, 0, 36);
+  background-image: url('../img/MTG-background-image.png');
+  background-size:cover;
+  background-attachment: fixed;
 }
 </style>
 ~

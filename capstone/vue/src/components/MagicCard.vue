@@ -16,7 +16,6 @@
         <h3>{{ card.oracleText }}</h3>
         <div class="buttons">
           <button>View Collections</button>
-          <button>Add To Collection</button>
        <button>
             <router-link v-bind:to="{ name: 'add-card', params: { id: card.id, gameTypeId: 1 } }">
                 Add To Collections</router-link>
@@ -69,7 +68,8 @@ export default {
   margin: 10px;
   width: 90vw;
   text-align: center;
-  background-color: rgb(197, 134, 236);
+  background-color: rgb(197, 134, 236, 0.65);
+
 }
 
 .flip-button {

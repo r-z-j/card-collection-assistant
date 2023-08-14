@@ -84,7 +84,7 @@ export default {
   display: flex;
   flex-direction: row;
   border: 2px solid #52525a;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255, 0.65);
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
