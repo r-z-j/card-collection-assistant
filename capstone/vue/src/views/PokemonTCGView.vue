@@ -1,7 +1,7 @@
 <template>
     <div class="multiple">
     
-       <router-link v-bind:to="{ name: 'card-test-pokemon' }">  
+       <router-link v-bind:to="{ name: 'pokemon-search' }">  
       <Card name="Add Cards to Collections" :picture="pokemonCardStackImage" description="Browse all cards"></Card>
        </router-link>&nbsp;
       

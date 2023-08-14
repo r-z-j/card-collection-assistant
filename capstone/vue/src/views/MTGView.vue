@@ -1,6 +1,6 @@
 <template>
     <div class="multiple">
-      <router-link v-bind:to="{ name: 'card-test' }">  
+      <router-link v-bind:to="{ name: 'mtg-search-view' }">  
       <Card name="Search Cards" picture="" description="Search for cards to add to a collection"></Card>
       </router-link>
       <router-link v-bind:to="{ name: 'collections'}">

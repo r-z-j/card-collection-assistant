@@ -125,19 +125,6 @@
     border-radius: 12px;
   }
   
-  .card-details {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-  }
-  
-  .buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-top: auto;
-  }
-  
   button {
     padding: 10px 20px;
     font-size: 16px;
