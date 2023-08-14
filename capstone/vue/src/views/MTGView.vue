@@ -3,8 +3,9 @@
       <router-link v-bind:to="{ name: 'card-test' }">  
       <Card name="Search Cards" picture="" description="Search for cards to add to a collection"></Card>
       </router-link>
+      <router-link v-bind:to="{ name: 'collections'}">
       <Card name="My Collections" picture="" description="View all of your trading card collections"></Card>
-
+      </router-link>
       <Card name="Favorited Collections" picture="" description="View all of your favorited trading card collections"></Card>
 
       <Card name="All Collections" picture="" description="Browse all collections"></Card>
