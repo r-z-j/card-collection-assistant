@@ -81,7 +81,8 @@ const router = new Router({
       meta: {
         requiresAuth: false
       }
-    },  {
+    },
+    {
       path: "/card-test",
       name: "card-test",
       component: MTGSearchView,

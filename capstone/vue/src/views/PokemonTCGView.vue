@@ -6,9 +6,11 @@
        </router-link>&nbsp;
       
     
-     
-      <Card name="User Collections" :picture="pokemonUserCollecctionImage" description="View all of your trading card collections"></Card>
+        <router-link v-bind:to="{ name: 'collections' }">
+      <Card name="User Collections" :picture="pokemonUserCollecctionImage" description="View all of your trading card collections">
+      </Card>
     
+</router-link>
     
       <Card name="Favorited Collections" :picture="favPokeImage" description="View all of your favorited trading card collections"></Card>
     
