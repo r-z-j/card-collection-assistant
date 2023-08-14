@@ -43,9 +43,16 @@ p {
 }
 
 .home-card{
+  padding: 50px;
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   flex-grow: 1;
   text-decoration: none;
+  background-image: url("../img/collectionsBackground.png");
+  background-size: cover;
+  width: 100vw;
+  height: 100vw; 
 }
 
 router-link{

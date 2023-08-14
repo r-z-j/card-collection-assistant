@@ -43,7 +43,11 @@ main{
   flex-direction: column;
   justify-content: center;
   flex-grow: 1;
-  background-color: rgba(253, 6, 6, 0.925);
+  background-image: url("../img/pokeball.png");
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+
 }
 
 </style>
