@@ -1,20 +1,30 @@
 <template>
   <div class="collections">
     <center><h1 class="page-header">Collections</h1></center>
-      
-        <div class="card" v-for="collection in collections" v-bind:key="collection.collectionId" >
-          {{ collection.collectionName }}
-          <img src="../img/magicCardBack.png"/>
-            <div class="collection-title"></div>
-            
+
+    <section>
+      <div
+        class="collection-container"
+        v-for="collection in collections"
+        v-bind:key="collection.collectionId"
+      >
+        <div class="tile-container">
+          <div class="collection-title">{{ collection.collectionName }}</div>
+          <div v-if="collection.gameTypeId === 2">
+            <img src="../img/pokemon-cardback.png" />
+          </div>
+          <div v-else-if="collection.gameTypeId === 1">
+            <img src="../img/magicCardBack.png" />
+          </div>
+
         </div>
-     
-        
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
-import collectionService from "../services/CollectionApiService"
+import collectionService from "../services/CollectionApiService";
 
 export default {
   name: "collections",
@@ -22,13 +32,13 @@ export default {
     return {
       collections: null,
       favorited: null,
-    }
+    };
   },
 
   computed: {
     myCollections() {
       return this.$store.state.collections;
-    }
+    },
   },
 
   async created() {
@@ -40,21 +50,21 @@ export default {
   },
 
   methods: {
-    getCollections: async() => {
+    getCollections: async () => {
       return collectionService.getMyCollections();
-    }
+    },
   },
-    getFavoritedCollections: async() => {
-      return collectionService.getFavoriteCollections();
-    }
-
+  getFavoritedCollections: async () => {
+    return collectionService.getFavoriteCollections();
+  },
 };
 </script>
 
 <style scoped>
-.collection-title{
+.collection-title {
   padding: 40px;
- color: seashell;
+  color: seashell;
+  justify-content: center;
 }
 .collections {
   display: block;
@@ -63,26 +73,32 @@ export default {
   background-image: url("../img/collectionsBackground.png");
   background-size: cover;
   width: 100vw;
-  height:100vw;
-  
+  height: 100vw;
 }
 
-.card{
-background-color: rgb(17, 17, 16);
-display: flex;
-
-
-
-
+.tile-container{
+  justify-content: center;
+  text-align: center;
 }
 
-.page-header{
+section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.collection-container {
+  display: inline-block;
+  padding: 20px;
+  justify-content: center;
+}
+
+img {
+  border-radius: 15px;
+  width: 270px;
+  height: 378px;
+}
+
+.page-header {
   padding: 50px;
 }
-
-
-
-
-
-
 </style>
