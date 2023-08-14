@@ -181,9 +181,24 @@ public class JdbcCollectionDao implements CollectionDao {
     }
 
     @Override
-    public List<CollectionDto> getCollectionsByCardApiId(int cardApiId) {
-        // TODO
-        return null;
+    public List<CollectionDto> getCollectionsByCardApiId(String cardApiId) {
+        List<CollectionDto> cardApiCollection = new ArrayList<>();
+        String sql = "SELECT collection.collection_id " +
+                "FROM collection " +
+                "JOIN card ON collection.collection_id = card.collection_id " +
+                "WHERE card_api_id = ?;";
+        try {
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, cardApiId);
+            while (result.next()) {
+                int collectionId = result.getInt("collection_id");
+                cardApiCollection.add(getCollectionById(collectionId));
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return cardApiCollection;
     }
 
     @Override

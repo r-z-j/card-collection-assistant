@@ -26,6 +26,15 @@ INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, co
 INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('89u06uifjkg', 'Gengar', 2, 5.00, 2, 6, 2);
 INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('63yui54o', 'Scyther', 2, 40.00, 1, 1, 2);
 
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('xy1-1', 'Venusaur', 2, 12.00, 1, 4, 2);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('mcd19-1', 'Caterpie', 2, 3.00, 2, 7, 2);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('pl1-2', 'Blastoise', 2, 40.00, 1, 1, 2);
+
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('bce78225-9dbf-46c1-b63d-083c1858eb98', 'Austere Command', 1, 90.00, 2, 1, 1);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('5654575e-0849-4e7f-98f2-0074ac8e0faa', 'Blessed Orator', 1, 30.00, 1, 4, 1);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('0215cbbf-7bac-4ff7-bceb-23d728797848', 'Ironscale Hydra', 1, 5.00, 3, 7, 1);
+
+
 INSERT INTO favorite_collection (user_id, collection_id) VALUES (1, 1);
 INSERT INTO favorite_collection (user_id, collection_id) VALUES (1, 2);
 INSERT INTO favorite_collection (user_id, collection_id) VALUES (2, 1);

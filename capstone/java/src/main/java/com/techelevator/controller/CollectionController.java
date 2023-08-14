@@ -142,6 +142,19 @@ public class CollectionController {
     };
 
     @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path = "/card-api/{cardApiId}", method = RequestMethod.GET)
+    public List<CollectionDto> cardApiCollection(@PathVariable String cardApiId){
+        List<CollectionDto> apiCardCollection = null;
+        try {
+            apiCardCollection = collectionDao.getCollectionsByCardApiId(cardApiId);
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
+
+        return apiCardCollection;
+    };
+
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/favorite", method = RequestMethod.GET)
     public List<CollectionDto> getFavoriteCollections(Principal principal){
         int userId = userDao.getUserByUsername(principal.getName()).getId();
