@@ -63,6 +63,9 @@ export default {
   getFavoritedCollections: async () => {
     return collectionService.getFavoriteCollections();
   },
+  getMagicCollections: async() =>{
+      return collectionService.getMagicCollections();
+  }
 };
 </script>
 
