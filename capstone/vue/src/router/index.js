@@ -13,6 +13,7 @@ import MyCollections from '../views/MyCollections.vue'
 import AddMagicCard from '../views/AddMagicCard.vue'
 import AddPokeCard from '../views/AddPokeCard.vue'
 import ViewMTGCollectionView from '../views/ViewMTGCollectionView.vue'
+import AllCollections from '../views/AllCollections.vue'
 
 Vue.use(Router)
 
@@ -124,7 +125,16 @@ const router = new Router({
       meta: {
         requiresAuth: false
       }
-    }
+    },
+      {
+        path: "/allCollections",
+        name: "all-collections",
+        component: AllCollections,
+        meta: {
+          requiresAuth: false
+        }
+
+      }
   ]
 })
 

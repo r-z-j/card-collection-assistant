@@ -1,8 +1,8 @@
 <template>
   <div class="collections">
-    <link rel="stylesheet"
+      <link rel="stylesheet"
       href="http://fonts.googleapis.com/css2?family=Simonetta&display=swap"/>
-    <center><h1 class="page-header">My Collections</h1></center>
+    <center><h1 class="page-header">Collections</h1></center>
 
     <section>
       <div
@@ -107,9 +107,10 @@ img {
 
 .page-header {
   padding: 50px;
-  color: rgb(241, 239, 234);
+  color: rgb(248, 243, 238);
   font-family: 'Simonetta', cursive;
   font-style: bold;
   font-size: 75px;
+  
 }
 </style>
