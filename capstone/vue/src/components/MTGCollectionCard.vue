@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="card-list">
       <div v-for="card in magicCards" :key="card.id" class="magic-card" :class="{ flipped: card.isFlipped }">
         <div class="card-image">
           <div class="flip-button-container" @click="flipCard(card)">
@@ -25,8 +25,8 @@
       this.getMultipleCardsBySearch(this.$store.state.searchQuery);
     },
     methods: {
-      async getMultipleCardsBySearch(searchQuery) {
-        const response = await scryfallService.getMultipleCardsBySearchName(searchQuery);
+      async getMultipleCardsBySearch() {
+        const response = await scryfallService.getMultipleCardsBySearchName("dragon");
         this.$store.commit("CLEAR_MAGIC_CARDS");
         this.$store.commit("SET_MAGIC_CARDS_SEARCH", response.data);
       },
@@ -48,17 +48,25 @@
   </script>
   
   <style scoped>
+
+  .card-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
   .magic-card {
     position: relative;
     display: flex;
+
     flex-direction: row;
     border: 2px solid #360164;
     border-radius: 10px;
     padding: 10px;
     margin: 10px;
-    width: 90vw;
     text-align: center;
-    background-color: rgb(197, 134, 236);
+    background-color: rgb(197, 134, 236, 0.65);
+
   }
   
   .flip-button {

@@ -1,7 +1,10 @@
 <template>
-  <MTGCollectionCard>
-
-  </MTGCollectionCard>
+  <main>
+    <div></div>
+    <MTGCollectionCard>
+    
+    </MTGCollectionCard>
+  </main>
 </template>
 
 <script>
@@ -14,5 +17,9 @@ export default {
 </script>
 
 <style>
-
+main {
+  background-image: url('../img/MTG-background-image.png');
+  background-size:cover;
+  background-attachment: fixed;
+  }
 </style>
