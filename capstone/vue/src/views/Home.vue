@@ -44,15 +44,19 @@ p {
 
 .home-card{
   padding: 50px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   flex-direction: row;
   justify-content: space-around;
   flex-grow: 1;
   text-decoration: none;
-  background-image: url("../img/collectionsBackground.png");
+  flex-grow: 1;
+  background-image: url("../img/ElementalBackground.png");
   background-size: cover;
+  background-position: 55%;
   width: 100vw;
-  height: 100vw; 
+  height: 100vw;
+  
 }
 
 router-link{

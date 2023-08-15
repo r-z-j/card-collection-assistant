@@ -14,9 +14,11 @@
     <div class="card-format">
     <Card name="Favorited Collections" :picture='favCollectionsImage' description="View all of your favorited trading card collections"></Card>
     </div>
+    <router-link v-bind:to="{ name: 'all-collections' }"> 
     <div class="card-format">
     <Card name="All Collections" :picture='allCollectionsImage' description="Browse all collections"></Card>
     </div>
+    </router-link>
   </div>
 </main>
   </template>
