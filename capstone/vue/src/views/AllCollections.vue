@@ -22,9 +22,11 @@
             <img src="../img/magicCardBack.png" />
             </router-link>
           </div>
-
+          <button class="transparent-button">add to favorites</button>
         </div>
+        
       </div>
+      
     </section>
   </div>
 </template>
@@ -80,6 +82,19 @@ export default {
 </script>
 
 <style scoped>
+.transparent-button {
+  background-color: rgba(255, 0, 200, 0.3); 
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.transparent-button:hover {
+  background-color: rgba(0, 123, 255, 0.664); 
+}
 .collection-title {
   padding: 40px;
   color: seashell;
@@ -111,10 +126,14 @@ section {
   max-height: auto;
 }
 .collection-container {
+  font-size: 20px;
+  background-color: rgba(245, 203, 214, 0.514);
+  border-radius: 5%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 20px;
+  margin-bottom: 10px;
+  
   
 }
 
