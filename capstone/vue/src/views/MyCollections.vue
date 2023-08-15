@@ -76,9 +76,6 @@ export default {
   justify-content: center;
 }
 .collections {
-  display: block;
-  align-content: center;
-  flex-grow: 1;
   background-image: url("../img/ElementalBackground.png");
   background-size: cover;
   background-position: 55%;
@@ -95,11 +92,21 @@ section {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 20px;
+  justify-content: space-around;
+  max-width: 100%;
+  max-height: auto;
+
 }
 .collection-container {
-  display: inline-block;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   padding: 20px;
-  justify-content: center;
+  
 }
 
 img {
