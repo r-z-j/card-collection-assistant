@@ -30,7 +30,7 @@
             v-bind:to="{ name: 'logout' }"
             v-if="$store.state.token != ''"
           >
-            <button>Login</button>
+            <button>Logout</button>
           </router-link>
           <router-link
             v-bind:to="{ name: 'login' }"
