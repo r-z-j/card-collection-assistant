@@ -55,7 +55,7 @@ p {
   background-size: cover;
   background-position: 55%;
   width: 100vw;
-  height: 100vw;
+  min-height: 100vw;
   
 }
 
