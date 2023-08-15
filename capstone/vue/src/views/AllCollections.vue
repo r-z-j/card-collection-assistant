@@ -22,9 +22,11 @@
             <img src="../img/magicCardBack.png" />
             </router-link>
           </div>
-
+          <button class="transparent-button">add to favorites</button>
         </div>
+        
       </div>
+      
     </section>
   </div>
 </template>
@@ -49,7 +51,7 @@ export default {
 
   async created() {
     const res = await this.getCollections();
-    this.collections = res.data;
+    this.collections = res;
     // const res = await collectionService.getMyCollections();
     // console.log(res.data);
     // this.collections = res.data;
@@ -57,30 +59,53 @@ export default {
 
   methods: {
     getCollections: async () => {
-      return collectionService.getMyCollections();
+      const magicRes = await collectionService.getMagicCollections()
+    const pokeRes = await collectionService.getPokemonCollections()
+    const res = [...magicRes.data, ...pokeRes.data]
+    console.log(res);
+    return res;
+
     },
-  },
-  getFavoritedCollections: async () => {
+    getFavoritedCollections: async () => {
     return collectionService.getFavoriteCollections();
   },
+  getMagicCollections: async() =>{
+      return collectionService.getMagicCollections();
+  },
+  getPokemonCollections: async() =>{
+      return collectionService.getPokemonCollections();
+  }
+
+  },
+ 
 };
 </script>
 
 <style scoped>
+.transparent-button {
+  background-color: rgba(55, 0, 255, 0.3); 
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.transparent-button:hover {
+  background-color: rgba(0, 123, 255, 0.664); 
+}
 .collection-title {
   padding: 40px;
   color: seashell;
   justify-content: center;
 }
 .collections {
-  display: block;
-  align-content: center;
-  flex-grow: 1;
   background-image: url("../img/ElementalBackground.png");
   background-size: cover;
   background-position: 55%;
   width: 100vw;
-  height: 100vw;
+  min-height: 100vw;
 }
 
 .tile-container{
@@ -92,17 +117,31 @@ section {
   display: flex;
   flex-direction: row;
   justify-content: center;
+   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 20px;
+  justify-content: space-around;
+  max-width: 100%;
+  max-height: auto;
 }
 .collection-container {
-  display: inline-block;
-  padding: 20px;
-  justify-content: center;
+  font-size: 20px;
+  background-color: rgba(164, 109, 216, 0.548);
+  border-radius: 5%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  
+  
 }
 
 img {
   border-radius: 15px;
   width: 270px;
   height: 378px;
+  
 }
 
 .page-header {

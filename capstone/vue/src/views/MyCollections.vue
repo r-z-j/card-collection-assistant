@@ -4,7 +4,7 @@
       href="http://fonts.googleapis.com/css2?family=Simonetta&display=swap"/>
     <center><h1 class="page-header">My Collections</h1>
     <router-link v-bind:to="{ name: 'create-collection' }"> 
-            <button>Create Collection</button>
+            <button class="transparent-button">Create Collection</button>
             </router-link>
     </center>
     <section>
@@ -25,8 +25,9 @@
             <img src="../img/magicCardBack.png" />
             </router-link>
           </div>
-
+<button class="transparent-button">add to favorites</button>
         </div>
+        
       </div>
     </section>
   </div>
@@ -66,20 +67,32 @@ export default {
 </script>
 
 <style scoped>
+.transparent-button {
+  background-color: rgba(255, 0, 200, 0.63); 
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.transparent-button:hover {
+  background-color: rgba(0, 123, 255, 0.664); 
+}
+
+
 .collection-title {
   padding: 40px;
   color: seashell;
   justify-content: center;
 }
 .collections {
-  display: block;
-  align-content: center;
-  flex-grow: 1;
   background-image: url("../img/ElementalBackground.png");
   background-size: cover;
   background-position: 55%;
   width: 100vw;
-  height: 100vw;
+  min-height: 100vw;
 }
 
 .tile-container{
@@ -91,11 +104,25 @@ section {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 20px;
+  justify-content: space-around;
+  max-width: 100%;
+  max-height: auto;
+
 }
 .collection-container {
-  display: inline-block;
-  padding: 20px;
-  justify-content: center;
+  font-size: 20px;
+  background-color: rgba(245, 203, 214, 0.514);
+  border-radius: 5%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  
+  
 }
 
 img {

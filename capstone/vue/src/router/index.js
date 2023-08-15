@@ -8,7 +8,7 @@ import store from '../store/index'
 import MTGView from '../views/MTGView.vue'
 import PokemonTCGView from '../views/PokemonTCGView.vue'
 import MTGSearchView from '../views/MTGSearchView.vue'
-import PokemonTest from '../views/PokemonTest.vue'
+import PokemonSearch from '../views/PokemonSearch.vue'
 import MyCollections from '../views/MyCollections.vue'
 import CreateCollection from '../views/CreateCollection.vue'
 import AddMagicCard from '../views/AddMagicCard.vue'
@@ -122,7 +122,7 @@ const router = new Router({
     {
       path: "/pokemon-search",
       name: "pokemon-search",
-      component: PokemonTest,
+      component: PokemonSearch,
       meta: {
         requiresAuth: false
       }
