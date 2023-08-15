@@ -36,8 +36,9 @@ export default {
   },
 
   methods: {
-    submitCollection: (collection) => {
+    submitCollection(collection) {
         collectionService.createCollection(collection)
+        this.$router.push("/collections");
     },
   },
 };
