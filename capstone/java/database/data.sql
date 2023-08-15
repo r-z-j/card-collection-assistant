@@ -10,6 +10,7 @@ INSERT INTO game_type (game_type_name, game_type_id) VALUES ('Pokemon', 2);
 INSERT INTO collection (collection_name, author_id, game_type_id) VALUES ('magic-collection-1', 1, 1);
 INSERT INTO collection (collection_name, author_id, game_type_id) VALUES ('poke-collection-1', 2, 2);
 
+
 INSERT INTO condition (condition_id, condition_name) VALUES (1, 'Mint');
 INSERT INTO condition (condition_id, condition_name) VALUES (2, 'Near Mint');
 INSERT INTO condition (condition_id, condition_name) VALUES (3, 'Excellent');
