@@ -2,8 +2,11 @@
   <div class="collections">
     <link rel="stylesheet"
       href="http://fonts.googleapis.com/css2?family=Simonetta&display=swap"/>
-    <center><h1 class="page-header">My Collections</h1></center>
-
+    <center><h1 class="page-header">My Collections</h1>
+    <router-link v-bind:to="{ name: 'create-collection' }"> 
+            <button>Create Collection</button>
+            </router-link>
+    </center>
     <section>
       <div
         class="collection-container"
