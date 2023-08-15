@@ -10,6 +10,7 @@ import PokemonTCGView from '../views/PokemonTCGView.vue'
 import MTGSearchView from '../views/MTGSearchView.vue'
 import PokemonTest from '../views/PokemonTest.vue'
 import MyCollections from '../views/MyCollections.vue'
+import CreateCollection from '../views/CreateCollection.vue'
 import AddMagicCard from '../views/AddMagicCard.vue'
 import AddPokeCard from '../views/AddPokeCard.vue'
 import ViewMTGCollectionView from '../views/ViewMTGCollectionView.vue'
@@ -97,6 +98,14 @@ const router = new Router({
       path: "/collections",
       name: "collections",
       component: MyCollections,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/create-collection",
+      name: "create-collection",
+      component: CreateCollection,
       meta: {
         requiresAuth: false
       }
