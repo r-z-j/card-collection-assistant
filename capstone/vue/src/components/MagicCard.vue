@@ -17,7 +17,7 @@
         <div class="buttons">
           <button>View Collections</button>
        <button>
-            <router-link v-bind:to="{ name: 'add-card', params: { id: card.id, gameTypeId: 1 } }">
+            <router-link v-bind:to="{ name: 'add-magic', params: { id: card.id } }">
                 Add To Collections</router-link>
           </button> </div>
       </div>

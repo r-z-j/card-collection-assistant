@@ -36,9 +36,9 @@ export default {
   },
 
   computed: {
-    myCollections() {
-      return this.$store.state.collections;
-    },
+    // myCollections() {
+    //   return this.$store.state.collections;
+    // },
   },
 
   async created() {

@@ -1,7 +1,13 @@
 <template>
   <div>
-    <img v-if="apiCard" :src="apiCard.images.small" alt="" />
-    <img v-if="apiCard" :src="apiCard.images.small" alt="" />
+    <img v-if="apiCard" :src="apiCard.image_uris.small" alt="" />
+
+    <div v-if="filteredCollections.length < 1">
+        <h2>You don't have any collections</h2>
+
+        </div>
+        <div v-else>
+
 
     <form v-on:submit.prevent>
       <div class="field">
@@ -32,7 +38,7 @@
         <label for="collection">Collection</label>
         <select name="pets" id="pet-select" v-model="cardToSave.collectionId">
           <option
-            v-for="collection in collections"
+            v-for="collection in filteredCollections"
             :value="collection.collectionId"
             :key="collection.collectionId"
           >
@@ -43,24 +49,23 @@
       <div class="actions">
         <button
           type="submit"
-          v-on:click="
-            submitCard(cardToSave, $route.params.id, $route.params.gameTypeId)
-          "
+          v-on:click="submitCard(cardToSave, $route.params.id)"
         >
           Add Card
         </button>
       </div>
     </form>
+    </div>
+
   </div>
 </template>
 
 <script>
 import collectionService from "../services/CollectionApiService";
-import pokemonService from "../services/PokemonService";
-import scryfallService from "../services/ScryfallService";
+import scryfallService from '../services/ScryfallService';
 
 export default {
-  name: "add-card",
+  name: "add-poke",
   data() {
     return {
       collections: null,
@@ -70,7 +75,7 @@ export default {
         cardName: "",
         userPrice: 0,
         quantity: 1,
-        gameTypeId: 0,
+        gameTypeId: 1,
         conditionId: 0,
         collectionId: 0,
       },
@@ -78,8 +83,10 @@ export default {
   },
 
   computed: {
-    myCollections() {
-      return this.$store.state.collections;
+    filteredCollections() {
+      return this.collections.filter(
+        (collection) => collection.gameTypeId === 1
+      );
     },
   },
 
@@ -87,9 +94,11 @@ export default {
     const collectionRes = await this.getCollections();
     this.collections = collectionRes.data;
 
-    const cardRes = await this.getCardData(this.$route.params.id);
-    console.log(cardRes);
-    this.apiCard = cardRes.data.data;
+    const cardRes = await this.getCardData(
+      this.$route.params.id,
+    );
+    console.log(cardRes.data);
+    this.apiCard = cardRes.data;
   },
 
   methods: {
@@ -98,15 +107,12 @@ export default {
     },
 
     getCardData: async (id) => {
-      const magicRes = await scryfallService.getSingleCardById(id);
-      const pokeRes = await pokemonService.getSingleCardById(id);
-      return magicRes ? magicRes : pokeRes;
+      const res = await scryfallService.getSingleCardById(id);
+      return res;
     },
 
-    submitCard: async (card, apiId, gameTypeId) => {
+    submitCard: async (card, apiId) => {
       card.cardApiId = apiId;
-      card.gameTypeId = gameTypeId;
-      card.gameTypeId = 2;
       console.log(card);
       collectionService.addCardToCollection(card);
     },
