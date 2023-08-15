@@ -26,7 +26,7 @@
     },
     methods: {
       async getMultipleCardsBySearch() {
-        const response = await scryfallService.getMultipleCardsBySearchName("dragon");
+        const response = await scryfallService.getMultipleCardsBySearchName("Sheoldred, The Apoc");
         this.$store.commit("CLEAR_MAGIC_CARDS");
         this.$store.commit("SET_MAGIC_CARDS_SEARCH", response.data);
       },
