@@ -90,7 +90,7 @@ export default {
   background-size: cover;
   background-position: 55%;
   width: 100vw;
-  height: 100vw;
+  min-height: 100vw;
 }
 
 .tile-container{
@@ -102,17 +102,27 @@ section {
   display: flex;
   flex-direction: row;
   justify-content: center;
+   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 20px;
+  justify-content: space-around;
+  max-width: 100%;
+  max-height: auto;
 }
 .collection-container {
-  display: inline-block;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   padding: 20px;
-  justify-content: center;
+  
 }
 
 img {
   border-radius: 15px;
   width: 270px;
   height: 378px;
+  
 }
 
 .page-header {
