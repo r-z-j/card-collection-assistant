@@ -83,7 +83,7 @@ export default {
 
 <style scoped>
 .transparent-button {
-  background-color: rgba(255, 0, 200, 0.3); 
+  background-color: rgba(55, 0, 255, 0.3); 
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -127,7 +127,7 @@ section {
 }
 .collection-container {
   font-size: 20px;
-  background-color: rgba(245, 203, 214, 0.514);
+  background-color: rgba(164, 109, 216, 0.548);
   border-radius: 5%;
   display: flex;
   flex-direction: row;
