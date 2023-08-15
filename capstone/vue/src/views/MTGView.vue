@@ -39,7 +39,7 @@
   }
   </script>
   
-  <style>
+  <style scoped>
   .multiple{
   padding: 50px;
   display: grid;
@@ -50,7 +50,9 @@
   text-decoration: none;
   width: 100vw;
   height: 100vw;
+  
   }
+
 
   main{
   background-image: url('../img/MTG-background-image.png');
