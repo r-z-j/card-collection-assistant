@@ -78,6 +78,7 @@ const router = new Router({
       }
     },
     {
+<<<<<<< HEAD
       path: "/add-magic_:id",
       name: "add-magic",
       component: AddMagicCard,
@@ -89,6 +90,11 @@ const router = new Router({
       path: "/add-poke_:id",
       name: "add-poke",
       component: AddPokeCard,
+=======
+      path: "/add-card_:id",
+      name: "add-card",
+      component: AddCard,
+>>>>>>> refs/remotes/origin/main
       meta: {
         requiresAuth: false
       }
@@ -118,7 +124,7 @@ const router = new Router({
       }
     },
     {
-      path: "/test-collection-cards-view",
+      path: "/collection_:id",
       name: "mtg-collection-cards",
       component: ViewMTGCollectionView,
       meta: {

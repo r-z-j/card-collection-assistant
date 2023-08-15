@@ -18,9 +18,13 @@ INSERT INTO condition (condition_id, condition_name) VALUES (5, 'Light Played');
 INSERT INTO condition (condition_id, condition_name) VALUES (6, 'Played');
 INSERT INTO condition (condition_id, condition_name) VALUES (7, 'Poor');
 
-INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('abcd1234', 'Black Lotus', 1, 20.00, 2, 1, 1);
-INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('hifjweio452987', 'Red Lotus', 1, 10.00, 1, 2, 1);
-INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('hjkgfd789754390', 'Cornflower Blue Lotus', 1, 5.00, 3, 3, 1);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('3e64afdc-7623-4b88-a952-45243b4dff79', 'Ugin, The Spirit Dragon', 1, 20.00, 2, 1, 1);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('0ee0719c-07d0-419a-b6ed-fc3bf982e4d3', 'Elesh Norn, Grand Cenobite', 1, 10.00, 1, 2, 1);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('8df6603a-38c1-4d18-8b84-6211e9a7cc09', 'Sheoldred, the Apocalypse', 1, 5.00, 3, 3, 1);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('6d545e9d-3b8e-44f5-8b4e-d8573ecc5819', 'Doubling Season', 1, 5.00, 3, 3, 1);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('bce78225-9dbf-46c1-b63d-083c1858eb98', 'Austere Command', 1, 90.00, 2, 1, 1);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('5654575e-0849-4e7f-98f2-0074ac8e0faa', 'Blessed Orator', 1, 30.00, 1, 4, 1);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('0215cbbf-7bac-4ff7-bceb-23d728797848', 'Ironscale Hydra', 1, 5.00, 3, 7, 1);
 
 INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('vcbzxnmvzx', 'Charizard', 2, 10.00, 1, 4, 2);
 INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('89u06uifjkg', 'Gengar', 2, 5.00, 2, 6, 2);
@@ -30,9 +34,6 @@ INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, co
 INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('mcd19-1', 'Caterpie', 2, 3.00, 2, 7, 2);
 INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('pl1-2', 'Blastoise', 2, 40.00, 1, 1, 2);
 
-INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('bce78225-9dbf-46c1-b63d-083c1858eb98', 'Austere Command', 1, 90.00, 2, 1, 1);
-INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('5654575e-0849-4e7f-98f2-0074ac8e0faa', 'Blessed Orator', 1, 30.00, 1, 4, 1);
-INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('0215cbbf-7bac-4ff7-bceb-23d728797848', 'Ironscale Hydra', 1, 5.00, 3, 7, 1);
 
 
 INSERT INTO favorite_collection (user_id, collection_id) VALUES (1, 1);
