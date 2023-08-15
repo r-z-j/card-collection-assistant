@@ -3,7 +3,7 @@
       <link rel="stylesheet"
       href="http://fonts.googleapis.com/css2?family=Simonetta&display=swap"/>
     <center><h1 class="page-header">Collections</h1></center>
-
+ 
     <section>
       <div
         class="collection-container"

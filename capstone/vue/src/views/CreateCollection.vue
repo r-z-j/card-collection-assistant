@@ -38,8 +38,15 @@ export default {
   methods: {
     submitCollection(collection) {
         collectionService.createCollection(collection)
+        this.test();
         this.$router.push("/collections");
     },
+
+    test: () => {
+
+        console.log("here");
+        console.log(collectionService.getCollectionById(1));
+    }
   },
 };
 </script>

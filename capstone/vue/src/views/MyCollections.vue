@@ -45,17 +45,13 @@ export default {
   },
 
   computed: {
-    // myCollections() {
-    //   return this.$store.state.collections;
-    // },
   },
 
   async created() {
     const res = await this.getCollections();
     this.collections = res.data;
-    // const res = await collectionService.getMyCollections();
-    // console.log(res.data);
-    // this.collections = res.data;
+    
+   
   },
 
   methods: {
