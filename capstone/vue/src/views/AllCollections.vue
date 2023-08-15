@@ -49,7 +49,7 @@ export default {
 
   async created() {
     const res = await this.getCollections();
-    this.collections = res.data;
+    this.collections = res;
     // const res = await collectionService.getMyCollections();
     // console.log(res.data);
     // this.collections = res.data;
@@ -57,15 +57,25 @@ export default {
 
   methods: {
     getCollections: async () => {
-      return collectionService.getMyCollections();
+      const magicRes = await collectionService.getMagicCollections()
+    const pokeRes = await collectionService.getPokemonCollections()
+    const res = [...magicRes.data, ...pokeRes.data]
+    console.log(res);
+    return res;
+
     },
-  },
-  getFavoritedCollections: async () => {
+    getFavoritedCollections: async () => {
     return collectionService.getFavoriteCollections();
   },
   getMagicCollections: async() =>{
       return collectionService.getMagicCollections();
+  },
+  getPokemonCollections: async() =>{
+      return collectionService.getPokemonCollections();
   }
+
+  },
+ 
 };
 </script>
 
@@ -76,9 +86,6 @@ export default {
   justify-content: center;
 }
 .collections {
-  display: block;
-  align-content: center;
-  flex-grow: 1;
   background-image: url("../img/ElementalBackground.png");
   background-size: cover;
   background-position: 55%;
