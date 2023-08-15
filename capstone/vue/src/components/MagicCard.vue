@@ -16,23 +16,30 @@
         <h3>{{ card.oracleText }}</h3>
         <div class="buttons">
           <button>View Collections</button>
-       <button>
-            <router-link v-bind:to="{ name: 'add-magic', params: { id: card.id } }">
-                Add To Collections</router-link>
-          </button> </div>
+           <button @click="openModal(card)">Add To Collections</button>
+        </div>
       </div>
+      <card-form-modal v-show="showModal" @close="closeModal" :gameType="1" />
     </div>
   </div>
 </template>
 
 <script>
 import scryfallService from '../services/ScryfallService';
+import CardFormModal from './CardFormModal.vue';
 
 export default {
+  components: { CardFormModal },
   name: "magic-card",
   props: ["magicCardName"],
   created() {
     this.getMultipleCardsBySearch(this.$store.state.searchQuery);
+  },
+  data() {
+    return {
+      showModal: false,
+      selectedCard: null,
+    };
   },
   methods: {
     async getMultipleCardsBySearch(searchQuery) {
@@ -43,6 +50,14 @@ export default {
     flipCard(card) {
       card.isFlipped = !card.isFlipped;
     },
+    openModal(card) {
+      this.selectedCard = card;
+      this.showModal = true;
+    },
+    closeModal() {
+      this.selectedCard = null;
+      this.showModal = false;
+    }
   },
   computed: {
     magicCards() {
