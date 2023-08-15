@@ -12,7 +12,7 @@ INSERT INTO collection (collection_name, author_id, game_type_id) VALUES ('magic
 INSERT INTO collection (collection_name, author_id, game_type_id) VALUES ('poke-collection-1', 1, 2);
 INSERT INTO collection (collection_name, author_id, game_type_id) VALUES ('poke-collection-2', 1, 2);
 
-INSERT INTO collection (collection_name, author_id, game_type_id) VALUES ('poke-collection-1', 2, 2);
+INSERT INTO collection (collection_name, author_id, game_type_id) VALUES ('poke-collection-3', 2, 2);
 
 INSERT INTO condition (condition_id, condition_name) VALUES (1, 'Mint');
 INSERT INTO condition (condition_id, condition_name) VALUES (2, 'Near Mint');
@@ -38,14 +38,14 @@ INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, co
 
 INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('ex12-11', 'Muk', 2, 12.00, 1, 4, 3);
 INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('swsh2-91', 'Dragapult', 2, 3.00, 2, 7, 3);
-INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('gym1-14', 'Sabrinas Gengar,' 2, 40.00, 1, 1, 3);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('gym1-14', 'Sabrinas Gengar', 2, 40.00, 1, 1, 3);
 INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('xy1-1', 'Venusaur', 2, 12.00, 1, 4, 3);
 INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('mcd19-1', 'Caterpie', 2, 3.00, 2, 7, 3);
 INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('pl1-2', 'Blastoise', 2, 40.00, 1, 1, 3);
 
 INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('xy10-1', 'Shuckle', 2, 12.00, 1, 4, 4);
 INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('swsh35-8', 'Incineroar', 2, 3.00, 2, 7, 4);
-INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('swsh1-4', 'Roserade' 2, 40.00, 1, 1, 4);
+INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('swsh1-4', 'Roserade', 2, 40.00, 1, 1, 4);
 INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('sv1-80', 'Miraidon', 2, 12.00, 1, 4, 4);
 INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('pl4-5', 'Luxray', 2, 3.00, 2, 7, 4);
 INSERT INTO card (card_api_id, card_name, game_type_id, user_price, quantity, condition_id, collection_id) VALUES ('sv3-200', 'Palafin', 2, 40.00, 1, 1, 4);
