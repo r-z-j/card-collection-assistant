@@ -1,19 +1,23 @@
 <template>
   <div class="add-card-card">
-    ADD MORE CARDS
-    <img src="../img/plus_sign_icon_.png" >
+    <h1>
+        ADD MORE CARDS
+    </h1>
+    <div>
+        <img src="../img/plus_sign_icon_.png" class="centered-image"/>
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style scoped>
-
 .add-card-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border: 2px solid #360164;
   border-radius: 10px;
   padding: 10px;
@@ -27,8 +31,12 @@ export default {
   max-height: 402px;
   padding-right: 10px;
   perspective: 1000px;
+
 }
 
-
-
+.centered-image {
+  height: 125px;
+  width: 125px;
+  margin-top: 65px;
+}
 </style>
