@@ -1,11 +1,11 @@
 <template>
     <div class="multiple-pokemon">
-        <div >
+        <div>
        <router-link v-bind:to="{ name: 'pokemon-search' }">  
       <Card name="Add Cards to Collections" :picture="pokemonCardStackImage" description="Browse all cards"></Card>
        </router-link>&nbsp;
       </div>
-        <div >
+        <div>
         <router-link v-bind:to="{ name: 'collections' }">
       <Card name="User Collections" :picture="pokemonUserCollecctionImage" description="View all of your trading card collections"></Card>
       </router-link>&nbsp;
@@ -15,7 +15,7 @@
       <Card name="Favorited Collections" :picture="favPokeImage" description="View all of your favorited trading card collections"></Card>
     </div>
     <router-link v-bind:to="{ name: 'all-collections' }"> 
-    <div >
+    <div>
       <Card name="All Collections" :picture="allCollectionsImages" description="Browse all collections"></Card>
     </div>
     </router-link>
@@ -56,6 +56,5 @@
   height: 100%;
   }
   
-
   
   </style>
