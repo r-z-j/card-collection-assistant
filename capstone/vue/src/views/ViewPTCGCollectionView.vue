@@ -21,7 +21,7 @@ main {
   background-image: url('../img/pokeball.png');
   background-size:cover;
   background-attachment: fixed;
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   }
 </style>

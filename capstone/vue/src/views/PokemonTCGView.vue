@@ -55,7 +55,7 @@
   background-image: url("../img/pokemonCardsBackground.png");
   background-size: cover;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   }
   
   .router-link{
