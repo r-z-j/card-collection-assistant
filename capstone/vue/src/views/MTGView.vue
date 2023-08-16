@@ -42,6 +42,7 @@
   </script>
   
   <style scoped>
+    
   .multiple{
   padding: 50px;
   display: flex;

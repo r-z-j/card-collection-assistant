@@ -16,6 +16,7 @@ import ViewMTGCollectionView from '../views/ViewMTGCollectionView.vue'
 import ViewPTCGCollectionView from '../views/ViewPTCGCollectionView.vue'
 import AllCollections from '../views/AllCollections.vue'
 import CreateCollection from '../views/CreateCollection.vue'
+import FavoritedCollection from '../views/FavoritedCollection.vue'
 
 Vue.use(Router)
 
@@ -152,7 +153,16 @@ const router = new Router({
           requiresAuth: false
         }
 
+      },
+
+      {
+      path: "/favorited",
+      name: "favorited",
+      component: FavoritedCollection,
+      meta: {
+        requiresAuth: false
       }
+    }
   ]
 })
 
