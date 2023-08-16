@@ -18,12 +18,12 @@
         <div class="tile-container">
           <div class="collection-title">{{ collection.collectionName }}</div>
           <div v-if="collection.gameTypeId === 2">
-            <router-link v-bind:to="{ name: 'pokemon-search' }"> 
+            <router-link v-bind:to="{ name: 'ptcg-collection-cards', params: {id: collection.collectionId} }"> 
             <img src="../img/pokemon-cardback.png" />
             </router-link>
           </div>
           <div v-else-if="collection.gameTypeId === 1">
-            <router-link v-bind:to="{ name: 'pokemon-search' }"> 
+            <router-link v-bind:to="{ name: 'mtg-collection-cards', params: { id: collection.collectionId } }"> 
             <img src="../img/magicCardBack.png" />
             </router-link>
           </div>
