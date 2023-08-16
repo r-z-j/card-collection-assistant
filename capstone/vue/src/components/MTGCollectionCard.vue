@@ -1,6 +1,6 @@
 <template>
     <div class="card-list">
-      <div v-for="card in magicCards" :key="card.id" class="magic-card" :class="{ flipped: card.isFlipped }">
+      <div v-for="card in currentCollection" :key="card.id" class="magic-card" :class="{ flipped: card.isFlipped }">
         <div class="card-image">
           <div class="flip-button-container" @click="flipCard(card)">
             <img v-if="card.frontFace && card.backFace" class="flip-button" src="@/img/flip.png" alt="Flip Icon" />
@@ -15,37 +15,92 @@
     </div>
   </template>
   
-  <script>
-  import scryfallService from '../services/ScryfallService';
-  
-  export default {
-    name: "magic-card",
-    props: ["magicCardName"],
-    created() {
-      this.getMultipleCardsBySearch(this.$store.state.searchQuery);
+<script>
+import collectionApiService from "../services/CollectionApiService";
+import scryfallService from "../services/ScryfallService";
+
+export default {
+  name: "magic-card",
+  props: ["magicCardName"],
+
+  data() {
+    return {
+      cardListResponse: [],
+      currentCollection: [],
+      collectionID: this.$route.params.id,
+    };
+  },
+
+  created() {
+    this.getCollectionFromID().then(() => {
+      this.getCardsFromCollection();
+    });
+  },
+
+  methods: {
+    async getCollectionFromID() {
+      try {
+        const response = await collectionApiService.getCollectionById(
+          this.collectionID.toString()
+        );
+        this.cardListResponse = response.data.cardList;
+      } catch (error) {
+        console.error("Error fetching collection:", error);
+      }
     },
-    methods: {
-      async getMultipleCardsBySearch() {
-        const response = await scryfallService.getMultipleCardsBySearchName("bolas");
-        this.$store.commit("CLEAR_MAGIC_CARDS");
-        this.$store.commit("SET_MAGIC_CARDS_SEARCH", response.data);
-      },
-      flipCard(card) {
-        card.isFlipped = !card.isFlipped;
-      },
+
+    async getCardsFromCollection() {
+      try {
+        for (const card of this.cardListResponse) {
+          const response = await scryfallService.getSingleCardById(
+            card.cardApiId
+          );
+          let singleCardResponse = response.data;
+          let mappedCard = {
+            id: singleCardResponse.id,
+            name: singleCardResponse.name,
+            oracleText: singleCardResponse.oracle_text,
+            setName: singleCardResponse.set_name,
+            isFlipped: false,
+            isDualSided:
+              singleCardResponse.layout === "transform" ||
+              singleCardResponse.layout === "modal_dfc",
+          };
+          if (
+            singleCardResponse.card_faces &&
+            singleCardResponse.card_faces.length > 1
+          ) {
+            mappedCard.frontFace = {
+              name: singleCardResponse.card_faces[0].name,
+              oracleText: singleCardResponse.card_faces[0].oracle_text,
+              imageUri: singleCardResponse.card_faces[0].image_uris.normal,
+            };
+            mappedCard.backFace = {
+              name: singleCardResponse.card_faces[1].name,
+              oracleText: singleCardResponse.card_faces[1].oracle_text,
+              imageUri: singleCardResponse.card_faces[1].image_uris.normal,
+            };
+          } else {
+            mappedCard.imageUri = singleCardResponse.image_uris.normal;
+          }
+          this.currentCollection.push(mappedCard);
+        }
+      } catch (error) {
+        console.error("Error fetching cards:", error);
+      }
     },
-    computed: {
-      magicCards() {
-        return this.$store.state.magicCards;
-      },
+
+    flipCard(card) {
+      card.isFlipped = !card.isFlipped;
     },
-    watch: {
-      "$store.state.searchQuery"(newValue) {
-        this.getMultipleCardsBySearch(newValue);
-      },
+  },
+  computed: {
+    magicCards() {
+      return this.$store.state.magicCards;
     },
-  };
-  </script>
+  },
+};
+</script>
   
   <style scoped>
 
