@@ -69,7 +69,7 @@ export default {
   width: 90vw;
   text-align: center;
   background-color: rgb(197, 134, 236, 0.65);
-
+  
 }
 
 .flip-button {

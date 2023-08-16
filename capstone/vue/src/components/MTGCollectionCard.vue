@@ -32,7 +32,9 @@
         </div>
       </div>
     </div>
-    <AddCardCard></AddCardCard>
+    <router-link v-bind:to="{ name: 'mtg-search-view' }" class="back-to-search">
+      <AddCardCard></AddCardCard>
+    </router-link>
   </div>
 </template>
   
@@ -130,12 +132,12 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
 }
 .magic-card {
   position: relative;
   display: flex;
-
   flex-direction: row;
   border: 2px solid #360164;
   border-radius: 10px;
@@ -201,6 +203,10 @@ export default {
 
 .magic-card.flipped .card-image-content {
   transform: rotateY(180deg);
+}
+
+.back-to-search{
+  text-decoration: none;
 }
 
 img {
