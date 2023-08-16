@@ -11,6 +11,9 @@
       </div>
     </div>
   </div>
+    <div class="pokeball" v-else>
+      <img src="../img/pokeball.gif" alt="">
+    </div>
 </template>
   
 <script>
@@ -125,10 +128,16 @@ export default {
 }
 
 
-img {
+.card-image {
   width: 270px;
   height: 378px;
   border-radius: 12px;
+}
+
+.pokeball {
+  position: absolute;
+  top: 70vh;
+  right: 10vw;
 }
 
 button {

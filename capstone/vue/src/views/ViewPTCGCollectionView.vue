@@ -18,7 +18,7 @@ export default {
 
 <style scoped>
 main {
-  background-image: url('../img/MTG-background-image.png');
+  background-image: url('../img/pokeball.png');
   background-size:cover;
   background-attachment: fixed;
   height: 100vh;
