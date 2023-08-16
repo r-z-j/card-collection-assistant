@@ -128,7 +128,7 @@ const router = new Router({
       }
     },
     {
-      path: "/collection_:id",
+      path: "/mtg-collection_:id",
       name: "mtg-collection-cards",
       component: ViewMTGCollectionView,
       meta: {
