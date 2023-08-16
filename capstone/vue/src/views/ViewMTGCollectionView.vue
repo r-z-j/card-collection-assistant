@@ -1,9 +1,9 @@
 <template>
-  <main>
-    <div></div>
+  <main> 
     <MTGCollectionCard>
     
     </MTGCollectionCard>
+
   </main>
 </template>
 
