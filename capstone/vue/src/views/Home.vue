@@ -1,21 +1,23 @@
 <template>
-  <div class="home-card">
-    <router-link v-bind:to="{ name: 'mtg-view' }">
-   <Card 
-   name="Magic The Gathering"
-   :picture= 'mtgimage'
-   description="Make and share your own collection of Magic The Gathering cards, or view and favorite collections other users have made!"
-   />
-   </router-link>
-
-   <router-link v-bind:to="{ name: 'pokemon-tcg-view' }">
-   <Card 
-   name="Pokemon TCG"
-   :picture= 'karpImage'
-   description="Make and share your own collection of Pokemon TCG cards, or view and favorite collections other users have made!"
-   />
-   </router-link>
-  </div>
+  <main>
+    <div class="home-card">
+      <router-link v-bind:to="{ name: 'mtg-view' }">
+     <Card 
+     name="Magic The Gathering"
+     :picture= 'mtgimage'
+     description="Make and share your own collection of Magic The Gathering cards, or view and favorite collections other users have made!"
+     />
+     </router-link>
+  
+     <router-link v-bind:to="{ name: 'pokemon-tcg-view' }">
+     <Card 
+     name="Pokemon TCG"
+     :picture= 'karpImage'
+     description="Make and share your own collection of Pokemon TCG cards, or view and favorite collections other users have made!"
+     />
+     </router-link>
+    </div>
+  </main>
 </template>
 
 <script>
@@ -33,6 +35,10 @@ export default {
 </script>
 
 <style>
+html, body {
+  widows: 100%;
+  height: 100%;
+}
 hr {
   height: 1px;
         background-color: #0E2431;
@@ -44,24 +50,22 @@ p {
 
 .home-card{
   padding: 50px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   flex-direction: row;
   justify-content: space-around;
-  flex-grow: 1;
   text-decoration: none;
   flex-grow: 1;
+}
+
+main {
   background-image: url("../img/ElementalBackground.png");
   background-size: cover;
-  background-position: 55%;
+  background-attachment: fixed;
   width: 100vw;
-  height: 100vw;
-  
+  height: 100vh;
 }
 
 router-link{
   text-decoration: none;
 }
-
-
 </style>

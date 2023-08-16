@@ -83,7 +83,7 @@ export default {
   background-size: cover;
   background-position: 55%;
   width: 100vw;
-  height: 100vw;
+  min-height: 100vw;
 }
 
 .tile-container {
@@ -93,18 +93,24 @@ export default {
 
 section {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
 }
 .collection-container {
-  display: inline-block;
-  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
+  padding: 20px;
 }
 
 img {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   border-radius: 15px;
-  width: 270px;
+  min-width: 270px;
   height: 378px;
 }
 
