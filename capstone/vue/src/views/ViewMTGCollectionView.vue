@@ -22,6 +22,6 @@ main {
   background-size:cover;
   background-attachment: fixed;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   }
 </style>
