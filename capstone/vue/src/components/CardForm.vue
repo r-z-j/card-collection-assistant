@@ -19,7 +19,7 @@
           <option value="2">Near Mint</option>
           <option value="3">Excellent</option>
           <option value="4">Good</option>
-          <option value="5">Light Layed</option>
+          <option value="5">Light Played</option>
           <option value="6">Played</option>
           <option value="7">Poor</option>
         </select>
@@ -40,10 +40,12 @@
         <button
           type="submit"
           v-on:click="submitCard(cardToSave, $route.params.id)"
-          class="btn btn-primary transparent-button"
-        >
+          class="btn btn-primary transparent-button">
           Add Card
         </button>
+        <router-link to="/mtg-search" class="btn btn-secondary transparent-button back-to-search">
+        Back to Search
+      </router-link>
       </div>
     </form>
 </template>
@@ -111,10 +113,15 @@ export default {
       return res;
     },
 
-    submitCard: async (card, apiId) => {
+    submitCard (card, apiId) {
       card.cardApiId = apiId;
       console.log(card);
       collectionService.addCardToCollection(card);
+      if (card.gameTypeId === 1) {
+        this.$router.push(`mtg-collection_${card.collectionId}`)
+      } else {
+        this.$router.push(`ptcg-collection_${card.collectionId}`)
+      }
     },
   },
 };
@@ -174,6 +181,10 @@ select {
 
 .transparent-button:hover {
   background-color: rgba(0, 123, 255, 0.5); 
+}
+
+.back-to-search {
+  margin-left: 5px;
 }
 
 </style>
