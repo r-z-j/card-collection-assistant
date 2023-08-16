@@ -12,6 +12,9 @@
      <router-link v-bind:to="{ name: 'pokemon-search' }" class="back-to-search">
       <AddCardCard></AddCardCard>
     </router-link>
+      <router-link v-bind:to="{ name: 'UpdateCollection' }" class="back-to-search">
+      <UpdateCollectionCard></UpdateCollectionCard>
+      </router-link>
   </div>
     <div class="pokeball" v-else>
       <img src="../img/pokeball.gif" alt="">
@@ -23,11 +26,12 @@
 import collectionApiService from "../services/CollectionApiService";
 import pokeService from "../services/PokemonService.js";
 import AddCardCard from "../components/AddCardCard.vue"
+import UpdateCollectionCard from './UpdateCollectionCard.vue';
 
 export default {
   name: "poke-card",
   props: ["pokeCardName"],
-  components: {AddCardCard},
+  components: {AddCardCard, UpdateCollectionCard},
 
   data() {
     return {

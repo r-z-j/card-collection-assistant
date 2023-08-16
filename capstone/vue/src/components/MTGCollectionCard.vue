@@ -35,6 +35,7 @@
     <router-link v-bind:to="{ name: 'mtg-search-view' }" class="back-to-search">
       <AddCardCard></AddCardCard>
     </router-link>
+    <UpdateCollectionCard></UpdateCollectionCard>
   </div>
 </template>
   
@@ -42,11 +43,14 @@
 import collectionApiService from "../services/CollectionApiService";
 import scryfallService from "../services/ScryfallService";
 import AddCardCard from '../components/AddCardCard.vue';
+import UpdateCollectionCard from '../components/UpdateCollectionCard.vue'
 
 export default {
   name: "magic-card",
   props: ["magicCardName"],
-  components: {AddCardCard},
+  components: {AddCardCard, UpdateCollectionCard},
+              
+            
 
   data() {
     return {

@@ -17,6 +17,7 @@ import ViewPTCGCollectionView from '../views/ViewPTCGCollectionView.vue'
 import AllCollections from '../views/AllCollections.vue'
 import CreateCollection from '../views/CreateCollection.vue'
 import FavoritedCollection from '../views/FavoritedCollection.vue'
+import UpdateCollection from '../views/UpdateCollection.vue'
 
 Vue.use(Router)
 
@@ -159,6 +160,14 @@ const router = new Router({
       path: "/favorited",
       name: "favorited",
       component: FavoritedCollection,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/update-collection",
+      name: "UpdateCollection",
+      component: UpdateCollection,
       meta: {
         requiresAuth: false
       }
