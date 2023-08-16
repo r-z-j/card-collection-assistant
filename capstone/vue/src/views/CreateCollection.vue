@@ -1,4 +1,6 @@
 <template>
+<main>
+
   <form v-on:submit.prevent class="transparent-form">
     <div class="field">
       <label for="title">Title</label>
@@ -18,6 +20,7 @@
       </button>
     </div>
   </form>
+</main>
 </template>
 
 <script>
@@ -98,4 +101,5 @@ select {
 .transparent-button:hover {
   background-color: rgba(0, 123, 255, 0.5); 
 }
+
 </style>

@@ -132,4 +132,12 @@ img {
   color: dark purple;
   cursor: pointer;
 }
+main {
+  background-image: url("img/ElementalBackground.png");
+  background-size:cover;
+  background-attachment: fixed;
+  width: 100vw;
+  height: 100vh;
+  }
+
 </style>
