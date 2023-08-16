@@ -85,16 +85,19 @@ export default {
   background-size: cover;
   background-position: 55%;
   width: 100vw;
-  height: 100vw;
+  min-height: 100vw;
 }
 
 .tile-container{
   justify-content: center;
   text-align: center;
+  background-color: rgba(48, 48, 94, 0.678);
+  border-radius: 10px;
 }
 
 section {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
 }
@@ -116,5 +119,20 @@ img {
   font-family: 'Simonetta', cursive;
   font-style: bold;
   font-size: 75px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #3d1eafe5;
+  color: white;
+  border: 2px solid #260cbdd5;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 50px;
+}
+button:hover {
+ background-color: #98049d;
 }
 </style>
