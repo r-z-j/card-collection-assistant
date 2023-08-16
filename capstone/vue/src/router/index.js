@@ -14,6 +14,7 @@ import AddMagicCard from '../views/AddMagicCard.vue'
 import AddPokeCard from '../views/AddPokeCard.vue'
 import ViewMTGCollectionView from '../views/ViewMTGCollectionView.vue'
 import AllCollections from '../views/AllCollections.vue'
+import CreateCollection from '../views/CreateCollection.vue'
 
 Vue.use(Router)
 
@@ -90,6 +91,14 @@ const router = new Router({
       path: "/add-poke_:id",
       name: "add-poke",
       component: AddPokeCard,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/create-collection",
+      name: "create-collection",
+      component: CreateCollection,
       meta: {
         requiresAuth: false
       }
