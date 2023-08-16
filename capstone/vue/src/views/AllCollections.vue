@@ -1,7 +1,9 @@
 <template>
   <div class="collections">
-      <link rel="stylesheet"
-      href="http://fonts.googleapis.com/css2?family=Simonetta&display=swap"/>
+    <link
+      rel="stylesheet"
+      href="http://fonts.googleapis.com/css2?family=Simonetta&display=swap"
+    />
     <center><h1 class="page-header">Collections</h1></center>
 
     <section>
@@ -13,16 +15,15 @@
         <div class="tile-container">
           <div class="collection-title">{{ collection.collectionName }}</div>
           <div v-if="collection.gameTypeId === 2">
-            <router-link v-bind:to="{ name: 'pokemon-search' }"> 
-            <img src="../img/pokemon-cardback.png" />
+            <router-link v-bind:to="{ name: 'pokemon-search' }">
+              <img src="../img/pokemon-cardback.png" />
             </router-link>
           </div>
           <div v-else-if="collection.gameTypeId === 1">
-            <router-link v-bind:to="{ name: 'pokemon-search' }"> 
-            <img src="../img/magicCardBack.png" />
+            <router-link v-bind:to="{ name: 'pokemon-search' }">
+              <img src="../img/magicCardBack.png" />
             </router-link>
           </div>
-
         </div>
       </div>
     </section>
@@ -49,7 +50,7 @@ export default {
 
   async created() {
     const res = await this.getCollections();
-    this.collections = res.data;
+    this.collections = res;
     // const res = await collectionService.getMyCollections();
     // console.log(res.data);
     // this.collections = res.data;
@@ -57,11 +58,21 @@ export default {
 
   methods: {
     getCollections: async () => {
-      return collectionService.getMyCollections();
+      const magicRes = await collectionService.getMagicCollections();
+      const pokeRes = await collectionService.getPokemonCollections();
+      const res = [...magicRes.data, ...pokeRes.data];
+      console.log(res);
+      return res;
     },
-  },
-  getFavoritedCollections: async () => {
-    return collectionService.getFavoriteCollections();
+    getFavoritedCollections: async () => {
+      return collectionService.getFavoriteCollections();
+    },
+    getMagicCollections: async () => {
+      return collectionService.getMagicCollections();
+    },
+    getPokemonCollections: async () => {
+      return collectionService.getPokemonCollections();
+    },
   },
 };
 </script>
@@ -83,7 +94,7 @@ export default {
   height: 100vw;
 }
 
-.tile-container{
+.tile-container {
   justify-content: center;
   text-align: center;
 }
@@ -108,9 +119,8 @@ img {
 .page-header {
   padding: 50px;
   color: rgb(248, 243, 238);
-  font-family: 'Simonetta', cursive;
+  font-family: "Simonetta", cursive;
   font-style: bold;
   font-size: 75px;
-  
 }
 </style>

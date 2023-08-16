@@ -98,3 +98,4 @@ select {
 .transparent-button:hover {
   background-color: rgba(0, 123, 255, 0.5); 
 }
+</style>
