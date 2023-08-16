@@ -102,4 +102,8 @@ select {
   background-color: rgba(0, 123, 255, 0.5); 
 }
 
+main {
+  margin-top: 50px;
+}
+
 </style>

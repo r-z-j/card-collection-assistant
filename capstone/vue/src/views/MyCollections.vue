@@ -42,31 +42,18 @@ export default {
   data() {
     return {
       collections: null,
-      favorited: null,
     };
-  },
-
-  computed: {
-    // myCollections() {
-    //   return this.$store.state.collections;
-    // },
   },
 
   async created() {
     const res = await this.getCollections();
     this.collections = res.data;
-    // const res = await collectionService.getMyCollections();
-    // console.log(res.data);
-    // this.collections = res.data;
   },
 
   methods: {
     getCollections: async () => {
       return collectionService.getMyCollections();
     },
-  },
-  getFavoritedCollections: async () => {
-    return collectionService.getFavoriteCollections();
   },
 };
 </script>
