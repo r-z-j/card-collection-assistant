@@ -52,7 +52,7 @@
   flex-grow: 1;
   text-decoration: none;
   width: 100vw;
-  height: 100vw;
+  min-height: 100vw;
   }
 
 
