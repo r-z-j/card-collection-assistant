@@ -185,6 +185,7 @@ select {
 
 .back-to-search {
   margin-left: 5px;
+  text-decoration: none;
 }
 
 </style>
