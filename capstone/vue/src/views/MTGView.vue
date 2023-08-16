@@ -44,8 +44,8 @@
   <style scoped>
   .multiple{
   padding: 50px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
   flex-grow: 1;

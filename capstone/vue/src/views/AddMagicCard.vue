@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <CardForm :game-type="1" />
-  </div>
+  <main>
+    <div>
+      <CardForm :game-type="1" />
+    </div>
+  </main>
 </template>
 
 <script>
@@ -14,3 +16,13 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+main {
+  background-image: url('../img/MTG-background-image.png');
+  background-size:cover;
+  background-attachment: fixed;
+  width: 100vw;
+  height: 100vh;
+  }
+</style>

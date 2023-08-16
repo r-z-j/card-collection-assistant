@@ -21,7 +21,7 @@ main {
   background-image: url('../img/MTG-background-image.png');
   background-size:cover;
   background-attachment: fixed;
-  height: 100%;
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
   }
 </style>
