@@ -79,6 +79,7 @@ public class CollectionController {
 
     };
 
+    @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/{collectionId}/add-card", method = RequestMethod.POST)
     public CollectionDto addCard(@PathVariable int collectionId, @Valid @RequestBody CardDto card) {
@@ -96,6 +97,7 @@ public class CollectionController {
         return updatedCollection;
     }
 
+    @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/{collectionId}/card/{cardId}", method = RequestMethod.DELETE)
     public CollectionDto removeCard(@PathVariable int collectionId, @PathVariable int cardId) {
