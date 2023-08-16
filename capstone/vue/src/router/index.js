@@ -8,9 +8,8 @@ import store from '../store/index'
 import MTGView from '../views/MTGView.vue'
 import PokemonTCGView from '../views/PokemonTCGView.vue'
 import MTGSearchView from '../views/MTGSearchView.vue'
-import PokemonSearch from '../views/PokemonSearch.vue'
+import PokemonTest from '../views/PokemonTest.vue'
 import MyCollections from '../views/MyCollections.vue'
-import CreateCollection from '../views/CreateCollection.vue'
 import AddMagicCard from '../views/AddMagicCard.vue'
 import AddPokeCard from '../views/AddPokeCard.vue'
 import ViewMTGCollectionView from '../views/ViewMTGCollectionView.vue'
@@ -104,14 +103,6 @@ const router = new Router({
       }
     },
     {
-      path: "/create-collection",
-      name: "create-collection",
-      component: CreateCollection,
-      meta: {
-        requiresAuth: false
-      }
-    },
-    {
       path: "/mtg-search",
       name: "mtg-search-view",
       component: MTGSearchView,
@@ -122,7 +113,7 @@ const router = new Router({
     {
       path: "/pokemon-search",
       name: "pokemon-search",
-      component: PokemonSearch,
+      component: PokemonTest,
       meta: {
         requiresAuth: false
       }

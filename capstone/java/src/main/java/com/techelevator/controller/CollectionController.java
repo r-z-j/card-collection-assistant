@@ -16,6 +16,7 @@ import java.security.Principal;
 import java.util.List;
 
 @CrossOrigin
+@PreAuthorize("isAuthenticated()")
 @RestController
 @RequestMapping("/collection")
 public class CollectionController {
@@ -60,7 +61,6 @@ public class CollectionController {
         }
     }
 
-    @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/{collectionId}", method = RequestMethod.DELETE)
     public void deleteCollection(@PathVariable int collectionId, Principal principal){
@@ -109,7 +109,6 @@ public class CollectionController {
         return updatedCollection;
     }
 
-    @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/create", method = RequestMethod.POST)
     public CollectionDto createCollection(@Valid @RequestBody CollectionDto collection, Principal principal) {
@@ -127,7 +126,6 @@ public class CollectionController {
         return newCollectionDto;
     }
 
-    @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/mine", method = RequestMethod.GET)
     public List<CollectionDto> getMyCollections(Principal principal){
@@ -155,7 +153,6 @@ public class CollectionController {
         return apiCardCollection;
     };
 
-    @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/favorite", method = RequestMethod.GET)
     public List<CollectionDto> getFavoriteCollections(Principal principal){
@@ -170,7 +167,6 @@ public class CollectionController {
         return favCollections;
     };
 
-    @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/favorite/{collectionId}", method = RequestMethod.POST)
     public void addCollectionToFavorite(@PathVariable int collectionId, Principal principal) {
@@ -182,7 +178,6 @@ public class CollectionController {
         }
     }
 
-    @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/favorite/{collectionId}", method = RequestMethod.DELETE)
     public void removeCollectionFromFavorite(@PathVariable int collectionId, Principal principal) {

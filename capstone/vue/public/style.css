@@ -32,10 +32,10 @@ img {
   width: 95.25mm;
   height: 133.35mm;
   padding: 5px;
-  background-color: rgba(136, 100, 237, 0.65);
+  background-color: cornflowerblue;
   filter: drop-shadow(30px 10px 4px rgba(46, 46, 46, 0.7));
   border-radius: 10px;
-  border: solid #0e2431a2 10px;
+  border: solid #0E2431 10px;
   transform-style: preserve-3d;
   transform-origin: center right;
   transition: transform 1s;
@@ -68,8 +68,4 @@ img {
   75% {
     transform: translateX(-10px);
   }
-}
-
-a{
-  text-decoration: none;
 }
