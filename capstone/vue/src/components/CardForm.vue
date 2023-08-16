@@ -26,7 +26,7 @@
       </div>
       <div class="field">
         <label for="collection">Collection</label>
-        <select name="pets" id="pet-select" v-model="cardToSave.collectionId">
+        <select name="collection" id="collection" v-model="cardToSave.collectionId">
           <option
             v-for="collection in filteredCollections"
             :value="collection.collectionId"
