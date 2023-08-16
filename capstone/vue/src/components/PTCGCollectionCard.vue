@@ -1,4 +1,3 @@
-
 <template>
   <div class="card-list" v-if="isLoaded">
     <div
@@ -10,18 +9,25 @@
         <img :src="getImage(card.cardId)" alt="Card Image" />
       </div>
     </div>
+     <router-link v-bind:to="{ name: 'pokemon-search' }" class="back-to-search">
+      <AddCardCard></AddCardCard>
+    </router-link>
   </div>
     <div class="pokeball" v-else>
       <img src="../img/pokeball.gif" alt="">
     </div>
+    
 </template>
   
 <script>
 import collectionApiService from "../services/CollectionApiService";
 import pokeService from "../services/PokemonService.js";
+import AddCardCard from "../components/AddCardCard.vue"
 
 export default {
   name: "poke-card",
+  props: ["pokeCardName"],
+  components: {AddCardCard},
 
   data() {
     return {
