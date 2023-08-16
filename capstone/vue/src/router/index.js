@@ -13,6 +13,7 @@ import MyCollections from '../views/MyCollections.vue'
 import AddMagicCard from '../views/AddMagicCard.vue'
 import AddPokeCard from '../views/AddPokeCard.vue'
 import ViewMTGCollectionView from '../views/ViewMTGCollectionView.vue'
+import ViewPTCGCollectionView from '../views/ViewPTCGCollectionView.vue'
 import AllCollections from '../views/AllCollections.vue'
 import CreateCollection from '../views/CreateCollection.vue'
 
@@ -123,6 +124,14 @@ const router = new Router({
       path: "/pokemon-search",
       name: "pokemon-search",
       component: PokemonTest,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/ptcg-collection_:id",
+      name: "ptcg-collection-cards",
+      component: ViewPTCGCollectionView,
       meta: {
         requiresAuth: false
       }
