@@ -32,16 +32,19 @@
         </div>
       </div>
     </div>
+    <AddCardCard></AddCardCard>
   </div>
 </template>
   
 <script>
 import collectionApiService from "../services/CollectionApiService";
 import scryfallService from "../services/ScryfallService";
+import AddCardCard from '../components/AddCardCard.vue';
 
 export default {
   name: "magic-card",
   props: ["magicCardName"],
+  components: {AddCardCard},
 
   data() {
     return {

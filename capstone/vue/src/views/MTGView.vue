@@ -2,19 +2,19 @@
 <main>
   <div class="multiple">
     <div class="card-format">
-    <router-link v-bind:to="{ name: 'mtg-search-view' }">  
+    <router-link class="router-link" v-bind:to="{ name: 'mtg-search-view' }">  
     <Card name="Search Cards" :picture='searchImage' description="Search for cards to add to a collection"></Card>
     </router-link>
     </div>
     <div class="card-format">
-    <router-link v-bind:to="{ name: 'collections'}">
+    <router-link class="router-link" v-bind:to="{ name: 'collections'}">
     <Card name="My Collections" :picture='myCollectionImage' description="View all of your trading card collections"></Card>
     </router-link>
     </div>
     <div class="card-format">
     <Card name="Favorited Collections" :picture='favCollectionsImage' description="View all of your favorited trading card collections"></Card>
     </div>
-    <router-link v-bind:to="{ name: 'all-collections' }"> 
+    <router-link class="router-link" v-bind:to="{ name: 'all-collections' }"> 
     <div class="card-format">
     <Card name="All Collections" :picture='allCollectionsImage' description="Browse all collections"></Card>
     </div>
@@ -52,7 +52,6 @@
   text-decoration: none;
   width: 100vw;
   height: 100vw;
-  
   }
 
 
@@ -60,6 +59,10 @@
   background-image: url('../img/MTG-background-image.png');
   background-size:cover;
   background-attachment: fixed;
+  }
+
+  .router-link{
+    text-decoration: none;
   }
   
   </style>
