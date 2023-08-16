@@ -1,5 +1,5 @@
 <template>
-  <div class="FavoritedCollection">
+  <div class="favorited-collection">
     <link
       rel="stylesheet"
       href="http://fonts.googleapis.com/css2?family=Simonetta&display=swap"
@@ -24,7 +24,6 @@
               <img src="../img/magicCardBack.png" />
             </router-link>
           </div>
-           <button>Add to Favorites</button>
         </div>
        
       </div>
@@ -61,12 +60,6 @@ export default {
     getFavoritedCollections: async () => {
       return collectionService.getFavoriteCollections();
     },
-    getMagicCollections: async () => {
-      return collectionService.getMagicCollections();
-    },
-    getPokemonCollections: async () => {
-      return collectionService.getPokemonCollections();
-    },
   },
 };
 </script>
@@ -77,7 +70,7 @@ export default {
   color: seashell;
   justify-content: center;
 }
-.collections {
+.favorited-collection {
   display: block;
   align-content: center;
   flex-grow: 1;
@@ -101,7 +94,7 @@ section {
   flex-direction: row;
   justify-content: center;
 }
-.collection-container {
+.favorited-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -128,18 +121,4 @@ img {
   font-size: 75px;
 }
 
-button {
-  margin-top: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #3d1eafe5;
-  color: white;
-  border: 2px solid #260cbdd5;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-button:hover {
-  background-color: #98049d;
-}
 </style>

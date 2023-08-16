@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="home-card">
-      <router-link v-bind:to="{ name: 'mtg-view' }">
+      <router-link class="router-link" v-bind:to="{ name: 'mtg-view' }">
      <Card 
      name="Magic The Gathering"
      :picture= 'mtgimage'
@@ -9,7 +9,7 @@
      />
      </router-link>
   
-     <router-link v-bind:to="{ name: 'pokemon-tcg-view' }">
+     <router-link class="router-link" v-bind:to="{ name: 'pokemon-tcg-view' }">
      <Card 
      name="Pokemon TCG"
      :picture= 'karpImage'
@@ -65,7 +65,7 @@ main {
   height: 100vh;
 }
 
-router-link{
+.router-link{
   text-decoration: none;
 }
 </style>
