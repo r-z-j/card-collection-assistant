@@ -6,6 +6,7 @@
     />
     <center><h1 class="page-header">Collections</h1></center>
 
+
     <section>
       <div
         class="collection-container"
@@ -15,18 +16,34 @@
         <div class="tile-container">
           <div class="collection-title">{{ collection.collectionName }}</div>
           <div v-if="collection.gameTypeId === 2">
-            <router-link v-bind:to="{ name: 'ptcg-collection-cards', params: {id: collection.collectionId} }">
+            <router-link
+              v-bind:to="{
+                name: 'ptcg-collection-cards',
+                params: { id: collection.collectionId },
+              }"
+            >
               <img src="../img/pokemon-cardback.png" />
             </router-link>
           </div>
-          <div v-else-if="collection.gameTypeId === 1">
-            <router-link v-bind:to="{ name: 'mtg-collection-cards', params: { id: collection.collectionId } }">
+          <div v-if="collection.gameTypeId === 1">
+            <router-link
+              v-bind:to="{
+                name: 'mtg-collection-cards',
+                params: { id: collection.collectionId },
+              }"
+            >
               <img src="../img/magicCardBack.png" />
             </router-link>
           </div>
-           <button>Add to Favorites</button>
+          <button
+          v-if="!favorited.filter(e => e.collectionId === collection.collectionId).length > 0"
+          @click="addToFavorites(collection.collectionId)"
+          >Add to Favorites</button>
+          <button
+          v-else
+          @click="removeFromFavorites(collection.collectionId)"
+          >Remove from Favorites</button>
         </div>
-       
       </div>
     </section>
   </div>
@@ -39,15 +56,20 @@ export default {
   name: "collections",
   data() {
     return {
-      collections: null,
-      favorited: null,
+      collections: [],
+      favorited: [],
     };
   },
 
   async created() {
-    const res = await this.getCollections();
-    this.collections = res;
- 
+    try {
+      const favs = await this.getFavoritedCollections();
+      this.favorited = favs;
+      const res = await this.getCollections();
+      this.collections = res; 
+    } catch (e) {
+      console.log(e);
+    }
   },
 
   methods: {
@@ -55,17 +77,20 @@ export default {
       const magicRes = await collectionService.getMagicCollections();
       const pokeRes = await collectionService.getPokemonCollections();
       const res = [...magicRes.data, ...pokeRes.data];
-      console.log(res);
       return res;
     },
     getFavoritedCollections: async () => {
-      return collectionService.getFavoriteCollections();
+      const favRes = await collectionService.getFavoriteCollections();
+      return favRes.data;
     },
-    getMagicCollections: async () => {
-      return collectionService.getMagicCollections();
+
+    async addToFavorites(id) {
+      await collectionService.addCollectionToFavorites(id);
+      this.$router.go();
     },
-    getPokemonCollections: async () => {
-      return collectionService.getPokemonCollections();
+    async removeFromFavorites(id) {
+      await collectionService.removeCollectionToFavorites(id);
+      this.$router.go();
     },
   },
 };
@@ -107,7 +132,6 @@ section {
   flex-wrap: wrap;
   justify-content: center;
   padding: 15px;
-  
 }
 
 img {
@@ -117,7 +141,6 @@ img {
   border-radius: 15px;
   min-width: 270px;
   height: 378px;
-  
 }
 
 .page-header {

@@ -9,7 +9,7 @@
     <section>
       <div
         class="favorited-container"
-        v-for="collection in collections"
+        v-for="collection in favorited"
         v-bind:key="collection.collectionId"
       >
         <div class="tile-container">
@@ -38,25 +38,18 @@ export default {
   name: "favorited",
   data() {
     return {
-      collections: null,
       favorited: null,
     };
   },
 
   async created() {
-    const res = await this.getCollections();
-    this.collections = res;
+    const res = await this.getFavoritedCollections();
+    this.favorited = res.data;
+    console.log(res.data)
  
   },
 
   methods: {
-    getCollections: async () => {
-      const magicRes = await collectionService.getMagicCollections();
-      const pokeRes = await collectionService.getPokemonCollections();
-      const res = [...magicRes.data, ...pokeRes.data];
-      console.log(res);
-      return res;
-    },
     getFavoritedCollections: async () => {
       return collectionService.getFavoriteCollections();
     },
