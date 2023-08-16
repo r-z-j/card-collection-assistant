@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 main {
   background-image: url('../img/MTG-background-image.png');
   background-size:cover;
