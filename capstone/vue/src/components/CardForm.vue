@@ -39,7 +39,7 @@
       <div class="actions">
         <button
           type="submit"
-          v-on:click="submitCard(cardToSave, selectedCard.id)"
+          v-on:click="submitCard(cardToSave, $route.params.id)"
           class="btn btn-primary transparent-button"
         >
           Add Card
@@ -56,7 +56,10 @@ import pokemonService from '../services/PokemonService';
 export default {
   name: 'CardForm',
   props: {
-      gameType: Number,
+      gameType: {
+          type: Number,
+          required: true
+      }
   },
   data() {
     return {
@@ -76,7 +79,6 @@ export default {
 
   computed: {
     filteredCollections() {
-    
       return this.collections.filter(
         (collection) => collection.gameTypeId === this.gameType
       );
