@@ -1,21 +1,24 @@
 
 <template>
-  <div class="card-list">
+  <div class="card-list" v-if="isLoaded">
     <div
-      v-for="card in currentCollection"
+      v-for="card in cardListResponse"
       :key="card.id"
       class="poke-card"
-    >
+    > 
       <div class="card-image">
-        <img :src="card.imageUri" alt="Card Image" />
+        <img :src="getImage(card.cardId)" alt="Card Image" />
       </div>
     </div>
   </div>
+    <div class="pokeball" v-else>
+      <img src="../img/pokeball.gif" alt="">
+    </div>
 </template>
   
 <script>
 import collectionApiService from "../services/CollectionApiService";
-// import pokeService from "../services/PokemonService.js";
+import pokeService from "../services/PokemonService.js";
 
 export default {
   name: "poke-card",
@@ -23,15 +26,14 @@ export default {
   data() {
     return {
       cardListResponse: [],
-      currentCollection: [],
+      imageUris: new Map(),
       collectionID: this.$route.params.id,
+      isLoaded: false,
     };
   },
 
   created() {
-    this.getCollectionFromID().then(() => {
-      this.getCardsFromCollection();
-    });
+    this.getCollectionFromID(); 
   },
 
   methods: {
@@ -41,23 +43,20 @@ export default {
           this.collectionID.toString()
         );
         this.cardListResponse = response.data.cardList;
+        for(const card of this.cardListResponse) {
+          const res = await pokeService.getSingleCardById(card.cardApiId);
+          this.imageUris.set(card.cardId, res.data.data.images.large);
+        }
+        console.log(this.imageUris)
+        this.isLoaded = true;
       } catch (error) {
         console.error("Error fetching collection:", error);
       }
     },
-
-    async getCardsFromCollection() {
-      try {
-          console.log(this.cardListResponse);
-      } catch (error) {
-        console.error("Error fetching cards:", error);
-      }
-    },
-  },
-  computed: {
-    magicCards() {
-      return this.$store.state.magicCards;
-    },
+    getImage(id) {
+      console.log(this.imageUris.get(id));
+      return this.imageUris.get(id);
+    }
   },
 };
 </script>
@@ -128,22 +127,17 @@ export default {
   transition: opacity 0.3s ease;
 }
 
-.card-face.back-face {
-  transform: rotateY(180deg);
-}
 
-.magic-card.flipped .flip-button {
-  transform: rotateY(180deg);
-}
-
-.magic-card.flipped .card-image-content {
-  transform: rotateY(180deg);
-}
-
-img {
+.card-image {
   width: 270px;
   height: 378px;
   border-radius: 12px;
+}
+
+.pokeball {
+  position: absolute;
+  top: 70vh;
+  right: 10vw;
 }
 
 button {
