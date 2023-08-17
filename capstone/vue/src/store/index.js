@@ -135,9 +135,17 @@ export default new Vuex.Store({
           typeLine: cardData.type_line,
           isDualSided: cardData.layout === "transform" || cardData.layout === "modal_dfc",
         };
-        
-        if (cardData.toughness && cardData.power){
+
+        if (cardData.toughness && cardData.power) {
           card = {
+            id: cardData.id,
+            name: cardData.name,
+            oracleText: cardData.oracle_text,
+            setName: cardData.set_name,
+            isFlipped: false,
+            manaCost: cardData.mana_cost,
+            typeLine: cardData.type_line,
+            isDualSided: cardData.layout === "transform" || cardData.layout === "modal_dfc",
             power: cardData.power,
             toughness: cardData.toughness,
           }
