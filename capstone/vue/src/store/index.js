@@ -135,27 +135,19 @@ export default new Vuex.Store({
           typeLine: cardData.type_line,
           isDualSided: cardData.layout === "transform" || cardData.layout === "modal_dfc",
         };
-
-        if (cardData.toughness && cardData.power) {
-          card = {
-            id: cardData.id,
-            name: cardData.name,
-            oracleText: cardData.oracle_text,
-            setName: cardData.set_name,
-            isFlipped: false,
-            manaCost: cardData.mana_cost,
-            typeLine: cardData.type_line,
-            isDualSided: cardData.layout === "transform" || cardData.layout === "modal_dfc",
-            power: cardData.power,
-            toughness: cardData.toughness,
+        
+        if (cardData.toughness && cardData.power){
+          card.power = cardData.power,
+          card.toughness = cardData.toughness
           }
-        }
+        
         // Check if the card has multiple faces
         if (cardData.card_faces && cardData.card_faces.length > 1 && cardData.card_faces[0].image_uris) {
           card.frontFace = {
             name: cardData.card_faces[0].name,
             oracleText: cardData.card_faces[0].oracle_text,
             imageUri: cardData.card_faces[0].image_uris.normal,
+            manaCost: cardData.card_faces[0].mana_cost,
           };
           card.backFace = {
             name: cardData.card_faces[1].name,
