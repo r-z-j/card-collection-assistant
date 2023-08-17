@@ -95,6 +95,7 @@ input {
   width: 250px;
   transition: border-color 0.3s ease;
 }
+
 input:focus {
   outline: none;
   border-color: #270cbd;
