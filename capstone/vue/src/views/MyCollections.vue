@@ -40,7 +40,9 @@
               <img src="../img/magicCardBack.png" />
             </router-link>
           </div>
+          
         </div>
+        <center><button class="delete-button">Delete Collection</button></center>
       </div>
     </section>
   </div>
@@ -135,6 +137,7 @@ img {
 }
 
 button {
+ 
   padding: 10px 20px;
   font-size: 16px;
   background-color: #3d1eafe5;
@@ -147,5 +150,9 @@ button {
 }
 button:hover {
   background-color: #98049d;
+}
+
+.delete-button{
+  margin-top: 10px;
 }
 </style>
