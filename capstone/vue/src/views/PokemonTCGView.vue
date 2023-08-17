@@ -6,7 +6,7 @@
        </router-link>&nbsp;
       </div>
         <div>
-        <router-link class="router-link" v-bind:to="{ name: 'collections' }">
+        <router-link class="router-link" v-bind:to="{ name: 'collections' }" @click="$router.go()">
       <Card name="My Collections" :picture="pokemonUserCollecctionImage" description="View all of your trading card collections"></Card>
       </router-link>&nbsp;
       </div>
