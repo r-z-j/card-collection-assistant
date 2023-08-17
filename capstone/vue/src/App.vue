@@ -5,7 +5,7 @@
         <router-link v-bind:to="{ name: 'home' }">
           <div class="translucent-image">
             <img src="../src/img/Kings and Queens Trading.png" />
-            <div class="translucent-mask"></div>
+            <div class="translucent-mask-home"></div>
           </div> </router-link
         >&nbsp; &nbsp;
         <router-link v-bind:to="{ name: 'pokemon-tcg-view' }">
@@ -20,7 +20,7 @@
         <router-link v-bind:to="{ name: 'collections' }">
           <div class="translucent-image">
             <img src="../src/img/my collections.png" />
-            <div class="translucent-mask"></div>
+            <div class="translucent-mask-my-collections"></div>
           </div> </router-link
         >&nbsp; &nbsp;
       </div>
@@ -91,7 +91,7 @@ img {
   border-radius: 20px;
 }
 
-.translucent-mask {
+.translucent-mask-home{
   position: absolute;
   top: 0;
   left: 0;
@@ -101,6 +101,20 @@ img {
     ellipse at top left,
     transparent,
     rgba(59, 31, 92, 0.5),
+    transparent
+  );
+}
+
+.translucent-mask-my-collections{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at top left,
+    transparent,
+    rgba(124, 43, 124, 0.521),
     transparent
   );
 }
