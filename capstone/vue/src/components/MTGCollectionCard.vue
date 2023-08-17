@@ -1,8 +1,15 @@
 <template>
 <main>
-  <h1 class="collection-name">{{ collection.collectionName }}</h1>
+  <h1 class="collection-name">
+    <span class="background-span">{{ collection.collectionName }}</span>
+    </h1>
 
-  <div class="card-list">
+  <div v-if="isUpdating" class="loading-container">
+    <h1>Pulling your cards from another plane...</h1>
+      <img src="../img/loading-zndrsplt.gif" alt="Loading" />
+    </div>
+
+  <div class="card-list" v-else>
     <div
       v-for="card in currentCollection"
       :key="card.id"
@@ -68,7 +75,8 @@ export default {
       cardListResponse: [],
       currentCollection: [],
       collectionID: this.$route.params.id,
-      collection: {}
+      collection: {},
+      isUpdating: false,
     };
   },
 
@@ -96,12 +104,15 @@ export default {
 
     async getCollectionFromID() {
       try {
+        this.isUpdating = true;
         const response = await collectionApiService.getCollectionById(
           this.collectionID.toString()
         );
         this.cardListResponse = response.data.cardList;
       } catch (error) {
         console.error("Error fetching collection:", error);
+      } finally {
+        this.isUpdating = false;
       }
     },
 
@@ -114,6 +125,7 @@ export default {
 
     async getCardsFromCollection() {
       try {
+        this.isUpdating = true;
         for (const card of this.cardListResponse) {
           const response = await scryfallService.getSingleCardById(
             card.cardApiId
@@ -150,6 +162,8 @@ export default {
         }
       } catch (error) {
         console.error("Error fetching cards:", error);
+      } finally {
+        this.isUpdating = false;
       }
     },
 
@@ -182,6 +196,17 @@ export default {
 .collection-name {
   text-align: center;
   margin-top: 50px;
+  font-size: 28px;
+  color: rgb(40, 25, 107);
+  padding: 10px 0;
+  border-radius: 10px;
+}
+
+.background-span {
+  background-color: rgba(197, 134, 236, 0.65);
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 2px solid #3e049d;
 }
 
 .magic-card {
@@ -269,6 +294,22 @@ export default {
   top: 280px;
   right: -5px;
   z-index: 1;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 220px;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.loading-container img {
+  width: 600px;
+  height: auto;
+  border: solid 4px;
+  border-color: #360164;
 }
 
 img {
