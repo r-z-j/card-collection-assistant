@@ -3,7 +3,7 @@
   <div class="multiple">
     <div class="card-format">
     <router-link class="router-link" v-bind:to="{ name: 'mtg-search-view' }">  
-    <Card name="Search Cards" :picture='searchImage' description="Search for cards to add to a collection"></Card>
+    <Card name="Search Cards" :picture='searchImage' description="Browse all cards"></Card>
     </router-link>
     </div>
     <div class="card-format">
@@ -13,7 +13,7 @@
     </div>
     <div class="card-format">
     <router-link class="router-link" v-bind:to="{ name: 'favorited' }"> 
-    <Card name="Favorited Collections" :picture='favCollectionsImage' description="View all of your favorited trading card collections"></Card>
+    <Card name="Favorite Collections" :picture='favCollectionsImage' description="View all of your favorite trading card collections"></Card>
     </router-link>
     </div>
     <router-link class="router-link" v-bind:to="{ name: 'all-collections' }"> 
