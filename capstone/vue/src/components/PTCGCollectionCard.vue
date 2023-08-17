@@ -96,14 +96,12 @@ export default {
           const res = await pokeService.getSingleCardById(card.cardApiId);
           this.imageUris.set(card.cardId, res.data.data.images.large);
         }
-        console.log(this.imageUris);
         this.isLoaded = true;
       } catch (error) {
         console.error("Error fetching collection:", error);
       }
     },
     getImage(id) {
-      console.log(this.imageUris.get(id));
       return this.imageUris.get(id);
     },
     saveCollectionName() {
