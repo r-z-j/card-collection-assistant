@@ -13,7 +13,7 @@
     </div>
     <div class="card-format">
     <router-link class="router-link" v-bind:to="{ name: 'favorited' }"> 
-    <Card name="Favorited Collections" :picture='favCollectionsImage' description="View all of your favorited trading card collections"></Card>
+    <Card name="Favorite Collections" :picture='favCollectionsImage' description="View all of your favorited trading card collections"></Card>
     </router-link>
     </div>
     <router-link class="router-link" v-bind:to="{ name: 'all-collections' }"> 
