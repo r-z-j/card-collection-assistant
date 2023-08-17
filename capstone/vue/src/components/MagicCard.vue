@@ -11,21 +11,60 @@
           <img v-else :src="card.imageUri" alt="Card Image" />
         </div>
       </div>
+      
       <div class="card-details">
-        <h1>{{ card.name }} ({{ card.setName }})</h1>
-        <h3>{{ card.oracleText }}</h3>
+      <table>
+        <tr>
+          <th>Name</th>
+          <td>{{ card.name }}</td>
+        </tr>
+        <tr>
+          <th>Set Name</th>
+          <td>{{ card.setName }}</td>
+        </tr>
+        <tr>
+          <th>Cost</th>
+          <td>
+            {{ card.manaCost }}
+          </td>
+        </tr>
+        <tr>
+          <th>Type</th>
+          <td>
+            {{ card.typeLine }}
+          </td>
+        </tr>
+        <tr>
+          <th>Effect</th>
+          <td>{{ card.oracleText }}</td>
+        </tr>
+        <tr v-if="card.power">
+          <th>Power</th>
+          <td>
+            {{ card.power }}
+          </td>
+        </tr>
+
+        <tr>
+          <th></th>
+          <td>
+
         <div class="buttons">
        <button>
             <router-link  style="text-decoration: none; color: white" v-bind:to="{ name: 'add-magic', params: { id: card.id } }">
                 Add To Collections</router-link>
-          </button> </div>
+          </button> 
+      </div>
+        </td>
+        </tr>
+      </table>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import scryfallService from '../services/ScryfallService';
+import scryfallService from "../services/ScryfallService";
 
 export default {
   name: "magic-card",
@@ -35,7 +74,9 @@ export default {
   },
   methods: {
     async getMultipleCardsBySearch(searchQuery) {
-      const response = await scryfallService.getMultipleCardsBySearchName(searchQuery);
+      const response = await scryfallService.getMultipleCardsBySearchName(
+        searchQuery
+      );
       this.$store.commit("CLEAR_MAGIC_CARDS");
       this.$store.commit("SET_MAGIC_CARDS_SEARCH", response.data);
     },
@@ -68,7 +109,6 @@ export default {
   width: 50vw;
   text-align: center;
   background-color: rgb(197, 134, 236, 0.65);
-  
 }
 
 .flip-button {
@@ -162,4 +202,20 @@ button {
 button:hover {
   background-color: #3e049d;
 }
+
+table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid black;
+    }
+
+   
+ tr:not(:first-child) {
+      margin-top: 10px;
+    }
 </style>

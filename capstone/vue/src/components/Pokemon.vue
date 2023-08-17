@@ -66,25 +66,6 @@
 
         </tr>
       </table>
-
-      
-        <!-- <h3>{{ card.name }}</h3>
-        <h3>{{ card.hp }}</h3>
-
-        <div v-for="type in card.types" v-bind:key="type.name">
-          <p>{{ type }}</p>
-        </div>
-
-        <div v-for="attack in card.attacks" v-bind:key="attack.name">
-          <p>{{ attack.name }}</p>
-          <p>{{ attack.damage }}</p>
-          <p>{{ attack.text }}</p>
-        </div>
-
-        <div v-for="weakness in card.weaknesses[0]" v-bind:key="weakness.type">
-          <p>{{ weakness }}</p>
-        </div> -->
-
       </div>
     </div>
   </div>
