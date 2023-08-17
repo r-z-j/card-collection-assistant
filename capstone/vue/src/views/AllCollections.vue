@@ -127,8 +127,6 @@ export default {
 
 <style scoped>
 
-.my-collection {
-}
 
 .collection-title {
   padding: 40px;
