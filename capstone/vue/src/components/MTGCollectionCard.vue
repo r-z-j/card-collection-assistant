@@ -10,6 +10,10 @@
       :class="{ flipped: card.isFlipped }"
     >
       <div class="card-image">
+        <button v-if="showDeleteButton()" class="delete-button">
+          <img
+          src="../img/trashicon.png" class="delete-icon"/>
+        </button>
         <div class="flip-button-container" @click="flipCard(card)">
           <img
             v-if="card.frontFace && card.backFace"
@@ -62,7 +66,7 @@ export default {
       cardListResponse: [],
       currentCollection: [],
       collectionID: this.$route.params.id,
-      collection: {},
+      collection: {}
     };
   },
 
@@ -74,6 +78,7 @@ export default {
   },
 
   methods: {
+
     async getCollectionFromID() {
       try {
         const response = await collectionApiService.getCollectionById(
@@ -136,7 +141,12 @@ export default {
     flipCard(card) {
       card.isFlipped = !card.isFlipped;
     },
+    showDeleteButton(){
+      return this.collection.authorId === this.$store.state.user.id
+    },
   },
+
+
   computed: {
     magicCards() {
       return this.$store.state.magicCards;
@@ -233,6 +243,19 @@ export default {
   text-decoration: none;
 }
 
+.delete-icon{
+  height: 33px;
+  width: 27px;
+  position: relative;
+}
+
+.delete-button{
+  position: absolute;
+  top: 280px;
+  right: -5px;
+  z-index: 1;
+}
+
 img {
   width: 270px;
   height: 378px;
@@ -240,7 +263,6 @@ img {
 }
 
 button {
-  padding: 10px 20px;
   font-size: 16px;
   background-color: #6200ff;
   color: white;
