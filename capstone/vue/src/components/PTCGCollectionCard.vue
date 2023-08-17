@@ -6,17 +6,18 @@
         <label for="title">Title</label>
         <input type="text" name="title" v-model="collectionName" />
       </div>
-      <button
-        type="submit"
-        v-on:click="saveCollectionName()"
-        class="btn btn-primary transparent-button"
-      >
-        Create Collection
-      </button>
     </form>
     <div class="card-list" v-if="isLoaded">
       <div v-for="card in cardListResponse" :key="card.id" class="poke-card">
         <div class="card-image">
+          <button 
+        @click="deleteCardById(card.cardApiId)"
+
+        v-if="showDeleteButton()" 
+        class="delete-button">
+          <img
+          src="../img/trashicon.png" class="delete-icon"/>
+        </button>
           <img :src="getImage(card.cardId)" alt="Card Image" />
         </div>
       </div>
@@ -63,6 +64,24 @@ export default {
   },
 
   methods: {
+
+    async deleteCardById(cardId) {
+      const confirmed = window.confirm("Are you sure you want to remove this card from this collection?");
+      
+      if (confirmed) {
+        try {
+          await collectionApiService.removeCardFromCollection(this.collectionID, cardId);
+          this.$router.go()
+        } catch (error) {
+          console.error("Error deleting card:", error);
+        }
+      }
+    },
+
+    showDeleteButton(){
+      return this.collection.authorId === this.$store.state.user.id
+    },
+
     async getCollectionFromID() {
       try {
         const response = await collectionApiService.getCollectionById(
@@ -178,8 +197,20 @@ export default {
   right: 10vw;
 }
 
+.delete-icon{
+  height: 33px;
+  width: 27px;
+  position: relative;
+}
+
+.delete-button{
+  position: absolute;
+  top: 280px;
+  right: -5px;
+  z-index: 1;
+}
+
 button {
-  padding: 10px 20px;
   font-size: 16px;
   background-color: #6200ff;
   color: white;
@@ -191,5 +222,9 @@ button {
 
 button:hover {
   background-color: #3e049d;
+}
+
+a{
+  text-decoration: none;
 }
 </style>
