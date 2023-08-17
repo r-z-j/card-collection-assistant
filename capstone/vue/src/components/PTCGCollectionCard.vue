@@ -27,7 +27,7 @@
         <AddCardCard></AddCardCard>
       </router-link>
       <div @click="isUpdating = !isUpdating">
-        <UpdateCollectionCard></UpdateCollectionCard>
+        
       </div>
     </div>
     <div class="pokeball" v-else>
@@ -40,12 +40,11 @@
 import collectionApiService from "../services/CollectionApiService";
 import pokeService from "../services/PokemonService.js";
 import AddCardCard from "../components/AddCardCard.vue";
-import UpdateCollectionCard from "./UpdateCollectionCard.vue";
 
 export default {
   name: "poke-card",
   props: ["pokeCardName"],
-  components: { AddCardCard, UpdateCollectionCard },
+  components: { AddCardCard, },
 
   data() {
     return {
