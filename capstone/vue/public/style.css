@@ -52,7 +52,7 @@ img {
 }
 
 .shake {
-  animation: shake 0.5s ease-in-out;
+  animation: shake 1s ease-in-out;
 }
 
 @keyframes shake {
@@ -68,8 +68,7 @@ img {
   75% {
     transform: translateX(-10px);
   }
-
  a{
    text-decoration: none;
  }
-}
+ }

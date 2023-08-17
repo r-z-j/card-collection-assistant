@@ -80,8 +80,12 @@ export default {
       return res;
     },
     getFavoritedCollections: async () => {
-      const favRes = await collectionService.getFavoriteCollections();
-      return favRes.data;
+      try {
+        const favRes = await collectionService.getFavoriteCollections();
+        return favRes.data;
+      } catch (e) {
+        console.log("here")
+      }
     },
 
     async addToFavorites(id) {
