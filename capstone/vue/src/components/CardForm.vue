@@ -2,19 +2,19 @@
     <form v-on:submit.prevent class="transparent-form">
       <div class="field">
         <label for="title">Title</label>
-        <input type="text" name="title" v-model="cardToSave.cardName" />
+        <input type="text" name="title" v-model="cardToSave.cardName" required />
       </div>
       <div class="field">
         <label for="quantity">Quantity</label>
-        <input type="number" name="quantity" v-model="cardToSave.quantity" />
+        <input type="number" name="quantity" v-model="cardToSave.quantity" required />
       </div>
       <div class="field">
         <label for="price">Price</label>
-        <input type="number" name="price" v-model="cardToSave.userPrice" />
+        <input type="number" name="price" v-model="cardToSave.userPrice" required />
       </div>
       <div class="field">
         <label for="condition">Condition</label>
-        <select name="condition" v-model="cardToSave.conditionId">
+        <select name="condition" v-model="cardToSave.conditionId" required>
           <option value="1">Mint</option>
           <option value="2">Near Mint</option>
           <option value="3">Excellent</option>
@@ -26,7 +26,7 @@
       </div>
       <div class="field">
         <label for="collection">Collection</label>
-        <select name="collection" id="collection" v-model="cardToSave.collectionId">
+        <select name="collection" id="collection" v-model="cardToSave.collectionId" required>
           <option
             v-for="collection in filteredCollections"
             :value="collection.collectionId"
@@ -40,7 +40,7 @@
         <button
           type="submit"
           v-on:click="submitCard(cardToSave, $route.params.id)"
-          class="btn btn-primary transparent-button">
+          class="btn btn-primary transparent-button" :disabled="isDisabled">
           Add Card
         </button>
         <router-link to="/mtg-search" class="btn btn-secondary transparent-button back-to-search">
@@ -75,6 +75,7 @@ export default {
         gameTypeId: this.gameType,
         conditionId: 0,
         collectionId: 0,
+        isDisabled: false,
       },
     };
   },
@@ -123,6 +124,14 @@ export default {
         this.$router.push(`ptcg-collection_${card.collectionId}`)
       }
     },
+
+    isDisabled(){
+      if (this.cardToSave.cardName == '' ||  this.cardToSave.quantity !== '' || 
+        this.cardToSave.userPrice == '' || this.cardToSave.conditionId == '' ||
+        this.cardToSave.collectionId == ''){
+        this.isDisabled = true;
+      }
+    }
   },
 };
 </script>
