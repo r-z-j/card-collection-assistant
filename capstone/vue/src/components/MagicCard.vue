@@ -15,7 +15,6 @@
         <h1>{{ card.name }} ({{ card.setName }})</h1>
         <h3>{{ card.oracleText }}</h3>
         <div class="buttons">
-          <button>View Collections</button>
        <button>
             <router-link v-bind:to="{ name: 'add-magic', params: { id: card.id } }">
                 Add To Collections</router-link>
