@@ -3,19 +3,19 @@
 
   <form v-on:submit.prevent class="transparent-form">
     <div class="field">
-      <label for="title">Title</label>
-      <input type="text" name="title" v-model="collection.collectionName" />
+      <label for="title" >Title</label>
+      <input type="text" name="title" v-model="collection.collectionName" required />
     </div>
     <div class="field">
       <label for="gameType">Game</label>
-      <select name="gameType" v-model="collection.gameTypeId">
+      <select name="gameType" v-model="collection.gameTypeId" required>
         <option value="1">Magic</option>
         <option value="2">Pokemon</option>
       </select>
     </div>
     <div class="actions">
       <button type="submit" v-on:click="submitCollection(collection)"
-     class="btn btn-primary transparent-button" >
+     class="btn btn-primary transparent-button" :disabled="isDisabled">
         Create Collection
       </button>
     </div>
@@ -34,7 +34,9 @@ export default {
         collectionName: "",
         gameTypeId: 0,
         authorId: this.$store.state.user.id,
+        isDisabled: false,
       },
+      
     };
   },
 
@@ -44,6 +46,12 @@ export default {
         this.$router.push("/collections");
     },
   },
+
+  isDisabled(){
+      if (this.collection.collectionName == '' ||  this.collection.gameTypeId == ''){
+        this.isDisabled = true;
+      }
+    },
 };
 </script>
 <style scoped>
