@@ -100,7 +100,7 @@ public class CollectionController {
     @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/{collectionId}/card/{cardId}", method = RequestMethod.DELETE)
-    public CollectionDto removeCard(@PathVariable int collectionId, @PathVariable int cardId) {
+    public CollectionDto removeCard(@PathVariable int collectionId, @PathVariable String cardId) {
         CollectionDto updatedCollection = null;
         try {
             cardDao.removeCard(cardId);

@@ -9,5 +9,5 @@ public interface CardDao {
     CardDto updateCard(int cardId, CardDto card);
     List<CardDto> getAllCards();
     int addCard(CardDto card);
-    void removeCard(int cardId);
+    void removeCard(String cardId);
 }
