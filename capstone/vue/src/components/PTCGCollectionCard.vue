@@ -1,37 +1,51 @@
 <template>
-  <div class="card-list" v-if="isLoaded">
-    <div
-      v-for="card in cardListResponse"
-      :key="card.id"
-      class="poke-card"
-    > 
-      <div class="card-image">
-        <img :src="getImage(card.cardId)" alt="Card Image" />
+  <main>
+    <h1 v-if="!isUpdating" class="collection-name">{{ collectionName }}</h1>
+    <form v-else v-on:submit.prevent class="transparent-form">
+      <div class="field">
+        <label for="title">Title</label>
+        <input type="text" name="title" v-model="collectionName" />
+      </div>
+      <button
+        type="submit"
+        v-on:click="saveCollectionName()"
+        class="btn btn-primary transparent-button"
+      >
+        Create Collection
+      </button>
+    </form>
+    <div class="card-list" v-if="isLoaded">
+      <div v-for="card in cardListResponse" :key="card.id" class="poke-card">
+        <div class="card-image">
+          <img :src="getImage(card.cardId)" alt="Card Image" />
+        </div>
+      </div>
+      <router-link
+        v-bind:to="{ name: 'pokemon-search' }"
+        class="back-to-search"
+      >
+        <AddCardCard></AddCardCard>
+      </router-link>
+      <div @click="isUpdating = !isUpdating">
+        <UpdateCollectionCard></UpdateCollectionCard>
       </div>
     </div>
-     <router-link v-bind:to="{ name: 'pokemon-search' }" class="back-to-search">
-      <AddCardCard></AddCardCard>
-    </router-link>
-      <router-link v-bind:to="{ name: 'UpdateCollection' }" class="back-to-search">
-      <UpdateCollectionCard></UpdateCollectionCard>
-      </router-link>
-  </div>
     <div class="pokeball" v-else>
-      <img src="../img/pokeball.gif" alt="">
+      <img src="../img/pokeball.gif" alt="" />
     </div>
-    
+  </main>
 </template>
   
 <script>
 import collectionApiService from "../services/CollectionApiService";
 import pokeService from "../services/PokemonService.js";
-import AddCardCard from "../components/AddCardCard.vue"
-import UpdateCollectionCard from './UpdateCollectionCard.vue';
+import AddCardCard from "../components/AddCardCard.vue";
+import UpdateCollectionCard from "./UpdateCollectionCard.vue";
 
 export default {
   name: "poke-card",
   props: ["pokeCardName"],
-  components: {AddCardCard, UpdateCollectionCard},
+  components: { AddCardCard, UpdateCollectionCard },
 
   data() {
     return {
@@ -39,11 +53,14 @@ export default {
       imageUris: new Map(),
       collectionID: this.$route.params.id,
       isLoaded: false,
+      collection: {},
+      collectionName: "",
+      isUpdating: false,
     };
   },
 
   created() {
-    this.getCollectionFromID(); 
+    this.getCollectionFromID();
   },
 
   methods: {
@@ -53,11 +70,13 @@ export default {
           this.collectionID.toString()
         );
         this.cardListResponse = response.data.cardList;
-        for(const card of this.cardListResponse) {
+        this.collection = response.data;
+        this.collectionName = response.data.collectionName;
+        for (const card of this.cardListResponse) {
           const res = await pokeService.getSingleCardById(card.cardApiId);
           this.imageUris.set(card.cardId, res.data.data.images.large);
         }
-        console.log(this.imageUris)
+        console.log(this.imageUris);
         this.isLoaded = true;
       } catch (error) {
         console.error("Error fetching collection:", error);
@@ -66,6 +85,12 @@ export default {
     getImage(id) {
       console.log(this.imageUris.get(id));
       return this.imageUris.get(id);
+    },
+    saveCollectionName() {
+      // set collection name
+      this.collection.collectionName = this.collectionName;
+      collectionApiService.
+      this.isUpdating = false;
     }
   },
 };
@@ -137,11 +162,15 @@ export default {
   transition: opacity 0.3s ease;
 }
 
-
 .card-image {
   width: 270px;
   height: 378px;
   border-radius: 12px;
+}
+
+.collection-name {
+  text-align: center;
+  margin-top: 50px;
 }
 
 .pokeball {

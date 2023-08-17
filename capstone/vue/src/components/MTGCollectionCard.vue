@@ -1,4 +1,7 @@
 <template>
+<main>
+  <h1 class="collection-name">{{ collection.collectionName }}</h1>
+
   <div class="card-list">
     <div
       v-for="card in currentCollection"
@@ -35,8 +38,10 @@
     <router-link v-bind:to="{ name: 'mtg-search-view' }" class="back-to-search">
       <AddCardCard></AddCardCard>
     </router-link>
-    <UpdateCollectionCard></UpdateCollectionCard>
+    <UpdateCollectionCard >
+    </UpdateCollectionCard>
   </div>
+</main>
 </template>
   
 <script>
@@ -57,6 +62,7 @@ export default {
       cardListResponse: [],
       currentCollection: [],
       collectionID: this.$route.params.id,
+      collection: {},
     };
   },
 
@@ -64,6 +70,7 @@ export default {
     this.getCollectionFromID().then(() => {
       this.getCardsFromCollection();
     });
+    this.getCollection();
   },
 
   methods: {
@@ -76,6 +83,13 @@ export default {
       } catch (error) {
         console.error("Error fetching collection:", error);
       }
+    },
+
+    async getCollection() {
+        const response = await collectionApiService.getCollectionById(
+          this.collectionID.toString()
+        );
+        this.collection = response.data;
     },
 
     async getCardsFromCollection() {
@@ -139,6 +153,12 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
+.collection-name {
+  text-align: center;
+  margin-top: 50px;
+}
+
 .magic-card {
   position: relative;
   display: flex;

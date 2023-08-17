@@ -1,7 +1,6 @@
 <template>
   <main> 
     <MTGCollectionCard>
-    
     </MTGCollectionCard>
 
   </main>
