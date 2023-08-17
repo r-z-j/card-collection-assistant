@@ -1,6 +1,8 @@
 <template>
 <main>
-  <h1 class="collection-name">{{ collection.collectionName }}</h1>
+  <h1 class="collection-name">
+    <span class="background-span">{{ collection.collectionName }}</span>
+    </h1>
 
   <div class="card-list">
     <div
@@ -182,6 +184,17 @@ export default {
 .collection-name {
   text-align: center;
   margin-top: 50px;
+  font-size: 28px;
+  color: rgb(40, 25, 107); 
+  padding: 10px 0; 
+  border-radius: 10px; 
+}
+
+.background-span {
+  background-color: rgba(197, 134, 236, 0.65); 
+  padding: 10px 20px; 
+  border-radius: 10px;
+  border: 2px solid #3e049d;
 }
 
 .magic-card {
