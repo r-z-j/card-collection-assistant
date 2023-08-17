@@ -75,7 +75,6 @@ export default {
         gameTypeId: this.gameType,
         conditionId: 0,
         collectionId: 0,
-        isDisabled: false,
       },
     };
   },
@@ -84,6 +83,16 @@ export default {
     filteredCollections() {
       return this.collections.filter(
         (collection) => collection.gameTypeId === this.gameType
+      );
+    },
+    
+    isDisabled() {
+      return (
+        this.cardToSave.cardName === '' ||
+        this.cardToSave.quantity === '' ||
+        this.cardToSave.userPrice === '' ||
+        this.cardToSave.conditionId === 0 || 
+        this.cardToSave.collectionId === 0   
       );
     },
   },
@@ -124,14 +133,6 @@ export default {
         this.$router.push(`ptcg-collection_${card.collectionId}`)
       }
     },
-
-    isDisabled(){
-      if (this.cardToSave.cardName == '' ||  this.cardToSave.quantity !== '' || 
-        this.cardToSave.userPrice == '' || this.cardToSave.conditionId == '' ||
-        this.cardToSave.collectionId == ''){
-        this.isDisabled = true;
-      }
-    }
   },
 };
 </script>

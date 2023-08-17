@@ -34,10 +34,17 @@ export default {
         collectionName: "",
         gameTypeId: 0,
         authorId: this.$store.state.user.id,
-        isDisabled: false,
       },
-      
     };
+  },
+
+  computed: {
+    isDisabled() {
+      return (
+        this.collection.collectionName === "" ||
+        this.collection.gameTypeId === 0
+      );
+    },
   },
 
   methods: {
@@ -46,12 +53,6 @@ export default {
         this.$router.push("/collections");
     },
   },
-
-  isDisabled(){
-      if (this.collection.collectionName == '' ||  this.collection.gameTypeId == ''){
-        this.isDisabled = true;
-      }
-    },
 };
 </script>
 <style scoped>
