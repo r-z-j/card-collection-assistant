@@ -35,6 +35,8 @@
               <img src="../img/magicCardBack.png" />
             </router-link>
           </div>
+          <div v-if="$store.state.token.length > 0">
+
           <button
           v-if="!favorited.filter(e => e.collectionId === collection.collectionId).length > 0"
           @click="addToFavorites(collection.collectionId)"
@@ -43,6 +45,8 @@
           v-else
           @click="removeFromFavorites(collection.collectionId)"
           >Remove from Favorites</button>
+
+          </div>
         </div>
       </div>
     </section>
@@ -74,10 +78,14 @@ export default {
 
   methods: {
     getCollections: async () => {
+      try {
       const magicRes = await collectionService.getMagicCollections();
       const pokeRes = await collectionService.getPokemonCollections();
       const res = [...magicRes.data, ...pokeRes.data];
       return res;
+      } catch (e) {
+        console.log(e)
+      }
     },
     getFavoritedCollections: async () => {
       try {
