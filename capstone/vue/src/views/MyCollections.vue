@@ -40,9 +40,8 @@
               <img src="../img/magicCardBack.png" />
             </router-link>
           </div>
-          
+          <center><button @click="deleteCollectionById(collection.collectionId)" class="delete-button">Delete Collection</button></center>
         </div>
-        <center><button class="delete-button">Delete Collection</button></center>
       </div>
     </section>
   </div>
@@ -76,6 +75,20 @@ export default {
   },
   
   methods: {
+
+    async deleteCollectionById(id) {
+      const confirmed = window.confirm("Are you sure you want to delete this collection?");
+      console.log(id)
+      if (confirmed) {
+        try {
+          await collectionService.deleteCollectionById(id.toString());
+          this.$router.go()
+        } catch (error) {
+          console.error("Error deleting card:", error);
+        }
+      }
+    },
+
     getCollections: async () => {
       return collectionService.getMyCollections();
     },

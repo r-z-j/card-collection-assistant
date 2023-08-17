@@ -87,6 +87,7 @@ export default {
       if (confirmed) {
         try {
           await collectionApiService.removeCardFromCollection(this.collectionID, cardId);
+          this.$router.go()
         } catch (error) {
           console.error("Error deleting card:", error);
         }
