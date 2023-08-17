@@ -10,7 +10,11 @@
       :class="{ flipped: card.isFlipped }"
     >
       <div class="card-image">
-        <button v-if="showDeleteButton()" class="delete-button">
+        <button 
+        @click="deleteCardById(card.id)"
+
+        v-if="showDeleteButton()" 
+        class="delete-button">
           <img
           src="../img/trashicon.png" class="delete-icon"/>
         </button>
@@ -76,6 +80,18 @@ export default {
   },
 
   methods: {
+
+    async deleteCardById(cardId) {
+      const confirmed = window.confirm("Are you sure you want to remove this card from this collection?");
+      
+      if (confirmed) {
+        try {
+          await collectionApiService.removeCardFromCollection(this.collectionID, cardId);
+        } catch (error) {
+          console.error("Error deleting card:", error);
+        }
+      }
+    },
 
     async getCollectionFromID() {
       try {

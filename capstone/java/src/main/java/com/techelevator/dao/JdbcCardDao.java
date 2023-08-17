@@ -107,8 +107,8 @@ public class JdbcCardDao implements CardDao{
     }
 
     @Override
-    public void removeCard(int cardId) {
-        String sql = "DELETE FROM card WHERE card_id = ?;";
+    public void removeCard(String cardId) {
+        String sql = "DELETE FROM card WHERE card_api_id = ?;";
         try {
             jdbcTemplate.update(sql, cardId);
         } catch (CannotGetJdbcConnectionException e) {
