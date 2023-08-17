@@ -65,7 +65,7 @@ export default {
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
-  width: 90vw;
+  width: 50vw;
   text-align: center;
   background-color: rgb(197, 134, 236, 0.65);
   
