@@ -23,6 +23,8 @@ export default new Vuex.Store({
     user: currentUser || {},
     collections: currentCollections || [],
 
+    needsReload: true,
+
     //Searches are stored here
     searchQuery: '',
 

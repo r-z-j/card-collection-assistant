@@ -1,15 +1,18 @@
 <template>
   <div class="collections">
-    <link rel="stylesheet"
-      href="http://fonts.googleapis.com/css2?family=Simonetta&display=swap"/>
-    <center><h1 class="page-header">My Collections</h1>
-    <router-link v-bind:to="{ name: 'create-collection' }"> 
-            <button>Create Collection</button>
-            </router-link>
+    <link
+      rel="stylesheet"
+      href="http://fonts.googleapis.com/css2?family=Simonetta&display=swap"
+    />
+    <center>
+      <h1 class="page-header">My Collections</h1>
+      <router-link v-bind:to="{ name: 'create-collection' }">
+        <button >Create Collection</button>
+      </router-link>
     </center>
+    
 
-
-    <section>
+    <section v-if="isLoaded">
       <div
         class="collection-container"
         v-for="collection in collections"
@@ -18,16 +21,25 @@
         <div class="tile-container">
           <div class="collection-title">{{ collection.collectionName }}</div>
           <div v-if="collection.gameTypeId === 2">
-            <router-link v-bind:to="{ name: 'ptcg-collection-cards', params: {id: collection.collectionId} }"> 
-            <img src="../img/pokemon-cardback.png" />
+            <router-link
+              v-bind:to="{
+                name: 'ptcg-collection-cards',
+                params: { id: collection.collectionId },
+              }"
+            >
+              <img src="../img/pokemon-cardback.png" />
             </router-link>
           </div>
           <div v-else-if="collection.gameTypeId === 1">
-            <router-link v-bind:to="{ name: 'mtg-collection-cards', params: { id: collection.collectionId } }"> 
-            <img src="../img/magicCardBack.png" />
+            <router-link
+              v-bind:to="{
+                name: 'mtg-collection-cards',
+                params: { id: collection.collectionId },
+              }"
+            >
+              <img src="../img/magicCardBack.png" />
             </router-link>
           </div>
-
         </div>
       </div>
     </section>
@@ -42,19 +54,33 @@ export default {
   data() {
     return {
       collections: null,
+      userId: this.$store.state.user.id
     };
   },
-
+ computed: {
+    isLoaded() {
+      if (this.collections){
+        return true
+      }
+      return false;
+    }
+  },
   async created() {
     const res = await this.getCollections();
     this.collections = res.data;
+    if (this.collections.length > 0  && this.collections[0].authorId != this.userId){
+      this.reloadPage();
+    }
   },
-
+  
   methods: {
     getCollections: async () => {
       return collectionService.getMyCollections();
     },
-  },
+    reloadPage() {
+        this.$router.go()
+      }
+    },
 };
 </script>
 
@@ -75,7 +101,7 @@ export default {
   min-height: 100vw;
 }
 
-.tile-container{
+.tile-container {
   justify-content: center;
   text-align: center;
   background-color: rgba(48, 48, 94, 0.678);
@@ -103,7 +129,7 @@ img {
 .page-header {
   padding: 50px;
   color: rgb(241, 239, 234);
-  font-family: 'Simonetta', cursive;
+  font-family: "Simonetta", cursive;
   font-style: bold;
   font-size: 75px;
 }
@@ -120,6 +146,6 @@ button {
   margin-bottom: 50px;
 }
 button:hover {
- background-color: #98049d;
+  background-color: #98049d;
 }
 </style>
