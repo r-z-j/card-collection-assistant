@@ -37,8 +37,8 @@ export default {
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  margin: 0 auto;
-  max-width: 75%;
+  margin: 15px auto;
+  max-width: 50vw
 }
 
 .search-bar input {

@@ -5,11 +5,70 @@
       v-bind:key="card.id"
       class="pokemon-card"
     >
-      <div class="card-image">
+<div class="card-image">
         <img :src="card.imageUri" alt="Card Image" />
       </div>
       <div class="card-details">
-        <h3>{{ card.name }}</h3>
+      <table>
+        <tr>
+          <th>Name</th>
+          <td>{{ card.name }}</td>
+        </tr>
+        <tr>
+          <th>HP</th>
+          <td>{{ card.hp }}</td>
+        </tr>
+        <tr>
+          <th>Type(s)</th>
+          <td>
+            <div v-for="type in card.types" v-bind:key="type.name">
+              <p>{{ type }}</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th>Attacks</th>
+          <td>
+            <div v-for="attack in card.attacks" v-bind:key="attack.name">
+              <p>Name: {{ attack.name }}</p>
+              <p>Damage: {{ attack.damage }}</p>
+              <p>Text: {{ attack.text }}</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th>Weaknesses</th>
+          <td>
+            <div
+              v-for="weakness in card.weaknesses[0]"
+              v-bind:key="weakness.type"
+            >
+              <p>{{ weakness }}</p>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <th></th>
+          <td>
+
+        <div class="buttons">
+          <button>
+            <router-link
+              style="text-decoration: none; color: white"
+              v-bind:to="{ name: 'add-poke', params: { id: card.id } }"
+            >
+              Add To Collections</router-link
+            >
+          </button>
+        </div>
+          </td>
+
+        </tr>
+      </table>
+
+      
+        <!-- <h3>{{ card.name }}</h3>
         <h3>{{ card.hp }}</h3>
 
         <div v-for="type in card.types" v-bind:key="type.name">
@@ -24,15 +83,8 @@
 
         <div v-for="weakness in card.weaknesses[0]" v-bind:key="weakness.type">
           <p>{{ weakness }}</p>
-        </div>
+        </div> -->
 
-        <div class="buttons">
-          
-          <button>
-            <router-link style="text-decoration: none; color: white;" v-bind:to="{ name: 'add-poke', params: { id: card.id } }">
-                Add To Collections</router-link>
-          </button>
-        </div>
       </div>
     </div>
   </div>
@@ -80,8 +132,6 @@ export default {
 </script>
   
 <style scoped>
-
-
 .pokemon-card {
   display: flex;
   flex-direction: row;
@@ -90,7 +140,7 @@ export default {
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
-  width: 90vw;
+  width: 50vw;
   text-align: center;
 }
 .card-image {
@@ -132,4 +182,19 @@ button {
 button:hover {
   background-color: #3e049d;
 }
+table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+   
+ tr:not(:first-child) {
+      margin-top: 10px;
+    }
 </style>
