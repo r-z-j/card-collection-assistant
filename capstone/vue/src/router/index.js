@@ -87,7 +87,7 @@ const router = new Router({
       name: "add-magic",
       component: AddMagicCard,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -95,7 +95,7 @@ const router = new Router({
       name: "add-poke",
       component: AddPokeCard,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -103,7 +103,7 @@ const router = new Router({
       name: "create-collection",
       component: CreateCollection,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -111,7 +111,7 @@ const router = new Router({
       name: "collections",
       component: MyCollections,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -161,7 +161,7 @@ const router = new Router({
       name: "favorited",
       component: FavoritedCollection,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -169,7 +169,7 @@ const router = new Router({
       name: "UpdateCollection",
       component: UpdateCollection,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     }
   ]
