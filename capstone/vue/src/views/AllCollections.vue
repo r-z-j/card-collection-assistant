@@ -13,8 +13,25 @@
         v-for="collection in collections"
         v-bind:key="collection.collectionId"
       >
-        <div class="tile-container">
-          <div class="collection-title">{{ collection.collectionName }}</div>
+        <div class="tile-container" >
+
+<div v-if="collection.authorId === $store.state.user.id">
+          <div class="collection-title my-collection"> 
+          <h3> {{ collection.collectionName }}
+            </h3> 
+          <p>mine</p>
+            </div>
+</div>
+<div v-else>
+
+          <div class="collection-title"> 
+           <h3>
+            {{ collection.collectionName }}
+             </h3> 
+             <br>
+
+            </div>
+</div>
           <div v-if="collection.gameTypeId === 2">
             <router-link
               v-bind:to="{
@@ -109,6 +126,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 .collection-title {
   padding: 40px;
   color: seashell;
