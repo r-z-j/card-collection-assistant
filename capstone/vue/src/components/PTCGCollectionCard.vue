@@ -12,6 +12,7 @@
     <div class="card-list" v-if="isLoaded">
       <div v-for="card in cardListResponse" :key="card.id" class="poke-card">
         <div class="card-image">
+
           <button 
         @click="deleteCardById(card.cardApiId)"
 
@@ -20,7 +21,16 @@
           <img
           src="../img/trashicon.png" class="delete-icon"/>
         </button>
-          <img :src="getImage(card.cardId)" alt="Card Image" />
+          <img :src="getImage(card.cardId)" alt="Card Image" class="card-pic"/>
+        <div class="hide"
+        :style="getPos"
+        >
+        
+        <p> Name: {{ card.cardName }} </p>
+        <p> Condition: {{ card.condition }} </p>
+        <p> ${{ card.userPrice }} </p>
+
+        </div>
         </div>
       </div>
       <router-link
@@ -58,11 +68,28 @@ export default {
       collection: {},
       collectionName: "",
       isUpdating: false,
+
+      mousePosX: 0,
+      mousePosY: 0,
     };
   },
 
+  computed: {
+    getPos() {
+      return "left:" + (Math.floor(Math.sqrt(this.mousePosX))) + "px;top:"+ (Math.floor(Math.sqrt(this.mousePosY))-100) +"px"
+    },
+  },
+
+
   created() {
     this.getCollectionFromID();
+  },
+
+  mounted() {
+    document.addEventListener("mousemove", (event) => {
+      this.mousePosX = event.clientX;
+      this.mousePosY = event.clientY;
+    });
   },
 
   methods: {
@@ -219,6 +246,26 @@ export default {
   top: 280px;
   right: -5px;
   z-index: 1;
+}
+
+.hide {
+  display: none;
+  width: 200px;
+  height: 90px;
+  border-radius: 20px;
+  border: solid;
+  background-color: rgb(40, 25, 107, .90);
+
+  position: absolute;
+  color: white;
+}
+
+.hide p {
+  padding: 5px;
+}
+
+.card-pic:hover + .hide {
+  display: block;
 }
 
 button {
