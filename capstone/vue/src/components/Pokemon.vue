@@ -29,7 +29,7 @@
         <div class="buttons">
           
           <button>
-            <router-link v-bind:to="{ name: 'add-poke', params: { id: card.id } }">
+            <router-link style="text-decoration: none; color: white;" v-bind:to="{ name: 'add-poke', params: { id: card.id } }">
                 Add To Collections</router-link>
           </button>
         </div>
@@ -79,7 +79,9 @@ export default {
 };
 </script>
   
-  <style scoped>
+<style scoped>
+
+
 .pokemon-card {
   display: flex;
   flex-direction: row;
@@ -116,6 +118,7 @@ img {
   justify-content: space-around;
   margin-top: auto;
 }
+
 button {
   padding: 10px 20px;
   font-size: 16px;

@@ -16,7 +16,7 @@
         <h3>{{ card.oracleText }}</h3>
         <div class="buttons">
        <button>
-            <router-link v-bind:to="{ name: 'add-magic', params: { id: card.id } }">
+            <router-link  style="text-decoration: none; color: white" v-bind:to="{ name: 'add-magic', params: { id: card.id } }">
                 Add To Collections</router-link>
           </button> </div>
       </div>
