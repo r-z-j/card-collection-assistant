@@ -138,7 +138,11 @@ img {
   height: 15px;
   width: 15px;
   position: relative;
+  opacity: 1;
+}
 
+.add-button:hover .add-icon {
+  opacity: 0; 
 }
 .add-button {
   position: absolute;
@@ -153,7 +157,28 @@ img {
   right: -5px;
   z-index: 1;
   padding: 10px 10px;
-  transition: background-color 0.3s ease;
+  overflow: hidden;
+  transition: background-color 0.3s ease, padding 0.3s ease;
+}
+
+.button-text {
+  color: white;
+  font-size: 14px;
+  position: absolute;
+  top: 50%;
+  left: 70%; 
+  transform: translateY(-50%) translateX(-100%); 
+  opacity: 0; 
+  transition: opacity 0.3s ease; 
+  white-space: nowrap; 
+}
+.add-button:hover {
+  background-color: #3e049d;
+  padding: 10px 75px;
+}
+
+.add-button:hover .button-text {
+  opacity: 1; 
 }
 
 button:hover {
