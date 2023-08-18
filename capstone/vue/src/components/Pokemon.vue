@@ -5,67 +5,56 @@
       v-bind:key="card.id"
       class="pokemon-card"
     >
-<div class="card-image">
-        <img :src="card.imageUri" alt="Card Image" />
+    <div class="card-image">
+
+      <router-link v-bind:to="{ name: 'add-poke', params: { id: card.id } }">
+        <button class="add-button">
+          <img src="../img/plus-symbol-button.png" class="add-icon" />
+        </button>
+      </router-link>
+      
+      <img :src="card.imageUri" alt="Card Image" />
       </div>
       <div class="card-details">
-      <table>
-        <tr>
-          <th>Name</th>
-          <td>{{ card.name }}</td>
-        </tr>
-        <tr>
-          <th>HP</th>
-          <td>{{ card.hp }}</td>
-        </tr>
-        <tr>
-          <th>Type(s)</th>
-          <td>
-            <div v-for="type in card.types" v-bind:key="type.name">
-              <p>{{ type }}</p>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <th>Attacks</th>
-          <td>
-            <div v-for="attack in card.attacks" v-bind:key="attack.name">
-              <p>Name: {{ attack.name }}</p>
-              <p>Damage: {{ attack.damage }}</p>
-              <p>Text: {{ attack.text }}</p>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <th>Weaknesses</th>
-          <td>
-            <div
-              v-for="weakness in card.weaknesses[0]"
-              v-bind:key="weakness.type"
-            >
-              <p>{{ weakness }}</p>
-            </div>
-          </td>
-        </tr>
-
-        <tr>
-          <th></th>
-          <td>
-
-        <div class="buttons">
-          <button>
-            <router-link
-              style="text-decoration: none; color: white"
-              v-bind:to="{ name: 'add-poke', params: { id: card.id } }"
-            >
-              Add To Collections</router-link
-            >
-          </button>
-        </div>
-          </td>
-
-        </tr>
-      </table>
+        <table>
+          <tr>
+            <th>Name</th>
+            <td>{{ card.name }}</td>
+          </tr>
+          <tr>
+            <th>HP</th>
+            <td>{{ card.hp }}</td>
+          </tr>
+          <tr>
+            <th>Type(s)</th>
+            <td>
+              <div v-for="type in card.types" v-bind:key="type.name">
+                <p>{{ type }}</p>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>Attacks</th>
+            <td>
+              <div v-for="attack in card.attacks" v-bind:key="attack.name">
+                <p>Name: {{ attack.name }}</p>
+                <p>Damage: {{ attack.damage }}</p>
+                <p>Text: {{ attack.text }}</p>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>Weaknesses</th>
+            <td>
+              <div
+                v-for="weakness in card.weaknesses[0]"
+                v-bind:key="weakness.type"
+              >
+                <p>{{ weakness }}</p>
+              </div>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>
@@ -114,6 +103,7 @@ export default {
   
 <style scoped>
 .pokemon-card {
+  position: relative;
   display: flex;
   flex-direction: row;
   border: 2px solid #52525a;
@@ -125,6 +115,7 @@ export default {
   text-align: center;
 }
 .card-image {
+  position: relative;
   min-width: 270px;
   max-width: 270px;
   min-height: 378px;
@@ -142,40 +133,44 @@ img {
   flex-direction: column;
   flex-grow: 1;
 }
+.add-icon {
+  height: 15px;
+  width: 15px;
+  position: relative;
 
-.buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin-top: auto;
 }
-
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #ff0015e0;
-  color: white;
-  border: 2px solid #0f0f0f;
-  border-radius: 5px;
+.add-button {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  background-color: #6200ff;
+  border: 2px solid #270cbd;
   cursor: pointer;
+  border-radius: 6px;
+  bottom: 40px;
+  right: -5px;
+  z-index: 1;
+  padding: 10px 10px;
   transition: background-color 0.3s ease;
 }
+
 button:hover {
   background-color: #3e049d;
 }
 table {
-      border-collapse: collapse;
-      width: 100%;
-    }
+  border-collapse: collapse;
+  width: 100%;
+}
 
-    th, td {
-      padding: 8px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
 
-   
- tr:not(:first-child) {
-      margin-top: 10px;
-    }
+tr:not(:first-child) {
+  margin-top: 10px;
+}
 </style>
