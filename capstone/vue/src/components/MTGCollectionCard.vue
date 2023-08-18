@@ -37,13 +37,13 @@
               v-if="card.isFlipped && card.backFace"
               :src="card.backFace.imageUri"
               alt="Card Back Face"
-              class="card-face back-face"
+              class="card-face back-face card-pic"
             />
             <img
               v-else-if="card.frontFace"
               :src="card.frontFace.imageUri"
               alt="Card Front Face"
-              class="card-face front-face"
+              class="card-face front-face card-pic"
             />
             <img
               v-else
