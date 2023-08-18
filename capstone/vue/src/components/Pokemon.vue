@@ -40,11 +40,15 @@
               <div v-for="attack in card.attacks" v-bind:key="attack.name">
                 <p>Name: {{ attack.name }}</p>
                 <p>Damage: {{ attack.damage }}</p>
+                <div v-if="attack.text">
+
                 <p>Text: {{ attack.text }}</p>
+                </div>
               </div>
             </td>
           </tr>
           <tr>
+            <div v-if="card.weaknesses">
             <th>Weaknesses</th>
             <td>
               <div
@@ -54,6 +58,7 @@
                 <p>{{ weakness }}</p>
               </div>
             </td>
+            </div>
           </tr>
         </table>
       </div>
@@ -96,6 +101,7 @@ export default {
   },
   watch: {
     "$store.state.searchQuery"(newValue) {
+      console.log(newValue)
       this.getMultipleCardsBySearch(newValue);
     },
   },

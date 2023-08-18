@@ -32,7 +32,7 @@
               alt="Flip Icon"
             />
           </div>
-          <div class="card-image-content">
+          <div class="card-image-content card-pic">
             <img
               v-if="card.isFlipped && card.backFace"
               :src="card.backFace.imageUri"
