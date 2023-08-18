@@ -1,63 +1,84 @@
 <template>
   <div>
-    <div v-for="card in magicCards" :key="card.id" class="magic-card" :class="{ flipped: card.isFlipped }">
+    <div
+      v-for="card in magicCards"
+      :key="card.id"
+      class="magic-card"
+      :class="{ flipped: card.isFlipped }"
+    >
       <div class="card-image">
+
+        <router-link v-bind:to="{ name: 'add-magic', params: { id: card.id } }">
+          <button class="add-button">
+            <img src="../img/plus-symbol-button.png" class="add-icon" />
+          </button>
+        </router-link>
+
+
         <div class="flip-button-container" @click="flipCard(card)">
-          <img v-if="card.frontFace && card.backFace" class="flip-button" src="@/img/flip.png" alt="Flip Icon" />
+          <img
+            v-if="card.frontFace && card.backFace"
+            class="flip-button"
+            src="@/img/flip.png"
+            alt="Flip Icon"
+          />
         </div>
         <div class="card-image-content">
-          <img v-if="card.isFlipped && card.backFace" :src="card.backFace.imageUri" alt="Card Back Face" class="card-face back-face" />
-          <img v-else-if="card.frontFace" :src="card.frontFace.imageUri" alt="Card Front Face" class="card-face front-face" />
+          <img
+            v-if="card.isFlipped && card.backFace"
+            :src="card.backFace.imageUri"
+            alt="Card Back Face"
+            class="card-face back-face"
+          />
+          <img
+            v-else-if="card.frontFace"
+            :src="card.frontFace.imageUri"
+            alt="Card Front Face"
+            class="card-face front-face"
+          />
           <img v-else :src="card.imageUri" alt="Card Image" />
         </div>
       </div>
-      
+
       <div class="card-details">
-      <table>
-        <tr>
-          <th>Name</th>
-          <td>{{ card.name }}</td>
-        </tr>
-        <tr>
-          <th>Set Name</th>
-          <td>{{ card.setName }}</td>
-        </tr>
-        <tr>
-          <th>Cost</th>
-          <td>
-            {{ card.manaCost }}
-          </td>
-        </tr>
-        <tr>
-          <th>Type</th>
-          <td>
-            {{ card.typeLine }}
-          </td>
-        </tr>
-        <tr>
-          <th>Effect</th>
-          <td>{{ card.oracleText }}</td>
-        </tr>
-        <tr v-if="card.power">
-          <th>Power</th>
-          <td>
-            {{ card.power }}
-          </td>
-        </tr>
-
-        <tr>
-          <th></th>
-          <td>
-
-        <div class="buttons">
-       <button>
-            <router-link  style="text-decoration: none; color: white" v-bind:to="{ name: 'add-magic', params: { id: card.id } }">
-                Add To Collections</router-link>
-          </button> 
-      </div>
-        </td>
-        </tr>
-      </table>
+        <table>
+          <tr>
+            <th>Name</th>
+            <td>{{ card.name }}</td>
+          </tr>
+          <tr>
+            <th>Cost</th>
+            <td>
+              {{ card.manaCost }}
+            </td>
+          </tr>
+          <tr>
+            <th>Type</th>
+            <td>
+              {{ card.typeLine }}
+            </td>
+          </tr>
+          <tr>
+            <th>Effect</th>
+            <td>{{ card.oracleText }}</td>
+          </tr>
+          <tr v-if="card.power">
+            <th>Power</th>
+            <td>
+              {{ card.power }}
+            </td>
+          </tr>
+          <tr v-if="card.toughness">
+            <th>Toughness</th>
+            <td>
+              {{ card.toughness }}
+            </td>
+          </tr>
+          <tr>
+            <th>Set Name</th>
+            <td>{{ card.setName }}</td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>
@@ -188,14 +209,26 @@ img {
   margin-top: auto;
 }
 
-button {
-  padding: 10px 20px;
-  font-size: 16px;
+.add-icon {
+  height: 15px;
+  width: 15px;
+  position: relative;
+
+}
+
+.add-button {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
   background-color: #6200ff;
-  color: white;
   border: 2px solid #270cbd;
-  border-radius: 5px;
   cursor: pointer;
+  border-radius: 6px;
+  top: 280px;
+  right: -5px;
+  z-index: 1;
+  padding: 10px 10px;
   transition: background-color 0.3s ease;
 }
 
@@ -204,18 +237,18 @@ button:hover {
 }
 
 table {
-      border-collapse: collapse;
-      width: 100%;
-    }
+  border-collapse: collapse;
+  width: 100%;
+}
 
-    th, td {
-      padding: 8px;
-      text-align: left;
-      border-bottom: 1px solid black;
-    }
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid black;
+}
 
-   
- tr:not(:first-child) {
-      margin-top: 10px;
-    }
+tr:not(:first-child) {
+  margin-top: 10px;
+}
 </style>
