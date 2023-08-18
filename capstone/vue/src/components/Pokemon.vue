@@ -10,6 +10,7 @@
       <router-link v-bind:to="{ name: 'add-poke', params: { id: card.id } }">
         <button class="add-button">
           <img src="../img/plus-symbol-button.png" class="add-icon" />
+          <span class="button-text">Add Card</span>
         </button>
       </router-link>
       

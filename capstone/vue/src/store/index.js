@@ -135,6 +135,10 @@ export default new Vuex.Store({
           typeLine: cardData.type_line,
           isDualSided: cardData.layout === "transform" || cardData.layout === "modal_dfc",
         };
+
+        if (cardData.flavor_text){
+          card.flavorText = cardData.flavor_text
+        }
         
         if (cardData.toughness && cardData.power){
           card.power = cardData.power,

@@ -7,10 +7,11 @@
       :class="{ flipped: card.isFlipped }"
     >
       <div class="card-image">
-
+        
         <router-link v-bind:to="{ name: 'add-magic', params: { id: card.id } }">
           <button class="add-button">
             <img src="../img/plus-symbol-button.png" class="add-icon" />
+            <span class="button-text">Add Card</span>
           </button>
         </router-link>
 
@@ -46,7 +47,13 @@
             <th>Name</th>
             <td>{{ card.name }}</td>
           </tr>
-          <tr>
+          <tr v-if="card.frontFace">
+            <th>Cost</th>
+            <td>
+              {{ card.frontFace.manaCost }}
+            </td>
+          </tr>
+          <tr v-else>
             <th>Cost</th>
             <td>
               {{ card.manaCost }}
@@ -58,9 +65,21 @@
               {{ card.typeLine }}
             </td>
           </tr>
-          <tr>
+          <tr v-if="card.frontFace">
+            <th>Front Face Effect</th>
+            <td>{{ card.frontFace.oracleText }}</td>
+          </tr>
+          <tr v-if="card.backFace">
+            <th>Back Face Effect</th>
+            <td>{{ card.backFace.oracleText }}</td>
+          </tr>
+          <tr v-else>
             <th>Effect</th>
             <td>{{ card.oracleText }}</td>
+          </tr>
+          <tr v-if="card.flavorText">
+            <th>Flavor Text</th>
+            <td>{{ card.flavorText }}</td>
           </tr>
           <tr v-if="card.power">
             <th>Power</th>
@@ -213,14 +232,17 @@ img {
   height: 15px;
   width: 15px;
   position: relative;
-
+  opacity: 1;
+}
+.add-button:hover .add-icon {
+  opacity: 0; 
 }
 
 .add-button {
   position: fixed;
   display: flex;
-  flex-direction: column;
-  align-content: center;
+  flex-direction: row;
+  align-items: center;
   background-color: #6200ff;
   border: 2px solid #270cbd;
   cursor: pointer;
@@ -229,11 +251,29 @@ img {
   right: -5px;
   z-index: 1;
   padding: 10px 10px;
-  transition: background-color 0.3s ease;
+  overflow: hidden;
+  transition: background-color 0.3s ease, padding 0.3s ease;
 }
 
-button:hover {
+.button-text {
+  color: white;
+  font-size: 14px;
+  position: absolute;
+  top: 50%;
+  left: 70%; 
+  transform: translateY(-50%) translateX(-100%); 
+  opacity: 0; 
+  transition: opacity 0.3s ease; 
+  white-space: nowrap; 
+}
+
+.add-button:hover {
   background-color: #3e049d;
+  padding: 10px 75px;
+}
+
+.add-button:hover .button-text {
+  opacity: 1; 
 }
 
 table {
