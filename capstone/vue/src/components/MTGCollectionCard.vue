@@ -387,4 +387,10 @@ button:hover {
 .card-pic:hover + .hide {
   display: block;
 }
+
+main {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
 </style>

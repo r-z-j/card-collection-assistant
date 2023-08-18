@@ -285,4 +285,9 @@ button:hover {
 a{
   text-decoration: none;
 }
+
+main {
+  max-width: 80%;
+  margin: 0 auto;
+}
 </style>
