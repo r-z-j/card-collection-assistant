@@ -258,6 +258,7 @@ export default {
 
   position: absolute;
   color: white;
+  z-index: 5;
 }
 
 .hide p {
