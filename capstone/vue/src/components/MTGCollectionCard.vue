@@ -1,74 +1,84 @@
 <template>
-<main>
-  <h1 class="collection-name">
-    <span class="background-span">{{ collection.collectionName }}</span>
+  <main>
+    <h1 class="collection-name">
+      <span class="background-span">{{ collection.collectionName }}</span>
     </h1>
 
-  <div v-if="isUpdating" class="loading-container">
-    <h1>Pulling your cards from another plane...</h1>
+    <div v-if="isUpdating" class="loading-container">
+      <h1>Pulling your cards from another plane...</h1>
       <img src="../img/loading-zndrsplt.gif" alt="Loading" />
     </div>
 
-  <div class="card-list" v-else>
-    <div
-      v-for="card in currentCollection"
-      :key="card.id"
-      class="magic-card"
-      :class="{ flipped: card.isFlipped }"
-    >
-      <div class="card-image">
-        <button 
-        @click="deleteCardById(card.id)"
+    <div class="card-list" v-else>
+      <div
+        v-for="card in currentCollection"
+        :key="card.id"
+        class="magic-card"
+        :class="{ flipped: card.isFlipped }"
+      >
+        <div class="card-image">
+          <button
+            @click="deleteCardById(card.id)"
+            v-if="showDeleteButton()"
+            class="delete-button"
+          >
+            <img src="../img/trashicon.png" class="delete-icon" />
+          </button>
+          <div class="flip-button-container" @click="flipCard(card)">
+            <img
+              v-if="card.frontFace && card.backFace"
+              class="flip-button"
+              src="@/img/flip.png"
+              alt="Flip Icon"
+            />
+          </div>
+          <div class="card-image-content">
+            <img
+              v-if="card.isFlipped && card.backFace"
+              :src="card.backFace.imageUri"
+              alt="Card Back Face"
+              class="card-face back-face"
+            />
+            <img
+              v-else-if="card.frontFace"
+              :src="card.frontFace.imageUri"
+              alt="Card Front Face"
+              class="card-face front-face"
+            />
+            <img
+              v-else
+              :src="card.imageUri"
+              alt="Card Image"
+              class="card-pic"
+            />
 
-        v-if="showDeleteButton()" 
-        class="delete-button">
-          <img
-          src="../img/trashicon.png" class="delete-icon"/>
-        </button>
-        <div class="flip-button-container" @click="flipCard(card)">
-          <img
-            v-if="card.frontFace && card.backFace"
-            class="flip-button"
-            src="@/img/flip.png"
-            alt="Flip Icon"
-          />
-        </div>
-        <div class="card-image-content">
-          <img
-            v-if="card.isFlipped && card.backFace"
-            :src="card.backFace.imageUri"
-            alt="Card Back Face"
-            class="card-face back-face"
-          />
-          <img
-            v-else-if="card.frontFace"
-            :src="card.frontFace.imageUri"
-            alt="Card Front Face"
-            class="card-face front-face"
-          />
-          <img v-else :src="card.imageUri" alt="Card Image" />
+            <div class="hide" :style="getPos">
+              <p>Name: {{ getCard(card.id).cardName }}</p>
+              <p>Condition: {{ getCard(card.id).condition }}</p>
+              <p>${{ getCard(card.id).userPrice }}</p>
+            </div>
+          </div>
         </div>
       </div>
+      <router-link
+        v-bind:to="{ name: 'mtg-search-view' }"
+        class="back-to-search"
+      >
+        <AddCardCard></AddCardCard>
+      </router-link>
     </div>
-    <router-link v-bind:to="{ name: 'mtg-search-view' }" class="back-to-search">
-      <AddCardCard></AddCardCard>
-    </router-link>
-    
-  </div>
-</main>
+  </main>
 </template>
   
 <script>
 import collectionApiService from "../services/CollectionApiService";
 import scryfallService from "../services/ScryfallService";
-import AddCardCard from '../components/AddCardCard.vue';
+import AddCardCard from "../components/AddCardCard.vue";
 
 export default {
   name: "magic-card",
   props: ["magicCardName"],
-  components: {AddCardCard, },
-              
-            
+  components: { AddCardCard },
 
   data() {
     return {
@@ -77,9 +87,32 @@ export default {
       collectionID: this.$route.params.id,
       collection: {},
       isUpdating: false,
+      mousePosX: 0,
+      mousePosY: 0,
     };
   },
 
+  computed: {
+    getPos() {
+      return (
+        "left:" +
+        Math.floor(Math.sqrt(this.mousePosX)) +
+        "px;top:" +
+        (Math.floor(Math.sqrt(this.mousePosY)) - 100) +
+        "px"
+      );
+    },
+    magicCards() {
+      return this.$store.state.magicCards;
+    },
+  },
+
+  mounted() {
+    document.addEventListener("mousemove", (event) => {
+      this.mousePosX = event.clientX;
+      this.mousePosY = event.clientY;
+    });
+  },
   created() {
     this.getCollectionFromID().then(() => {
       this.getCardsFromCollection();
@@ -88,18 +121,26 @@ export default {
   },
 
   methods: {
-
     async deleteCardById(cardId) {
-      const confirmed = window.confirm("Are you sure you want to remove this card from this collection?");
-      
+      const confirmed = window.confirm(
+        "Are you sure you want to remove this card from this collection?"
+      );
+
       if (confirmed) {
         try {
-          await collectionApiService.removeCardFromCollection(this.collectionID, cardId);
-          this.$router.go()
+          await collectionApiService.removeCardFromCollection(
+            this.collectionID,
+            cardId
+          );
+          this.$router.go();
         } catch (error) {
           console.error("Error deleting card:", error);
         }
       }
+    },
+
+    getCard(apiId) {
+      return this.cardListResponse.find((card) => card.cardApiId === apiId);
     },
 
     async getCollectionFromID() {
@@ -117,10 +158,10 @@ export default {
     },
 
     async getCollection() {
-        const response = await collectionApiService.getCollectionById(
-          this.collectionID.toString()
-        );
-        this.collection = response.data;
+      const response = await collectionApiService.getCollectionById(
+        this.collectionID.toString()
+      );
+      this.collection = response.data;
     },
 
     async getCardsFromCollection() {
@@ -170,15 +211,8 @@ export default {
     flipCard(card) {
       card.isFlipped = !card.isFlipped;
     },
-    showDeleteButton(){
-      return this.collection.authorId === this.$store.state.user.id
-    },
-  },
-
-
-  computed: {
-    magicCards() {
-      return this.$store.state.magicCards;
+    showDeleteButton() {
+      return this.collection.authorId === this.$store.state.user.id;
     },
   },
 };
@@ -197,14 +231,14 @@ export default {
   text-align: center;
   margin-top: 50px;
   font-size: 28px;
-  color: rgb(40, 25, 107); 
-  padding: 10px 0; 
-  border-radius: 10px; 
+  color: rgb(40, 25, 107);
+  padding: 10px 0;
+  border-radius: 10px;
 }
 
 .background-span {
-  background-color: rgba(197, 134, 236, 0.65); 
-  padding: 10px 20px; 
+  background-color: rgba(197, 134, 236, 0.65);
+  padding: 10px 20px;
   border-radius: 10px;
   border: 2px solid #3e049d;
 }
@@ -279,17 +313,17 @@ export default {
   transform: rotateY(180deg);
 }
 
-.back-to-search{
+.back-to-search {
   text-decoration: none;
 }
 
-.delete-icon{
+.delete-icon {
   height: 33px;
   width: 27px;
   position: relative;
 }
 
-.delete-button{
+.delete-button {
   position: absolute;
   top: 280px;
   right: -5px;
@@ -330,5 +364,27 @@ button {
 
 button:hover {
   background-color: #3e049d;
+}
+
+.hide {
+  display: none;
+  width: 200px;
+  height: 100px;
+  border-radius: 20px;
+  border: solid;
+  background-color: rgb(40, 25, 107, 0.9);
+
+  position: absolute;
+  color: white;
+
+  z-index: 5;
+}
+
+.hide p {
+  padding: 5px;
+}
+
+.card-pic:hover + .hide {
+  display: block;
 }
 </style>
